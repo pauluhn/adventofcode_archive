@@ -52,6 +52,20 @@ class aocTests: XCTestCase {
         let answer = Day2.Part2(readInput(day: 2))
         print("\(#function):\(answer)")
     }
+    func testDay3Part1() {
+        let testData1 = testDataDay3()
+        assert(Day3.Part1(testData1.newlineSplit()) == 4)
+
+        let answer = Day3.Part1(readInput(day: 3))
+        print("\(#function):\(answer)")
+    }
+    func testDay3Part2() {
+        let testData1 = testDataDay3()
+        assert(Day3.Part2(testData1.newlineSplit()) == 3)
+        
+        let answer = Day3.Part2(readInput(day: 3))
+        print("\(#function):\(answer)")
+    }
 }
 
 extension aocTests {
@@ -75,6 +89,13 @@ extension aocTests {
         fguij
         axcye
         wvxyz
+        """
+    }
+    func testDataDay3() -> String {
+        return """
+        #1 @ 1,3: 4x4
+        #2 @ 3,1: 4x4
+        #3 @ 5,5: 2x2
         """
     }
 }

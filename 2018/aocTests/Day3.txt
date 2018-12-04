@@ -1,6 +1,3 @@
-import UIKit
-
-var input = """
 #1 @ 306,433: 16x11
 #2 @ 715,698: 18x29
 #3 @ 955,34: 21x24
@@ -1296,71 +1293,3 @@ var input = """
 #1293 @ 428,454: 29x11
 #1294 @ 770,573: 27x20
 #1295 @ 240,934: 29x28
-"""
-
-//input = """
-//#1 @ 1,3: 4x4
-//#2 @ 3,1: 4x4
-//#3 @ 5,5: 2x2
-//"""
-
-struct Claim {
-    let id: Int
-    let left: Int
-    let top: Int
-    let width: Int
-    let height: Int
-    
-    init?(data: [Int]) {
-        guard data.count == 5 else { return nil }
-        self.id = data[0]
-        self.left = data[1]
-        self.top = data[2]
-        self.width = data[3]
-        self.height = data[4]
-    }
-}
-
-let claims = input
-    .components(separatedBy: .newlines)
-    .compactMap { string -> Claim? in
-        let regex = try! NSRegularExpression(pattern: "^#(\\d+)\\s@\\s(\\d+),(\\d+):\\s(\\d+)x(\\d+)$")
-        let range = NSRange(location: 0, length: string.count)
-        guard let match = regex.matches(in: string, options: [], range: range).first else { return nil }
-        var results = [Int]()
-        for i in 0..<match.numberOfRanges {
-            let result = (string as NSString).substring(with: match.range(at: i))
-            if let int = Int(result) {
-                results.append(int)
-            }
-        }
-        return Claim(data: results)
-    }
-
-struct XY: Hashable {
-    let x: Int
-    let y: Int
-}
-
-func area(for claim: Claim) -> [XY] {
-    var xys = [XY]()
-    for x in claim.left..<(claim.left + claim.width) {
-        for y in claim.top..<(claim.top + claim.height) {
-            xys.append(XY(x: x, y: y))
-        }
-    }
-    return xys
-}
-
-var data = [XY: Int]()
-for claim in claims {
-    for xy in area(for: claim) {
-        if let count = data[xy] {
-            data[xy] = count + 1
-        } else {
-            data[xy] = 1
-        }
-    }
-}
-let overlap = data.filter { $0.value > 1 }.count
-print(overlap)

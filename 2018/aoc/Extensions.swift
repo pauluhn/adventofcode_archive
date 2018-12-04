@@ -31,4 +31,12 @@ extension String {
         let three = countedSet.count(of: 3).isEmptyInt
         return (two: two, three: three)
     }
+    
+    func match(_ result: NSTextCheckingResult, at index: Int) -> String {
+        return (self as NSString).substring(with: result.range(at: index))
+    }
+
+    var int: Int {
+        return Int(self) ?? 0
+    }
 }
