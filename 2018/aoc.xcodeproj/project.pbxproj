@@ -17,6 +17,9 @@
 		17E36BC521B6CCDF0060025A /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BC421B6CCDF0060025A /* Functions.swift */; };
 		17E36BC721B6CF730060025A /* Day1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17E36BC121B6CAEC0060025A /* Day1.txt */; };
 		17E36BC921B6D21D0060025A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BC821B6D21D0060025A /* Extensions.swift */; };
+		17E36BCB21B6DD550060025A /* Day2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17E36BCA21B6DD550060025A /* Day2.txt */; };
+		17E36BCD21B6DEC10060025A /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BCC21B6DEC10060025A /* Day2.swift */; };
+		17E36BD021B6DF530060025A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BCF21B6DF530060025A /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		17E36BC221B6CB4E0060025A /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
 		17E36BC421B6CCDF0060025A /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		17E36BC821B6D21D0060025A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		17E36BCA21B6DD550060025A /* Day2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day2.txt; sourceTree = "<group>"; };
+		17E36BCC21B6DEC10060025A /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
+		17E36BCF21B6DF530060025A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +92,9 @@
 			isa = PBXGroup;
 			children = (
 				17E36BBF21B6CA6B0060025A /* App */,
+				17E36BCE21B6DF400060025A /* Helpers */,
 				17E36BC221B6CB4E0060025A /* Day1.swift */,
+				17E36BCC21B6DEC10060025A /* Day2.swift */,
 			);
 			path = aoc;
 			sourceTree = "<group>";
@@ -118,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				17E36BC121B6CAEC0060025A /* Day1.txt */,
+				17E36BCA21B6DD550060025A /* Day2.txt */,
 			);
 			name = Inputs;
 			sourceTree = "<group>";
@@ -128,6 +137,14 @@
 				17E36BC421B6CCDF0060025A /* Functions.swift */,
 				17E36BC821B6D21D0060025A /* Extensions.swift */,
 				17E36BAC21B6C5710060025A /* Info.plist */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		17E36BCE21B6DF400060025A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				17E36BCF21B6DF530060025A /* Extensions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -223,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17E36BCB21B6DD550060025A /* Day2.txt in Resources */,
 				17E36BC721B6CF730060025A /* Day1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,7 +252,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17E36BD021B6DF530060025A /* Extensions.swift in Sources */,
 				17E36B9821B6C56D0060025A /* ViewController.swift in Sources */,
+				17E36BCD21B6DEC10060025A /* Day2.swift in Sources */,
 				17E36BC321B6CB4E0060025A /* Day1.swift in Sources */,
 				17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */,
 			);

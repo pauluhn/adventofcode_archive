@@ -9,6 +9,9 @@
 import Foundation
 
 extension String {
+    func newlineSplit() -> [String] {
+        return components(separatedBy: .newlines)
+    }
     func commaSplit() -> [String] {
         return split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
     }

@@ -1,6 +1,3 @@
-import UIKit
-
-var input = """
 evsialkqydurohxqpwbcugtjmh
 evsialkqydurohxzssbcngtjmv
 fvlialkqydurohxzpwbcngujmf
@@ -251,47 +248,3 @@ evsialkqydurohxzpebciytjmf
 evsialkqydrrohxzpwtcngtfmf
 evsialkqjducohxzpwycngtjmf
 evsialkqydurohxzpwicnxtjnf
-"""
-
-//input = """
-//abcde
-//fghij
-//klmno
-//pqrst
-//fguij
-//axcye
-//wvxyz
-//"""
-
-let ids = input
-    .components(separatedBy: .newlines)
-    .map { $0.characters.map { $0 } }
-let length = ids.first?.count ?? 0
-
-
-var bestTwo = [[Character]]()
-var bestCount = 0
-for (i, id) in ids.enumerated() {
-    for compareIndex in i+1..<ids.count {
-        let compare = ids[compareIndex]
-        var score = 0
-        for letterIndex in 0..<id.count {
-            if id[letterIndex] == compare[letterIndex] {
-                score += 1
-            }
-        }
-        if score > bestCount {
-            bestTwo = [id, compare]
-            bestCount = score
-        }
-    }
-}
-print(String(bestTwo[0]), String(bestTwo[1]))
-
-var answer = [Character]()
-for i in 0..<(bestTwo.first?.count ?? 0) {
-    if bestTwo[0][i] == bestTwo[1][i] {
-        answer.append(bestTwo[0][i])
-    }
-}
-print(String(answer))

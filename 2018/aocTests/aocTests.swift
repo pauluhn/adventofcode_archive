@@ -38,4 +38,43 @@ class aocTests: XCTestCase {
         let answer = Day1.Part2(readInput(day: 1))
         print("\(#function):\(answer)")
     }
+    func testDay2Part1() {
+        let testData1 = testDataDay2Part1()
+        assert(Day2.Part1(testData1.newlineSplit()) == 12)
+        
+        let answer = Day2.Part1(readInput(day: 2))
+        print("\(#function):\(answer)")
+    }
+    func testDay2Part2() {
+        let testData1 = testDataDay2Part2()
+        assert(Day2.Part2(testData1.newlineSplit()) == "fgij")
+        
+        let answer = Day2.Part2(readInput(day: 2))
+        print("\(#function):\(answer)")
+    }
+}
+
+extension aocTests {
+    func testDataDay2Part1() -> String {
+        return """
+        abcdef
+        bababc
+        abbcde
+        abcccd
+        aabcdd
+        abcdee
+        ababab
+        """
+    }
+    func testDataDay2Part2() -> String {
+        return """
+        abcde
+        fghij
+        klmno
+        pqrst
+        fguij
+        axcye
+        wvxyz
+        """
+    }
 }

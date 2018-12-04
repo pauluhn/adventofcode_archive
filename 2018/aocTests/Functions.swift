@@ -11,5 +11,5 @@ import Foundation
 func readInput(day number: Int) -> [String] {
     guard let url = Bundle(for: aocTests.self).url(forResource: "Day\(number)", withExtension: "txt") else { fatalError() }
     let input = try! String(contentsOf: url)
-    return input.components(separatedBy: .newlines)
+    return input.newlineSplit()
 }
