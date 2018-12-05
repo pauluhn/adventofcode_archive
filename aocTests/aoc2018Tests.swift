@@ -82,6 +82,25 @@ class aoc2018Tests: XCTestCase {
         let answer = Y2018Day4.Part2(readInput(year: year, day: 4))
         print("\(#function):\(answer)")
     }
+    func testDay5Part1() {
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("a")) == false)
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("b")) == false)
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("A")) == true)
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("B")) == false)
+
+        let testData1 = "dabAcCaCBAcCcaDA"
+        assert(Y2018Day5.Part1(testData1) == 10)
+
+        let answer = Y2018Day5.Part1(readInput(year: year, day: 5).first!)
+        print("\(#function):\(answer)")
+    }
+    func testDay5Part2() {
+        let testData1 = "dabAcCaCBAcCcaDA"
+        assert(Y2018Day5.Part2(testData1) == 4)
+
+        let answer = Y2018Day5.Part2(readInput(year: year, day: 5).first!)
+        print("\(#function):\(answer)")
+    }
 }
 
 extension aoc2018Tests {
