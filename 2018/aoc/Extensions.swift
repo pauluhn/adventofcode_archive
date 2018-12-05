@@ -12,6 +12,9 @@ extension NSCountedSet {
     func count(of int: Int) -> [Element] {
         return filter { count(for: $0) == int }
     }
+    func sorted() -> [Any] {
+        return sorted { count(for: $0) > count(for: $1) }
+    }
 }
 
 extension Collection {
@@ -38,5 +41,19 @@ extension String {
 
     var int: Int {
         return Int(self) ?? 0
+    }
+}
+
+extension DateFormatter {
+    static var timestampType: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        return formatter
+    }
+}
+
+extension Date {
+    var minute: Int {
+        return DateFormatter.timestampType.string(from: self).split(separator: ":").last.map(String.init)!.int
     }
 }

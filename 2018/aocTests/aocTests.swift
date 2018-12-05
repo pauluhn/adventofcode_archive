@@ -66,6 +66,20 @@ class aocTests: XCTestCase {
         let answer = Day3.Part2(readInput(day: 3))
         print("\(#function):\(answer)")
     }
+    func testDay4Part1() {
+        let testData1 = testDataDay4()
+        assert(Day4.Part1(testData1.newlineSplit()) == 240)
+
+        let answer = Day4.Part1(readInput(day: 4))
+        print("\(#function):\(answer)")
+    }
+    func testDay4Part2() {
+        let testData1 = testDataDay4()
+        assert(Day4.Part2(testData1.newlineSplit()) == 4455)
+
+        let answer = Day4.Part2(readInput(day: 4))
+        print("\(#function):\(answer)")
+    }
 }
 
 extension aocTests {
@@ -96,6 +110,27 @@ extension aocTests {
         #1 @ 1,3: 4x4
         #2 @ 3,1: 4x4
         #3 @ 5,5: 2x2
+        """
+    }
+    func testDataDay4() -> String {
+        return """
+        [1518-11-01 00:00] Guard #10 begins shift
+        [1518-11-01 00:05] falls asleep
+        [1518-11-01 00:25] wakes up
+        [1518-11-01 00:30] falls asleep
+        [1518-11-01 00:55] wakes up
+        [1518-11-01 23:58] Guard #99 begins shift
+        [1518-11-02 00:40] falls asleep
+        [1518-11-02 00:50] wakes up
+        [1518-11-03 00:05] Guard #10 begins shift
+        [1518-11-03 00:24] falls asleep
+        [1518-11-03 00:29] wakes up
+        [1518-11-04 00:02] Guard #99 begins shift
+        [1518-11-04 00:36] falls asleep
+        [1518-11-04 00:46] wakes up
+        [1518-11-05 00:03] Guard #99 begins shift
+        [1518-11-05 00:45] falls asleep
+        [1518-11-05 00:55] wakes up
         """
     }
 }
