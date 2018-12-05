@@ -15,8 +15,8 @@ struct Rect {
     
     var minX: Int { return origin.x }
     var minY: Int { return origin.y }
-    var maxX: Int { return origin.x + size.width - 1 }
-    var maxY: Int { return origin.y + size.height - 1 }
+    var maxX: Int { return origin.x + size.width }
+    var maxY: Int { return origin.y + size.height }
     
     init?(_ data: String) {
         let regex = try! NSRegularExpression(pattern: "^#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)$")
@@ -30,7 +30,7 @@ struct Rect {
     }
     
     func intersects(_ other: Rect) -> Bool {
-        return !(maxX < other.minX || other.maxX < minX || maxY < other.minY || other.maxY < minY)
+        return !(maxX <= other.minX || other.maxX <= minX || maxY <= other.minY || other.maxY <= minY)
     }
 }
 extension Rect: CustomStringConvertible {

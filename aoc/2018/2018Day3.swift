@@ -1,5 +1,5 @@
 //
-//  Day3.swift
+//  2018Day3.swift
 //  aoc
 //
 //  Created by Paul Uhn on 12/4/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Day3 {
+struct Y2018Day3 {
     static func Part1(_ data: [String]) -> Int {
         assert(Rect("#123 @ 3,2: 5x4")!.description == "#123 @ 3,2: 5x4")
         

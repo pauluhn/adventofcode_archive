@@ -1,5 +1,5 @@
 //
-//  Day2.swift
+//  2018Day2.swift
 //  aoc
 //
 //  Created by Paul Uhn on 12/4/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Day2 {
+struct Y2018Day2 {
     static func Part1(_ data: [String]) -> Int {
         assert("abcdef".twoThreeCount() == (0, 0))
         assert("bababc".twoThreeCount() == (1, 1))
