@@ -1,5 +1,5 @@
 //
-//  Day1.swift
+//  2018Day1.swift
 //  aoc
 //
 //  Created by Paul Uhn on 12/4/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Day1 {
+struct Y2018Day1 {
     static func Part1(_ data: [String]) -> Int {
         return data.compactMap(Int.init).reduce(0, +)
     }

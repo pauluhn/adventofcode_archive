@@ -1,5 +1,5 @@
 //
-//  Day4.swift
+//  2018Day4.swift
 //  aoc
 //
 //  Created by Paul Uhn on 12/4/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Day4 {
+struct Y2018Day4 {
     static func Part1(_ data: [String]) -> Int {
         assert(Timestamp("[1518-11-01 00:00] Guard #10 begins shift")!.description == "[1518-11-01 00:00] Guard #10 begins shift")
         assert(Timestamp("[1518-11-01 00:05] falls asleep")!.description == "[1518-11-01 00:05] falls asleep")

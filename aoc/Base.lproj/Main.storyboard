@@ -24,19 +24,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBI-EJ-Ajz">
-                                <rect key="frame" x="168" y="364" width="39" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="lBI-EJ-Ajz" firstAttribute="top" secondItem="bq6-P4-8B8" secondAttribute="bottom" constant="10" id="4MM-FN-Bqv"/>
                             <constraint firstItem="bq6-P4-8B8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gz4-Km-31d"/>
                             <constraint firstItem="bq6-P4-8B8" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="mcT-3Q-htf"/>
-                            <constraint firstItem="lBI-EJ-Ajz" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zZu-Vf-GdL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
