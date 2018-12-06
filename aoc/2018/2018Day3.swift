@@ -35,19 +35,11 @@ struct Y2018Day3 {
     static func Part2(_ data: [String]) -> Int {
         let rects = data.compactMap(Rect.init)
         
-        for (lhsIndex, lhs) in rects.enumerated() {
-            var intersects = false
-            for (rhsIndex, rhs) in rects.enumerated() {
-                if lhsIndex == rhsIndex {
-                    continue
-                }
-                if lhs.intersects(rhs) {
-                    intersects = true
-                    break
-                }
-            }
-            if !intersects {
-                return lhs.id
+        for index in 0..<rects.count {
+            var aRects = rects
+            let rect = aRects.remove(at: index)
+            if aRects.filter({ $0.intersects(rect) }).isEmpty {
+                return rect.id
             }
         }
         fatalError()

@@ -29,7 +29,7 @@ extension Collection {
 extension String {
     typealias TwoThreeCount = (two: Int, three: Int)
     func twoThreeCount() -> TwoThreeCount {
-        let countedSet = NSCountedSet(array: map(String.init))
+        let countedSet = NSCountedSet(array: Array(self))
         let two = countedSet.count(of: 2).isEmptyInt
         let three = countedSet.count(of: 3).isEmptyInt
         return (two: two, three: three)

@@ -14,51 +14,28 @@ struct Y2018Day4 {
         assert(Timestamp("[1518-11-01 00:05] falls asleep")!.description == "[1518-11-01 00:05] falls asleep")
         assert(Timestamp("[1518-11-01 00:25] wakes up")!.description == "[1518-11-01 00:25] wakes up")
         
-        let timeline = data.compactMap(Timestamp.init).sorted()
-        
-        // most minutes
-        var guardMinutesTracker = Tracker<Int>()
-        var currentGuardId = 0
-        var sleepStart = Date()
-        for timestamp in timeline {
-            switch timestamp.guardState {
-            case .begin(let guardId):
-                currentGuardId = guardId
-            case .sleep:
-                sleepStart = timestamp.dateTime
-            case .wakeUp:
-                let minutes = timestamp.dateTime.timeIntervalSince(sleepStart) * 60
-                guardMinutesTracker.add(currentGuardId, value: Int(minutes))
-            }
-        }
-        let chosenGuard = guardMinutesTracker.maxKey!
-        
-        // the minute
-        var correctGuardId = false
-        let countedSet = NSCountedSet(array: [])
-        for timestamp in timeline {
-            switch timestamp.guardState {
-            case .begin(let guardId):
-                correctGuardId = guardId == chosenGuard
-            case .sleep where correctGuardId:
-                sleepStart = timestamp.dateTime
-            case .wakeUp where correctGuardId:
-                let minutes = (sleepStart.minute..<timestamp.dateTime.minute).map { $0 }
-                countedSet.addObjects(from: minutes)
-            default:
-                break
-            }
-        }
-        let theMinute = countedSet.sorted().first as! Int
-        
-        return chosenGuard * theMinute
+        let guards = allGuards(data)
+        let chosenGuard = guards
+            .sorted { $0.totalMinutes > $1.totalMinutes }
+            .first!
+        return chosenGuard.id * chosenGuard.minuteFrequency.minute
     }
     static func Part2(_ data: [String]) -> Int {
+        let guards = allGuards(data)
+        let chosenGuard = guards
+            .sorted { $0.minuteFrequency.frequency > $1.minuteFrequency.frequency }
+            .first!
+        return chosenGuard.id * chosenGuard.minuteFrequency.minute
+    }
+}
+private extension Y2018Day4 {
+    static func allGuards(_ data: [String]) -> Set<Guard> {
         let timeline = data.compactMap(Timestamp.init).sorted()
-
-        var guardCountedSet: [Int: NSCountedSet] = [:]
+        
+        var guards = Set<Guard>()
         var currentGuardId = 0
         var sleepStart = Date()
+        
         for timestamp in timeline {
             switch timestamp.guardState {
             case .begin(let guardId):
@@ -66,25 +43,12 @@ struct Y2018Day4 {
             case .sleep:
                 sleepStart = timestamp.dateTime
             case .wakeUp:
+                let theGuard = guards.filter { $0.id == currentGuardId }.first ?? Guard(id: currentGuardId)
                 let minutes = (sleepStart.minute..<timestamp.dateTime.minute).map { $0 }
-                if let countedSet = guardCountedSet[currentGuardId] {
-                    countedSet.addObjects(from: minutes)
-                    guardCountedSet[currentGuardId] = countedSet
-                } else {
-                    guardCountedSet[currentGuardId] = NSCountedSet(array: minutes)
-                }
+                theGuard.add(minutes: minutes)
+                guards.update(with: theGuard)
             }
         }
-        let chosen = guardCountedSet
-            .map { guardAndCountedSet -> (guardId: Int, minute: Int, count: Int) in
-                let guardId = guardAndCountedSet.key
-                let countedSet = guardAndCountedSet.value
-                let minute = countedSet.sorted().first as! Int
-                return (guardId: guardId, minute: minute, count: countedSet.count(for: minute))                
-            }
-            .sorted { $0.count > $1.count }
-            .first!
-
-        return chosen.guardId * chosen.minute
+        return guards
     }
 }
