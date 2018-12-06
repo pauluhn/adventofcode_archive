@@ -24,6 +24,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day1.Part1(readInput(year: year, day: 1))
         print("\(#function):\(answer)")
+        assert(answer == 525)
     }
     func testDay1Part2() {
         let testData1 = "+1, -2, +3, +1".commaSplit()
@@ -39,6 +40,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day1.Part2(readInput(year: year, day: 1))
         print("\(#function):\(answer)")
+        assert(answer == 75749)
     }
     func testDay2Part1() {
         let testData1 = testDataDay2Part1()
@@ -46,6 +48,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day2.Part1(readInput(year: year, day: 2))
         print("\(#function):\(answer)")
+        assert(answer == 6448)
     }
     func testDay2Part2() {
         let testData1 = testDataDay2Part2()
@@ -53,6 +56,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day2.Part2(readInput(year: year, day: 2))
         print("\(#function):\(answer)")
+        assert(answer == "evsialkqyiurohzpwucngttmf")
     }
     func testDay3Part1() {
         let testData1 = testDataDay3()
@@ -60,6 +64,7 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day3.Part1(readInput(year: year, day: 3))
         print("\(#function):\(answer)")
+        assert(answer == 105071)
     }
     func testDay3Part2() {
         let testData1 = testDataDay3()
@@ -67,6 +72,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day3.Part2(readInput(year: year, day: 3))
         print("\(#function):\(answer)")
+        assert(answer == 222)
     }
     func testDay4Part1() {
         let testData1 = testDataDay4()
@@ -74,6 +80,7 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day4.Part1(readInput(year: year, day: 4))
         print("\(#function):\(answer)")
+        assert(answer == 38813)
     }
     func testDay4Part2() {
         let testData1 = testDataDay4()
@@ -81,6 +88,7 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day4.Part2(readInput(year: year, day: 4))
         print("\(#function):\(answer)")
+        assert(answer == 141071)
     }
     func testDay5Part1() {
         assert(PolymerUnit("a").reacts(to: PolymerUnit("a")) == false)
@@ -93,6 +101,7 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day5.Part1(readInput(year: year, day: 5).first!)
         print("\(#function):\(answer)")
+        assert(answer == 11814)
     }
     func testDay5Part2() {
         let testData1 = "dabAcCaCBAcCcaDA"
@@ -100,6 +109,23 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day5.Part2(readInput(year: year, day: 5).first!)
         print("\(#function):\(answer)")
+        assert(answer == 4282)
+    }
+    func testDay6Part1() {
+        let testData1 = testDataDay6()
+        assert(Y2018Day6.Part1(testData1.newlineSplit()) == 17)
+        
+        let answer = Y2018Day6.Part1(readInput(year: year, day: 6))
+        print("\(#function):\(answer)")
+        assert(answer == 4976)
+    }
+    func testDay6Part2() {
+        let testData1 = testDataDay6()
+        assert(Y2018Day6.Part2(testData1.newlineSplit(), 32) == 16)
+
+        let answer = Y2018Day6.Part2(readInput(year: year, day: 6), 10000)
+        print("\(#function):\(answer)")
+        assert(answer == 46462)
     }
 }
 
@@ -152,6 +178,16 @@ extension aoc2018Tests {
         [1518-11-05 00:03] Guard #99 begins shift
         [1518-11-05 00:45] falls asleep
         [1518-11-05 00:55] wakes up
+        """
+    }
+    func testDataDay6() -> String {
+        return """
+        1, 1
+        1, 6
+        8, 3
+        3, 4
+        5, 5
+        8, 9
         """
     }
 }
