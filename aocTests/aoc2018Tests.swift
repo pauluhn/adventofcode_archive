@@ -127,6 +127,22 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 46462)
     }
+    func testDay7Part1() {
+        let testData1 = testDataDay7()
+        assert(Y2018Day7.Part1(testData1.newlineSplit()) == "CABDFE")
+        
+        let answer = Y2018Day7.Part1(readInput(year: year, day: 7))
+        print("\(#function):\(answer)")
+        assert(answer == "FHMEQGIRSXNWZBCLOTUADJPKVY")
+    }
+    func testDay7Part2() {
+        let testData1 = testDataDay7()
+        assert(Y2018Day7.Part2(testData1.newlineSplit(), 0, 2) == 15)
+        
+        let answer = Y2018Day7.Part2(readInput(year: year, day: 7), 60, 5)
+        print("\(#function):\(answer)")
+        assert(answer == 917)
+    }
 }
 
 extension aoc2018Tests {
@@ -188,6 +204,17 @@ extension aoc2018Tests {
         3, 4
         5, 5
         8, 9
+        """
+    }
+    func testDataDay7() -> String {
+        return """
+        Step C must be finished before step A can begin.
+        Step C must be finished before step F can begin.
+        Step A must be finished before step B can begin.
+        Step A must be finished before step D can begin.
+        Step B must be finished before step E can begin.
+        Step D must be finished before step E can begin.
+        Step F must be finished before step E can begin.
         """
     }
 }
