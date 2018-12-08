@@ -143,6 +143,22 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 917)
     }
+    func testDay8Part1() {
+        let testData1 = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+        assert(Y2018Day8.Part1(testData1) == 138)
+        
+        let answer = Y2018Day8.Part1(readInput(year: year, day: 8).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 35911)
+    }
+    func testDay8Part2() {
+        let testData1 = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+        assert(Y2018Day8.Part2(testData1) == 66)
+        
+        let answer = Y2018Day8.Part2(readInput(year: year, day: 8).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 17206)
+    }
 }
 
 extension aoc2018Tests {
