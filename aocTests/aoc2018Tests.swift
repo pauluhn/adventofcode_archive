@@ -159,6 +159,19 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 17206)
     }
+    func testDay9Part1() {
+        let testData1 = testDataDay9()
+        assert(Y2018Day9.Part1(testData1.newlineSplit(), 1) == [32, 8317, 146373, 2764, 54718, 37305])
+        
+        let answer = Y2018Day9.Part1(readInput(year: year, day: 9), 1)
+        print("\(#function):\(answer)")
+        assert(answer == [388024])
+    }
+    func DISABLED_testDay9Part2() { // takes 1.4hrs
+        let answer = Y2018Day9.Part1(readInput(year: year, day: 9), 100)
+        print("\(#function):\(answer)")
+        assert(answer == [3180929875])
+    }
 }
 
 extension aoc2018Tests {
@@ -231,6 +244,16 @@ extension aoc2018Tests {
         Step B must be finished before step E can begin.
         Step D must be finished before step E can begin.
         Step F must be finished before step E can begin.
+        """
+    }
+    func testDataDay9() -> String {
+        return """
+        9 players; last marble is worth 25 points
+        10 players; last marble is worth 1618 points
+        13 players; last marble is worth 7999 points
+        17 players; last marble is worth 1104 points
+        21 players; last marble is worth 6111 points
+        30 players; last marble is worth 5807 points
         """
     }
 }
