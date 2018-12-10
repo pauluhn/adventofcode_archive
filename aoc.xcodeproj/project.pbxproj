@@ -19,6 +19,9 @@
 		174F9ED921BCFB70001C0EA6 /* 2018Day9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9ED821BCFB70001C0EA6 /* 2018Day9.swift */; };
 		174F9EDB21BCFD00001C0EA6 /* MarbleMania.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EDA21BCFD00001C0EA6 /* MarbleMania.swift */; };
 		174F9EDD21BD03DA001C0EA6 /* CircularList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EDC21BD03DA001C0EA6 /* CircularList.swift */; };
+		174F9EE021BE8067001C0EA6 /* 2018Day10.txt in Resources */ = {isa = PBXBuildFile; fileRef = 174F9EDF21BE8067001C0EA6 /* 2018Day10.txt */; };
+		174F9EE221BE821A001C0EA6 /* StarAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EE121BE821A001C0EA6 /* StarAlign.swift */; };
+		174F9EE421BE8457001C0EA6 /* 2018Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EE321BE8457001C0EA6 /* 2018Day10.swift */; };
 		17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36B9521B6C56D0060025A /* AppDelegate.swift */; };
 		17E36B9821B6C56D0060025A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36B9721B6C56D0060025A /* ViewController.swift */; };
 		17E36B9B21B6C56D0060025A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17E36B9921B6C56D0060025A /* Main.storyboard */; };
@@ -35,7 +38,7 @@
 		17E36BD221B705B40060025A /* 2018Day3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17E36BD121B705B40060025A /* 2018Day3.txt */; };
 		17E36BD421B706480060025A /* 2018Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BD321B706480060025A /* 2018Day3.swift */; };
 		17E36BD721B706E10060025A /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BD621B706E10060025A /* Rect.swift */; };
-		17E36BD921B7070D0060025A /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BD821B7070D0060025A /* Coord.swift */; };
+		17E36BD921B7070D0060025A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BD821B7070D0060025A /* Point.swift */; };
 		17E36BDB21B7072B0060025A /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BDA21B7072B0060025A /* Size.swift */; };
 		17E36BDD21B726440060025A /* 2018Day4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17E36BDC21B726440060025A /* 2018Day4.txt */; };
 		17E36BDF21B726CE0060025A /* 2018Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BDE21B726CE0060025A /* 2018Day4.swift */; };
@@ -74,6 +77,9 @@
 		174F9EDA21BCFD00001C0EA6 /* MarbleMania.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMania.swift; sourceTree = "<group>"; };
 		174F9EDC21BD03DA001C0EA6 /* CircularList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularList.swift; sourceTree = "<group>"; };
 		174F9EDE21BD9B74001C0EA6 /* aoc.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = aoc.playground; path = aoc/aoc.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		174F9EDF21BE8067001C0EA6 /* 2018Day10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day10.txt; sourceTree = "<group>"; };
+		174F9EE121BE821A001C0EA6 /* StarAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarAlign.swift; sourceTree = "<group>"; };
+		174F9EE321BE8457001C0EA6 /* 2018Day10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day10.swift; sourceTree = "<group>"; };
 		17E36B9221B6C56D0060025A /* aoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E36B9521B6C56D0060025A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17E36B9721B6C56D0060025A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +100,7 @@
 		17E36BD121B705B40060025A /* 2018Day3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day3.txt; sourceTree = "<group>"; };
 		17E36BD321B706480060025A /* 2018Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day3.swift; sourceTree = "<group>"; };
 		17E36BD621B706E10060025A /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
-		17E36BD821B7070D0060025A /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
+		17E36BD821B7070D0060025A /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		17E36BDA21B7072B0060025A /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		17E36BDC21B726440060025A /* 2018Day4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day4.txt; sourceTree = "<group>"; };
 		17E36BDE21B726CE0060025A /* 2018Day4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day4.swift; sourceTree = "<group>"; };
@@ -211,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				174F9EDC21BD03DA001C0EA6 /* CircularList.swift */,
-				17E36BD821B7070D0060025A /* Coord.swift */,
+				17E36BD821B7070D0060025A /* Point.swift */,
 				174F9ECC21BAAECC001C0EA6 /* Instruction.swift */,
 				174F9EC621B9CDC0001C0EA6 /* Guard.swift */,
 				17E36BE221B7283F0060025A /* GuardState.swift */,
@@ -221,6 +227,7 @@
 				17E36BEF21B809E00060025A /* PolymerUnit.swift */,
 				17E36BD621B706E10060025A /* Rect.swift */,
 				17E36BDA21B7072B0060025A /* Size.swift */,
+				174F9EE121BE821A001C0EA6 /* StarAlign.swift */,
 				17E36BE021B7279E0060025A /* Timestamp.swift */,
 				17E36BE421B731900060025A /* Tracker.swift */,
 				174F9ED021BB65AE001C0EA6 /* Worker.swift */,
@@ -240,6 +247,7 @@
 				174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */,
 				174F9ED421BB89DF001C0EA6 /* 2018Day8.swift */,
 				174F9ED821BCFB70001C0EA6 /* 2018Day9.swift */,
+				174F9EE321BE8457001C0EA6 /* 2018Day10.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -256,6 +264,7 @@
 				174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */,
 				174F9ED221BB897B001C0EA6 /* 2018Day8.txt */,
 				174F9ED621BCFA5C001C0EA6 /* 2018Day9.txt */,
+				174F9EDF21BE8067001C0EA6 /* 2018Day10.txt */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17E36BDD21B726440060025A /* 2018Day4.txt in Resources */,
+				174F9EE021BE8067001C0EA6 /* 2018Day10.txt in Resources */,
 				17E36BCB21B6DD550060025A /* 2018Day2.txt in Resources */,
 				17E36BEC21B8090E0060025A /* 2018Day5.txt in Resources */,
 				174F9ED321BB897B001C0EA6 /* 2018Day8.txt in Resources */,
@@ -378,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				174F9EDB21BCFD00001C0EA6 /* MarbleMania.swift in Sources */,
+				174F9EE221BE821A001C0EA6 /* StarAlign.swift in Sources */,
 				17E36BD721B706E10060025A /* Rect.swift in Sources */,
 				17E36BE521B731900060025A /* Tracker.swift in Sources */,
 				17E36BDF21B726CE0060025A /* 2018Day4.swift in Sources */,
@@ -392,12 +403,13 @@
 				17E36B9821B6C56D0060025A /* ViewController.swift in Sources */,
 				174F9ED121BB65AE001C0EA6 /* Worker.swift in Sources */,
 				17E36BEE21B8098E0060025A /* 2018Day5.swift in Sources */,
+				174F9EE421BE8457001C0EA6 /* 2018Day10.swift in Sources */,
 				17E36BF821B8E7070060025A /* 2018Day6.swift in Sources */,
 				17E36BCD21B6DEC10060025A /* 2018Day2.swift in Sources */,
 				174F9EC721B9CDC0001C0EA6 /* Guard.swift in Sources */,
 				17E36BDB21B7072B0060025A /* Size.swift in Sources */,
 				17E36BC321B6CB4E0060025A /* 2018Day1.swift in Sources */,
-				17E36BD921B7070D0060025A /* Coord.swift in Sources */,
+				17E36BD921B7070D0060025A /* Point.swift in Sources */,
 				17E36BF221B80A120060025A /* Polarity.swift in Sources */,
 				17E36BD421B706480060025A /* 2018Day3.swift in Sources */,
 				17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */,

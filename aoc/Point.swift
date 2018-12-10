@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Coord {
+struct Point {
     let x: Int
     let y: Int
     
@@ -17,15 +17,20 @@ struct Coord {
         self.y = y
     }
     init?(_ data: String) {
-        let regex = try! NSRegularExpression(pattern: "^(\\d+), (\\d+)$")
+        let regex = try! NSRegularExpression(pattern: "^\\s*(-?\\d+),\\s*(-?\\d+)$")
         guard let match = regex.firstMatch(in: data, options: [], range: NSRange(location: 0, length: data.count)) else { return nil }
         
         x = data.match(match, at: 1).int
         y = data.match(match, at: 2).int
     }
     
-    func manhattanDistance(from other: Coord) -> Int {
+    func manhattanDistance(from other: Point) -> Int {
         return abs(x - other.x) + abs(y - other.y)
     }
 }
-extension Coord: Hashable {}
+extension Point: Hashable {}
+extension Point: CustomStringConvertible {
+    var description: String {
+        return "\(x),\(y)"
+    }
+}
