@@ -180,6 +180,20 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer.seconds == 10659)
     }
+    func testDay11Part1() {
+        assert(Y2018Day11.Part1([18, 42], 3) == [FuelCell(33, 45, 29), FuelCell(21, 61, 30)])
+
+        let answer = Y2018Day11.Part1([5034], 3)
+        print("\(#function):\(answer)")
+        assert(answer == [FuelCell(235, 63, 29)])
+    }
+    func DISABLED_testDay11Part2() { // takes ~40min
+        assert(Y2018Day11.Part2([18, 42], 20) == [FuelCell(90, 269, 16), FuelCell(232, 251, 12)])
+        
+        let answer = Y2018Day11.Part2([5034], 300)
+        print("\(#function):\(answer)")
+        assert(answer == [FuelCell(229, 251, 16)])
+    }
 }
 
 extension aoc2018Tests {
