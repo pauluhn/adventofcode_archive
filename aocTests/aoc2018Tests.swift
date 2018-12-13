@@ -194,6 +194,19 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == [FuelCell(229, 251, 16)])
     }
+    func testDay12Part1() {
+        let testData1 = testDataDay12()
+        assert(Y2018Day12.Part1(testData1.newlineSplit(), 20) == 325)
+
+        let answer = Y2018Day12.Part1(readInput(year: year, day: 12), 20)
+        print("\(#function):\(answer)")
+        assert(answer == 1623)
+    }
+    func testDay12Part2() {
+        let answer = Y2018Day12.Part2(readInput(year: year, day: 12), 50000000000)
+        print("\(#function):\(answer)")
+        assert(answer == 1600000000401)
+    }
 }
 
 extension aoc2018Tests {
@@ -311,6 +324,26 @@ extension aoc2018Tests {
         position=< 5,  9> velocity=< 1, -2>
         position=<14,  7> velocity=<-2,  0>
         position=<-3,  6> velocity=< 2, -1>
+        """
+    }
+    func testDataDay12() -> String {
+        return """
+        initial state: #..#.#..##......###...###
+
+        ...## => #
+        ..#.. => #
+        .#... => #
+        .#.#. => #
+        .#.## => #
+        .##.. => #
+        .#### => #
+        #.#.# => #
+        #.### => #
+        ##.#. => #
+        ##.## => #
+        ###.. => #
+        ###.# => #
+        ####. => #
         """
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172D6DF321C18DBF0061862E /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D6DF221C18DBF0061862E /* BinaryTree.swift */; };
 		174F9EC721B9CDC0001C0EA6 /* Guard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EC621B9CDC0001C0EA6 /* Guard.swift */; };
 		174F9EC921BAAE0F001C0EA6 /* 2018Day7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */; };
 		174F9ECB21BAAE84001C0EA6 /* 2018Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */; };
@@ -54,6 +55,9 @@
 		17E36BF221B80A120060025A /* Polarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BF121B80A120060025A /* Polarity.swift */; };
 		17E36BF621B8E6810060025A /* 2018Day6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17E36BF521B8E6810060025A /* 2018Day6.txt */; };
 		17E36BF821B8E7070060025A /* 2018Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BF721B8E7070060025A /* 2018Day6.swift */; };
+		17FFBCDA21C13966004CD1CC /* 2018Day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17FFBCD921C13966004CD1CC /* 2018Day12.txt */; };
+		17FFBCDC21C13A04004CD1CC /* 2018Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */; };
+		17FFBCDE21C16A14004CD1CC /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FFBCDD21C16A14004CD1CC /* LinkedList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		172D6DF221C18DBF0061862E /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		174F9EC621B9CDC0001C0EA6 /* Guard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guard.swift; sourceTree = "<group>"; };
 		174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day7.txt; sourceTree = "<group>"; };
 		174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day7.swift; sourceTree = "<group>"; };
@@ -119,6 +124,9 @@
 		17E36BF121B80A120060025A /* Polarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polarity.swift; sourceTree = "<group>"; };
 		17E36BF521B8E6810060025A /* 2018Day6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day6.txt; sourceTree = "<group>"; };
 		17E36BF721B8E7070060025A /* 2018Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day6.swift; sourceTree = "<group>"; };
+		17FFBCD921C13966004CD1CC /* 2018Day12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day12.txt; sourceTree = "<group>"; };
+		17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day12.swift; sourceTree = "<group>"; };
+		17FFBCDD21C16A14004CD1CC /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,12 +230,14 @@
 		17E36BD521B706D20060025A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				172D6DF221C18DBF0061862E /* BinaryTree.swift */,
 				174F9EDC21BD03DA001C0EA6 /* CircularList.swift */,
 				174F9EE921C019EE001C0EA6 /* DimensionalArray.swift */,
 				174F9EE721BFD778001C0EA6 /* FuelCell.swift */,
 				174F9ECC21BAAECC001C0EA6 /* Instruction.swift */,
 				174F9EC621B9CDC0001C0EA6 /* Guard.swift */,
 				17E36BE221B7283F0060025A /* GuardState.swift */,
+				17FFBCDD21C16A14004CD1CC /* LinkedList.swift */,
 				174F9EDA21BCFD00001C0EA6 /* MarbleMania.swift */,
 				174F9ECE21BABDA8001C0EA6 /* Node.swift */,
 				17E36BD821B7070D0060025A /* Point.swift */,
@@ -257,6 +267,7 @@
 				174F9ED821BCFB70001C0EA6 /* 2018Day9.swift */,
 				174F9EE321BE8457001C0EA6 /* 2018Day10.swift */,
 				174F9EE521BFD2BF001C0EA6 /* 2018Day11.swift */,
+				17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -274,6 +285,7 @@
 				174F9ED221BB897B001C0EA6 /* 2018Day8.txt */,
 				174F9ED621BCFA5C001C0EA6 /* 2018Day9.txt */,
 				174F9EDF21BE8067001C0EA6 /* 2018Day10.txt */,
+				17FFBCD921C13966004CD1CC /* 2018Day12.txt */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -377,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17E36BDD21B726440060025A /* 2018Day4.txt in Resources */,
+				17FFBCDA21C13966004CD1CC /* 2018Day12.txt in Resources */,
 				174F9EE021BE8067001C0EA6 /* 2018Day10.txt in Resources */,
 				17E36BCB21B6DD550060025A /* 2018Day2.txt in Resources */,
 				17E36BEC21B8090E0060025A /* 2018Day5.txt in Resources */,
@@ -396,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172D6DF321C18DBF0061862E /* BinaryTree.swift in Sources */,
 				174F9EDB21BCFD00001C0EA6 /* MarbleMania.swift in Sources */,
 				174F9EE221BE821A001C0EA6 /* StarAlign.swift in Sources */,
 				17E36BD721B706E10060025A /* Rect.swift in Sources */,
@@ -405,6 +419,7 @@
 				174F9ED921BCFB70001C0EA6 /* 2018Day9.swift in Sources */,
 				17E36BD021B6DF530060025A /* Extensions.swift in Sources */,
 				174F9EDD21BD03DA001C0EA6 /* CircularList.swift in Sources */,
+				17FFBCDE21C16A14004CD1CC /* LinkedList.swift in Sources */,
 				17E36BF021B809E00060025A /* PolymerUnit.swift in Sources */,
 				17E36BE321B7283F0060025A /* GuardState.swift in Sources */,
 				174F9EEA21C019EE001C0EA6 /* DimensionalArray.swift in Sources */,
@@ -418,6 +433,7 @@
 				17E36BF821B8E7070060025A /* 2018Day6.swift in Sources */,
 				17E36BCD21B6DEC10060025A /* 2018Day2.swift in Sources */,
 				174F9EC721B9CDC0001C0EA6 /* Guard.swift in Sources */,
+				17FFBCDC21C13A04004CD1CC /* 2018Day12.swift in Sources */,
 				17E36BDB21B7072B0060025A /* Size.swift in Sources */,
 				17E36BC321B6CB4E0060025A /* 2018Day1.swift in Sources */,
 				17E36BD921B7070D0060025A /* Point.swift in Sources */,
