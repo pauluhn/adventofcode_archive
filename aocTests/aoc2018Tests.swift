@@ -167,7 +167,7 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == [388024])
     }
-    func DISABLED_testDay9Part2() { // takes 1.4hrs
+    func testDay9Part2() {
         let answer = Y2018Day9.Part1(readInput(year: year, day: 9), 100)
         print("\(#function):\(answer)")
         assert(answer == [3180929875])
@@ -220,6 +220,31 @@ class aoc2018Tests: XCTestCase {
         let answer = Y2018Day13.Part2(readInput(year: year, day: 13), 1)
         print("\(#function):\(answer)")
         assert(answer == Point(x: 113, y: 109))
+    }
+    func testDay14Part1() {
+        let recipes = [3, 7]
+        let elves = 2
+        let answerLength = 10
+        assert(Y2018Day14.Part1(recipes, elves, 9, answerLength) == "5158916779")
+        assert(Y2018Day14.Part1(recipes, elves, 5, answerLength) == "0124515891")
+        assert(Y2018Day14.Part1(recipes, elves, 18, answerLength) == "9251071085")
+        assert(Y2018Day14.Part1(recipes, elves, 2018, answerLength) == "5941429882")
+
+        let answer = Y2018Day14.Part1(recipes, elves, 920831, answerLength)
+        print("\(#function):\(answer)")
+        assert(answer == "7121102535")
+    }
+    func DISABLED_testDay14Part2() { // ~125s
+        let recipes = [3, 7]
+        let elves = 2
+        assert(Y2018Day14.Part2(recipes, elves, "51589") == 9)
+        assert(Y2018Day14.Part2(recipes, elves, "01245") == 5)
+        assert(Y2018Day14.Part2(recipes, elves, "92510") == 18)
+        assert(Y2018Day14.Part2(recipes, elves, "59414") == 2018)
+
+        let answer = Y2018Day14.Part2(recipes, elves, "920831")
+        print("\(#function):\(answer)")
+        assert(answer == 20236441)
     }
 }
 

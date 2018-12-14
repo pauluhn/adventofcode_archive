@@ -16,35 +16,49 @@ struct Y2018Day9 {
         var hiScores = [Int]()
         for game in games {
             
-            var marbles = CircularList<Int>()
-            marbles.insert(1)
-            marbles.insert(0)
-            marbles.move(by: 1)
+            let marbles = CircularList<Int>()
+            marbles.append(0)
+            marbles.append(1)
+            var marbleNode = marbles.last!
 
-            var players = CircularList<Int>()
+            let players = CircularList<Int>()
             for _ in 0..<game.playerCount {
-                players.insert(0)
+                players.append(0)
             }
-            
+            var playerNode = players.head!
+
             var marbleNumber = 1
             while marbleNumber < game.lastMarblePoint * multiplier {
                 marbleNumber += 1
 
                 if marbleNumber % 23 == 0 {
-                    var currentScore = players.element()
-                    marbles.move(by: -7)
-                    currentScore += marbles.remove()
-                    players.replace(currentScore + marbleNumber)
+                    var currentScore = playerNode.value
+                    marbleNode = marbles.get(marbleNode, offset: -6)
+                    currentScore += marbles.remove(marbleNode.prev!)
+                    playerNode.value = currentScore + marbleNumber
 
                 } else {
-                    marbles.move(by: 2)
-                    marbles.insert(marbleNumber)
+                    marbleNode = marbles.get(marbleNode, offset: 2)
+                    marbles.insert(before: marbleNode, marbleNumber)
+                    marbleNode = marbles.get(marbleNode, offset: -1)
                 }
 
-                players.move(by: 1)
+                playerNode = players.get(playerNode, offset: 1)
             }
-            hiScores.append(players.data.sorted().last!)
+            hiScores.append(max(score: players))
         }
         return hiScores
+    }
+}
+private extension Y2018Day9 {
+    static func max(score players: CircularList<Int>) -> Int {
+        var node = players.head!
+        var scores = [node.value]
+        
+        for _ in 1..<players.count {
+            node = node.next!
+            scores.append(node.value)
+        }
+        return scores.sorted().last!
     }
 }

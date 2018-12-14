@@ -8,55 +8,73 @@
 
 import Foundation
 
-struct CircularList<T> {
-    typealias Pointer = Int
-    private(set) var pointer: Pointer = 0
-    private(set) var data: [T] = []
-    
-    var count: Int { return data.count }
-    
-    func element() -> T {
-        return data[pointer]
+class CircularList<T> {
+    class CircularListNode<T> {
+        var value: T
+        var prev: Node?
+        var next: Node?
+        init(_ value: T) { self.value = value }
     }
+    typealias Node = CircularListNode<T>
     
-    mutating func move(by offset: Int) {
-        guard offset != 0 else { return }
+    private(set) var head: Node?
+    private(set) var last: Node?
+    private(set) var count = 0
+
+    init() {}
+    
+    func get(_ node: Node, offset: Int) -> Node {
+        guard offset != 0 else { return node }
         if offset > 0 {
-            for _ in 0..<offset { forward() }
+            return get(node.next!, offset: offset - 1)
         } else {
-            for _ in 0..<(abs(offset)) { backward() }
+            return get(node.prev!, offset: offset + 1)
         }
     }
     
-    mutating func insert(_ element: T) {
-        data.insert(element, at: pointer)
+    func append(_ element: T) {
+        append(Node(element))
     }
     
-    mutating func replace(_ element: T) {
-        data[pointer] = element
+    func append(_ newNode: Node) {
+        if let lastNode = last {
+            let next = lastNode.next!
+            next.prev = newNode
+            newNode.next = next
+            newNode.prev = lastNode
+            lastNode.next = newNode
+            last = newNode
+            count += 1
+        } else {
+            newNode.next = newNode
+            newNode.prev = newNode
+            head = newNode
+            last = newNode
+            count = 1
+        }
+    }
+
+    func insert(before node: Node, _ element: T) {
+        insert(before: node, Node(element))
     }
     
-    mutating func remove() -> T {
-        let element = data.remove(at: pointer)
-        if pointer == data.count {
-            forward()
-        }
-        return element
+    func insert(before node: Node, _ newNode: Node) {
+        let prev = node.prev!
+        prev.next = newNode
+        newNode.prev = prev
+        newNode.next = node
+        node.prev = newNode
+        count += 1
     }
-}
-private extension CircularList {
-    mutating func forward() {
-        guard pointer < data.count - 1 else {
-            pointer = 0
-            return
-        }
-        pointer += 1
-    }
-    mutating func backward() {
-        guard pointer > 0 else {
-            pointer = data.count - 1
-            return
-        }
-        pointer -= 1
+    
+    @discardableResult
+    func remove(_ node: Node) -> T {
+        let value = node.value
+        let prev = node.prev!
+        let next = node.next!
+        prev.next = next
+        next.prev = prev
+        count -= 1
+        return value
     }
 }
