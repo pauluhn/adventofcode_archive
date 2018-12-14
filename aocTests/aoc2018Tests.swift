@@ -207,6 +207,20 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 1600000000401)
     }
+    func testDay13Part1() {
+        assert(Y2018Day13.Part1(readInput(year: year, day: 130), 1) == Point(x: 7, y: 3))
+        
+        let answer = Y2018Day13.Part1(readInput(year: year, day: 13), 1)
+        print("\(#function):\(answer)")
+        assert(answer == Point(x: 100, y: 21))
+    }
+    func testDay13Part2() {
+        assert(Y2018Day13.Part2(readInput(year: year, day: 131), 1) == Point(x: 6, y: 4))
+        
+        let answer = Y2018Day13.Part2(readInput(year: year, day: 13), 1)
+        print("\(#function):\(answer)")
+        assert(answer == Point(x: 113, y: 109))
+    }
 }
 
 extension aoc2018Tests {
