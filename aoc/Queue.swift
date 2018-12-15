@@ -17,32 +17,20 @@ class Queue<T> {
     }
     typealias Node = QueueNode<T>
     
-    let size: Int
     private(set) var head: Node?
     private(set) var last: Node?
     private(set) var count = 0
     
-    init(size: Int) {
-        self.size = size
-    }
-
-    func append(_ value: T) {
-        append(Node(value))
+    func push(_ value: T) {
+        push(Node(value))
     }
     
-    func append(_ newNode: Node) {
-        if let lastNode = last {
-            newNode.prev = lastNode
-            lastNode.next = newNode
-            last = newNode
+    func push(_ newNode: Node) {
+        if let headNode = head {
+            newNode.next = headNode
+            headNode.prev = newNode
+            head = newNode
             count += 1
-            
-            if count == size {
-                let newHead = head!.next!
-                newHead.prev = nil
-                head = newHead
-                count -= 1
-            }
             
         } else {
             head = newNode
@@ -51,4 +39,13 @@ class Queue<T> {
         }
     }
 
+    func pop() -> T? {
+        guard let lastNode = last else { return nil }
+        let value = lastNode.value
+        let newLast = lastNode.prev!
+        newLast.next = nil
+        last = newLast
+        count -= 1
+        return value
+    }
 }
