@@ -16,6 +16,9 @@
 		172D6DFF21C33B310061862E /* 2018Day131.txt in Resources */ = {isa = PBXBuildFile; fileRef = 172D6DFE21C33B310061862E /* 2018Day131.txt */; };
 		172D6E0121C3E2E80061862E /* 2018Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D6E0021C3E2E80061862E /* 2018Day14.swift */; };
 		172D6E0321C46E220061862E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D6E0221C46E220061862E /* Queue.swift */; };
+		172D6E0521C4C1400061862E /* 2018Day15.txt in Resources */ = {isa = PBXBuildFile; fileRef = 172D6E0421C4C1400061862E /* 2018Day15.txt */; };
+		172D6E0721C4C1680061862E /* 2018Day15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D6E0621C4C1680061862E /* 2018Day15.swift */; };
+		172D6E0921C4C4FA0061862E /* BattleUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D6E0821C4C4FA0061862E /* BattleUnit.swift */; };
 		174F9EC721B9CDC0001C0EA6 /* Guard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EC621B9CDC0001C0EA6 /* Guard.swift */; };
 		174F9EC921BAAE0F001C0EA6 /* 2018Day7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */; };
 		174F9ECB21BAAE84001C0EA6 /* 2018Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */; };
@@ -88,6 +91,9 @@
 		172D6DFE21C33B310061862E /* 2018Day131.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day131.txt; sourceTree = "<group>"; };
 		172D6E0021C3E2E80061862E /* 2018Day14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day14.swift; sourceTree = "<group>"; };
 		172D6E0221C46E220061862E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		172D6E0421C4C1400061862E /* 2018Day15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day15.txt; sourceTree = "<group>"; };
+		172D6E0621C4C1680061862E /* 2018Day15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day15.swift; sourceTree = "<group>"; };
+		172D6E0821C4C4FA0061862E /* BattleUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleUnit.swift; sourceTree = "<group>"; };
 		174F9EC621B9CDC0001C0EA6 /* Guard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guard.swift; sourceTree = "<group>"; };
 		174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day7.txt; sourceTree = "<group>"; };
 		174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day7.swift; sourceTree = "<group>"; };
@@ -246,6 +252,7 @@
 		17E36BD521B706D20060025A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				172D6E0821C4C4FA0061862E /* BattleUnit.swift */,
 				172D6DF221C18DBF0061862E /* BinaryTree.swift */,
 				172D6DFA21C2B1AD0061862E /* Cart.swift */,
 				174F9EDC21BD03DA001C0EA6 /* CircularList.swift */,
@@ -289,6 +296,7 @@
 				17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */,
 				172D6DF821C29BB00061862E /* 2018Day13.swift */,
 				172D6E0021C3E2E80061862E /* 2018Day14.swift */,
+				172D6E0621C4C1680061862E /* 2018Day15.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -310,6 +318,7 @@
 				172D6DF621C29B110061862E /* 2018Day130.txt */,
 				172D6DF421C2997D0061862E /* 2018Day13.txt */,
 				172D6DFE21C33B310061862E /* 2018Day131.txt */,
+				172D6E0421C4C1400061862E /* 2018Day15.txt */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -418,6 +427,7 @@
 				172D6DF721C29B110061862E /* 2018Day130.txt in Resources */,
 				174F9EE021BE8067001C0EA6 /* 2018Day10.txt in Resources */,
 				17E36BCB21B6DD550060025A /* 2018Day2.txt in Resources */,
+				172D6E0521C4C1400061862E /* 2018Day15.txt in Resources */,
 				17E36BEC21B8090E0060025A /* 2018Day5.txt in Resources */,
 				174F9ED321BB897B001C0EA6 /* 2018Day8.txt in Resources */,
 				172D6DFF21C33B310061862E /* 2018Day131.txt in Resources */,
@@ -436,6 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172D6E0921C4C4FA0061862E /* BattleUnit.swift in Sources */,
 				172D6DF321C18DBF0061862E /* BinaryTree.swift in Sources */,
 				174F9EDB21BCFD00001C0EA6 /* MarbleMania.swift in Sources */,
 				174F9EE221BE821A001C0EA6 /* StarAlign.swift in Sources */,
@@ -453,6 +464,7 @@
 				174F9EEA21C019EE001C0EA6 /* DimensionalArray.swift in Sources */,
 				174F9ECF21BABDA8001C0EA6 /* Node.swift in Sources */,
 				17E36BE121B7279E0060025A /* Timestamp.swift in Sources */,
+				172D6E0721C4C1680061862E /* 2018Day15.swift in Sources */,
 				174F9ED521BB89DF001C0EA6 /* 2018Day8.swift in Sources */,
 				17E36B9821B6C56D0060025A /* ViewController.swift in Sources */,
 				174F9ED121BB65AE001C0EA6 /* Worker.swift in Sources */,

@@ -21,6 +21,15 @@ class Queue<T> {
     private(set) var last: Node?
     private(set) var count = 0
     
+    var isEmpty: Bool { return count == 0 }
+    
+    init() {}
+    
+    func push(_ list: [T]) {
+        for item in list {
+            push(item)
+        }
+    }
     func push(_ value: T) {
         push(Node(value))
     }
@@ -42,6 +51,12 @@ class Queue<T> {
     func pop() -> T? {
         guard let lastNode = last else { return nil }
         let value = lastNode.value
+        guard count > 1 else {
+            head = nil
+            last = nil
+            count = 0
+            return value
+        }
         let newLast = lastNode.prev!
         newLast.next = nil
         last = newLast
