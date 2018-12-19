@@ -47,6 +47,9 @@
 		1764013121C93DCE00046721 /* 2018Day18.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1764013021C93DCE00046721 /* 2018Day18.txt */; };
 		1764013321C93E6A00046721 /* 2018Day18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764013221C93E6A00046721 /* 2018Day18.swift */; };
 		1764013521C93E9300046721 /* Acre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764013421C93E9300046721 /* Acre.swift */; };
+		1764013921CA070900046721 /* 2018Day19.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1764013821CA070900046721 /* 2018Day19.txt */; };
+		1764013B21CA073100046721 /* 2018Day19.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764013A21CA073100046721 /* 2018Day19.swift */; };
+		1764013D21CA0A6300046721 /* OpCodeProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1764013C21CA0A6300046721 /* OpCodeProgram.swift */; };
 		17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36B9521B6C56D0060025A /* AppDelegate.swift */; };
 		17E36B9821B6C56D0060025A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36B9721B6C56D0060025A /* ViewController.swift */; };
 		17E36B9B21B6C56D0060025A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17E36B9921B6C56D0060025A /* Main.storyboard */; };
@@ -133,6 +136,9 @@
 		1764013021C93DCE00046721 /* 2018Day18.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day18.txt; sourceTree = "<group>"; };
 		1764013221C93E6A00046721 /* 2018Day18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day18.swift; sourceTree = "<group>"; };
 		1764013421C93E9300046721 /* Acre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acre.swift; sourceTree = "<group>"; };
+		1764013821CA070900046721 /* 2018Day19.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day19.txt; sourceTree = "<group>"; };
+		1764013A21CA073100046721 /* 2018Day19.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day19.swift; sourceTree = "<group>"; };
+		1764013C21CA0A6300046721 /* OpCodeProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpCodeProgram.swift; sourceTree = "<group>"; };
 		17E36B9221B6C56D0060025A /* aoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E36B9521B6C56D0060025A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17E36B9721B6C56D0060025A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +294,7 @@
 				174F9ECE21BABDA8001C0EA6 /* Node.swift */,
 				1764012421C74AEA00046721 /* OpCode.swift */,
 				1764012621C74FDA00046721 /* OpCodeInstruction.swift */,
+				1764013C21CA0A6300046721 /* OpCodeProgram.swift */,
 				17E36BD821B7070D0060025A /* Point.swift */,
 				17E36BF121B80A120060025A /* Polarity.swift */,
 				17E36BEF21B809E00060025A /* PolymerUnit.swift */,
@@ -323,6 +330,7 @@
 				1764012221C74A7E00046721 /* 2018Day16.swift */,
 				1764012E21C76A4300046721 /* 2018Day17.swift */,
 				1764013221C93E6A00046721 /* 2018Day18.swift */,
+				1764013A21CA073100046721 /* 2018Day19.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -349,6 +357,7 @@
 				1764012821C75B8E00046721 /* 2018Day166.txt */,
 				1764012C21C769C000046721 /* 2018Day17.txt */,
 				1764013021C93DCE00046721 /* 2018Day18.txt */,
+				1764013821CA070900046721 /* 2018Day19.txt */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -469,6 +478,7 @@
 				174F9EC921BAAE0F001C0EA6 /* 2018Day7.txt in Resources */,
 				17E36BD221B705B40060025A /* 2018Day3.txt in Resources */,
 				17E36BF621B8E6810060025A /* 2018Day6.txt in Resources */,
+				1764013921CA070900046721 /* 2018Day19.txt in Resources */,
 				174F9ED721BCFA5C001C0EA6 /* 2018Day9.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +506,7 @@
 				174F9EDD21BD03DA001C0EA6 /* CircularList.swift in Sources */,
 				17FFBCDE21C16A14004CD1CC /* LinkedList.swift in Sources */,
 				17E36BF021B809E00060025A /* PolymerUnit.swift in Sources */,
+				1764013D21CA0A6300046721 /* OpCodeProgram.swift in Sources */,
 				17E36BE321B7283F0060025A /* GuardState.swift in Sources */,
 				174F9EEA21C019EE001C0EA6 /* DimensionalArray.swift in Sources */,
 				174F9ECF21BABDA8001C0EA6 /* Node.swift in Sources */,
@@ -525,6 +536,7 @@
 				172D6DFD21C2B1E70061862E /* Direction.swift in Sources */,
 				174F9ECD21BAAECC001C0EA6 /* Instruction.swift in Sources */,
 				1764012721C74FDA00046721 /* OpCodeInstruction.swift in Sources */,
+				1764013B21CA073100046721 /* 2018Day19.swift in Sources */,
 				1764013521C93E9300046721 /* Acre.swift in Sources */,
 				174F9ECB21BAAE84001C0EA6 /* 2018Day7.swift in Sources */,
 			);

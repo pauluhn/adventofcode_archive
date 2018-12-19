@@ -11,7 +11,7 @@ import Foundation
 struct OpCode {
     typealias Value = Int
     static let initialRegisterValue: Value = 0
-    static let registerCount = 4
+    static var registerCount = 4
 
     // MARK: - Addition
     /// (add register) stores into register C the result of adding register A and register B.
