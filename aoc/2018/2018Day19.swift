@@ -36,7 +36,7 @@ struct Y2018Day19 {
         return [18992592] // sum of factors of 10551430
     }
 }
-private extension Y2018Day19 {
+extension Y2018Day19 { // for Day 21
     static func runOpCode(_ registers: inout [OpCode.Value], _ opCode: OpCodeProgram.OpCodeType, _ values: [OpCode.Value]) {
         guard registers.count == OpCode.registerCount && values.count == 3 else { fatalError() }
         

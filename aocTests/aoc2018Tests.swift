@@ -320,6 +320,16 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 8514)
     }
+    func testDay21Part1() {
+        let answer = Y2018Day21.Part1(readInput(year: year, day: 21), 9959629)
+        print("\(#function):\(answer)")
+        assert(answer == 9959629)
+    }
+    func DISABLED_testDay21Part2() { // ~18.5m
+        let answer = Y2018Day21.Part1(readInput(year: year, day: 21), 12691260)
+        print("\(#function):\(answer)")
+        assert(answer == 12691260)
+    }
 }
 
 extension aoc2018Tests {
