@@ -304,6 +304,22 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 18992592)
     }
+    func testDay20Part1() {
+        assert(Y2018Day20.Part1("^WNE$") == 3)
+        assert(Y2018Day20.Part1("^ENWWW(NEEE|SSE(EE|N))$") == 10)
+        assert(Y2018Day20.Part1("^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$") == 18)
+        assert(Y2018Day20.Part1("^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$") == 23)
+        assert(Y2018Day20.Part1("^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$") == 31)
+        
+        let answer = Y2018Day20.Part1(readInput(year: year, day: 20)[0])
+        print("\(#function):\(answer)")
+        assert(answer == 3476)
+    }
+    func testDay20Part2() {
+        let answer = Y2018Day20.Part2(readInput(year: year, day: 20)[0])
+        print("\(#function):\(answer)")
+        assert(answer == 8514)
+    }
 }
 
 extension aoc2018Tests {
