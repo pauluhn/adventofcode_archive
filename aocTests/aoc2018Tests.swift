@@ -246,14 +246,40 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 20236441)
     }
-    func testDay15Part1() {
+    func DISABLED_testDay15Part1() { // ~3.5m
         Y2018Day15.Part0()
         let testData1 = testDataDay15()
         assert(Y2018Day15.Part1(testData1.newlineSplit()) == 27730)
+        let testDataA = testDataDay15a()
+        assert(Y2018Day15.Part1(testDataA.newlineSplit()) == 36334)
+        let testDataB = testDataDay15b()
+        assert(Y2018Day15.Part1(testDataB.newlineSplit()) == 39514)
+        let testDataC = testDataDay15c()
+        assert(Y2018Day15.Part1(testDataC.newlineSplit()) == 27755)
+        let testDataD = testDataDay15d()
+        assert(Y2018Day15.Part1(testDataD.newlineSplit()) == 28944)
+        let testDataE = testDataDay15e()
+        assert(Y2018Day15.Part1(testDataE.newlineSplit()) == 18740)
+
+        let answer = Y2018Day15.Part1(readInput(year: year, day: 15))
+        print("\(#function):\(answer)")
+        assert(answer == 229950)
+    }
+    func DISABLED_testDay15Part2() { // ~32m
+        let testData1 = testDataDay15()
+        assert(Y2018Day15.Part2(testData1.newlineSplit()) == (15, 4988))
+        let testDataB = testDataDay15b()
+        assert(Y2018Day15.Part2(testDataB.newlineSplit()) == (4, 31284))
+        let testDataC = testDataDay15c()
+        assert(Y2018Day15.Part2(testDataC.newlineSplit()) == (15, 3478))
+        let testDataD = testDataDay15d()
+        assert(Y2018Day15.Part2(testDataD.newlineSplit()) == (12, 6474))
+        let testDataE = testDataDay15e()
+        assert(Y2018Day15.Part2(testDataE.newlineSplit()) == (34, 1140))
         
-//        let answer = Y2018Day15.Part1(readInput(year: year, day: 15))
-//        print("\(#function):\(answer)")
-//        assert(answer == "7121102535")
+        let answer = Y2018Day15.Part2(readInput(year: year, day: 15))
+        print("\(#function):\(answer)")
+        assert(answer == (13, 54360))
     }
     func testDay16Part1() {
         let testData1 = testDataDay16()
@@ -478,6 +504,63 @@ extension aoc2018Tests {
         #..G#E#
         #.....#
         #######
+        """
+    }
+    func testDataDay15a() -> String {
+        return """
+        #######
+        #G..#E#
+        #E#E.E#
+        #G.##.#
+        #...#E#
+        #...E.#
+        #######
+        """
+    }
+    func testDataDay15b() -> String {
+        return """
+        #######
+        #E..EG#
+        #.#G.E#
+        #E.##E#
+        #G..#.#
+        #..E#.#
+        #######
+        """
+    }
+    func testDataDay15c() -> String {
+        return """
+        #######
+        #E.G#.#
+        #.#G..#
+        #G.#.G#
+        #G..#.#
+        #...E.#
+        #######
+        """
+    }
+    func testDataDay15d() -> String {
+        return """
+        #######
+        #.E...#
+        #.#..G#
+        #.###.#
+        #E#G#G#
+        #...#G#
+        #######
+        """
+    }
+    func testDataDay15e() -> String {
+        return """
+        #########
+        #G......#
+        #.E.#...#
+        #..##..G#
+        #...##..#
+        #...#...#
+        #.G...G.#
+        #.....G.#
+        #########
         """
     }
     func testDataDay16() -> String {

@@ -16,7 +16,7 @@ class BattleUnit {
     let id: String
     let type: UnitType
     var position: Point
-    let attack: Int
+    var attack: Int
     var hp: Int
     
     var isAlive: Bool { return hp > 0 }
@@ -27,5 +27,9 @@ class BattleUnit {
         position = Point(x: x, y: y)
         attack = 3
         self.hp = hp
+    }
+    
+    func copy() -> BattleUnit {
+        return BattleUnit(type, position.x, position.y, hp)
     }
 }

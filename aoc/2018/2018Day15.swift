@@ -9,34 +9,125 @@
 import Foundation
 
 struct Y2018Day15 {
+    typealias Node = Graph<Point>.GraphNode<Point>
+    fileprivate enum Value {
+        case wall
+        case open
+        case elf
+        case goblin
+    }
     static func Part0() {
-        let testData = ["#######",
-                        "#E..G.#",
-                        "#...#.#",
-                        "#.G.#G#",
-                        "#######"]
-        let testField = testData.map { $0.map { $0 }}
-        let testInRange = [Point(x: 3, y: 1),
-                           Point(x: 5, y: 1),
-                           Point(x: 2, y: 2),
-                           Point(x: 5, y: 2),
-                           Point(x: 1, y: 3),
-                           Point(x: 3, y: 3)]
-        let testPathFind = testInRange.map { pathFinder(Point(x: 1, y: 1), $0, testField, 10) }
-        let testCount = testPathFind.map { $0.count }
-        assert(testCount == [2, 0, 2, 0, 2, 4])
-        
+        var graph = Graph<Point>()
+        var units = [BattleUnit]()
+        // reading order of positions
+        let testData0 = ["#######",
+                         "#.G.E.#",
+                         "#E.G.E#",
+                         "#.G.E.#",
+                         "#######"]
+        (graph, units) = Graph.generateMap(testData0)
+        let positions = units
+            .shuffled()
+            .sortedByReadingOrder()
+            .map { $0.position }
+        assert(positions == [Point(x: 2, y: 1),
+                             Point(x: 4, y: 1),
+                             Point(x: 1, y: 2),
+                             Point(x: 3, y: 2),
+                             Point(x: 5, y: 2),
+                             Point(x: 2, y: 3),
+                             Point(x: 4, y: 3)])
+        // move
+        let testData1 = ["#######",
+                         "#E..G.#",
+                         "#...#.#",
+                         "#.G.#G#",
+                         "#######"]
+        (graph, units) = Graph.generateMap(testData1)
+        // 1. targets
+        var elf = units.first { $0.isElf }!
+        let targets = elf.targets(units)
+        assert(targets.map({ $0.position }) == [Point(x: 4, y: 1),
+                                                Point(x: 2, y: 3),
+                                                Point(x: 5, y: 3)])
+        // 2. in range
+        let targetNodes = targets.compactMap { t in
+            graph.nodes.first { $0.value == t.position }
+        }
+        let inRange = targetNodes
+            .flatMap { graph.adjacent($0) }
+            .shuffled()
+            .sortedByReadingOrder()
+        assert(inRange.map({ $0.value }) == [Point(x: 3, y: 1),
+                                             Point(x: 5, y: 1),
+                                             Point(x: 2, y: 2),
+                                             Point(x: 5, y: 2),
+                                             Point(x: 1, y: 3),
+                                             Point(x: 3, y: 3)])
+        // 3. reachable
+        var elfNode = graph.nodes.first { $0.value == elf.position }!
+        let reachable = inRange
+            .filter { graph.reachable(elfNode, to: $0, all: units) }
+        assert(reachable.map({ $0.value }) == [Point(x: 3, y: 1),
+                                               Point(x: 2, y: 2),
+                                               Point(x: 1, y: 3),
+                                               Point(x: 3, y: 3)])
+        // 4. nearest
+        let nearestTuples = inRange
+            .map { ($0, graph.nearest(elfNode, to: $0, all: units)) }
+            .filter { $0.1 != nil }
+            .map { ($0.0, $0.1!) }
+            .sorted { $0.1 < $1.1 }
+        let nearestInt = nearestTuples.first!.1
+        let nearest = nearestTuples
+            .filter { $0.1 == nearestInt }
+            .map { $0.0 }
+        assert(nearest.map({ $0.value }) == [Point(x: 3, y: 1),
+                                             Point(x: 2, y: 2),
+                                             Point(x: 1, y: 3)])
+        // 5. chosen
+        var chosen = nearest
+            .shuffled()
+            .sortedByReadingOrder().first!
+        assert(chosen.value == Point(x: 3, y: 1))
+        // step
         let testData2 = ["#######",
                          "#.E...#",
                          "#.....#",
                          "#...G.#",
                          "#######"]
-        let testField2 = testData2.map { $0.map { $0 }}
-        let start = Point(x: 2, y: 1)
-        let chosen = Point(x: 4, y: 2)
-        let testPathFind2 = pathFinder(start, chosen, testField2, 10)
-        assert(testPathFind2.first == Point(x: 3, y: 1))
+        (graph, units) = Graph.generateMap(testData2)
+        elf = units.first { $0.isElf }!
+        chosen = graph.move(elf, all: units)
+        // 1. distance
+        elfNode = graph.nodes.first { $0.value == elf.position }!
+        let steps = graph.adjacent(elfNode)
+        let distanceTuples = steps
+            .map { ($0, graph.nearest($0, to: chosen, all: units)) }
+            .filter { $0.1 != nil }
+            .map { ($0.0, $0.1!) }
+            .sorted { $0.1 < $1.1 }
+        let distanceInt = distanceTuples.first!.1
+        let distances = distanceTuples
+            .filter { $0.1 == distanceInt }
+            .map { $0.0 }
+            .sortedByReadingOrder()
+        assert(distances.map({ $0.value }) == [Point(x: 3, y: 1),
+                                               Point(x: 2, y: 2)])
+        // 2. step
+        assert(distances.first!.value == Point(x: 3, y: 1))
         
+        // no move
+        let testData22 = ["####",
+                          "#EG#",
+                          "####"]
+        (graph, units) = Graph.generateMap(testData22)
+        elf = units.first { $0.isElf }!
+        chosen = graph.move(elf, all: units)
+        assert(chosen.value == elf.position)
+        let step = graph.step(elf, all: units, chosen: chosen)
+        assert(step.value == elf.position)
+
         let testData3 = ["#########",
                          "#G..G..G#",
                          "#.......#",
@@ -64,229 +155,311 @@ struct Y2018Day15 {
         assert(Part1(testData4, false, true, 1, testUnits4) == 1 * (9 + 4 + (200 - 3 * 2) + 2 + 1))
     }
     static func Part1(_ data: [String], _ allowedToMove: Bool = true, _ battleMode: Bool = true, _ rounds: Int = -1, _ loadUnits: [BattleUnit]? = nil) -> Int {
-        var battlefield = data.map { $0.map { $0 }}
-        var units = loadUnits ?? getUnits(battlefield)
-        remove(units, from: &battlefield)
+        let (graph, u) = Graph.generateMap(data)
+        var units = loadUnits ?? u
         
         var round = 0
-        gameLoop: while continueGame(round, rounds) { // or no more targets
-            unitLoop: for (i, unit) in units.sorted(by: Sort.unit).enumerated() {
-                // check life
+        gameLoop: while continueGame(round, rounds) {
+            unitLoop: for (i, unit) in units.sortedByReadingOrder().enumerated() {
                 guard let _ = units.first(where: { $0.id == unit.id }) else {
-                    print("round \(round), unit \(i) is dead")
-                    continue unitLoop } // skip dead unit
-                
-                let targets = getTargets(unit, units)
-                if targets.isEmpty { break gameLoop } // end game
-
-                var mapWithUnits = battlefield
-                put(units, on: &mapWithUnits)
-
-                let inRange = getInRange(unit, targets, mapWithUnits)
-                if inRange.isEmpty {
-                    print("round \(round), unit \(i) with \(unit.hp) hp - no moves")
-                    continue unitLoop } // end turn
-                
-                var moved = false
-                if !inRange.contains(unit.position) && allowedToMove {
-                    // move
-                    let reachable = inRange
-                        .map { pathFinder(unit.position, $0, mapWithUnits, battlefield.count * 2) } // adjust threshold???
-                        .filter { !$0.isEmpty }
-                    //
-                    let sorted = reachable.sorted { $0.count < $1.count }
-                    let count = sorted.first?.count
-                    let nearest = sorted.filter { $0.count == count }
-                    //
-                    if let chosen = nearest.sorted(by: Sort.points(false)).first?.first {
-                        moved = true
-                        unit.position = chosen
-                    }
+                    continue unitLoop  // skip dead unit
                 }
+                
+                guard !unit.targets(units).isEmpty else {
+                    break gameLoop // end game
+                }
+
+                if allowedToMove {
+                    let chosen = graph.move(unit, all: units)
+                    let step = graph.step(unit, all: units, chosen: chosen)
+                    unit.position = step.value
+                }
+                
                 if battleMode {
-                    // attack
-                    let inRangeTargets = getInRangeTargets(unit, targets)
-                    if inRangeTargets.isEmpty {
-                        print("round \(round), unit \(i) with \(unit.hp) hp - no attack \(moved ? "" : "- did not move")")
-                        continue unitLoop } // end turn
-                    let target = getBestTarget(inRangeTargets)
-                    target.hp -= unit.attack
-                    if !target.isAlive {
-                        // dies
-                        units.removeAll { $0.id == target.id }
+                    if let target = graph.aim(unit, all: units) {
+                        target.hp -= unit.attack
+                        if !target.isAlive {
+                            units.removeAll { $0.id == target.id }
+                        }
                     }
                 }
-                print("round \(round), unit \(i) with \(unit.hp) hp \(moved ? "" : "- did not move")")
                 // print
-//                mapWithUnits = battlefield
-//                put(units, on: &mapWithUnits)
-//                printBattlefield(mapWithUnits)
+//                print("\(round).\(i)")
+//                graph.printMap(units)
             }
             round += 1
             // print
-            var mapWithUnits = battlefield
-            put(units, on: &mapWithUnits)
-            print(round)
-            printBattlefield(mapWithUnits)
+//            print(round)
+//            graph.printMap(units)
         }
         return round * units.map { $0.hp }.reduce(0, +)
     }
+    static func Part2(_ data: [String]) -> (Int, Int) {
+        let (graph, u) = Graph.generateMap(data)
+        let elvesCount = u.filter { $0.isElf }.count
+        
+        var units = u.copy()
+        var power = units.first?.attack ?? 3
+        var score = 0
+        partLoop: while true {
+            var round = 0
+            gameLoop: while true {
+                unitLoop: for unit in units.sortedByReadingOrder() {
+                    // check life
+                    guard let _ = units.first(where: { $0.id == unit.id }) else {
+                        continue unitLoop  // skip dead unit
+                    }
+                    
+                    guard !unit.targets(units).isEmpty else {
+                        break gameLoop // end game
+                    }
+                    
+                    let chosen = graph.move(unit, all: units)
+                    let step = graph.step(unit, all: units, chosen: chosen)
+                    unit.position = step.value
+                    
+                    if let target = graph.aim(unit, all: units) {
+                        target.hp -= unit.attack
+                        if !target.isAlive {
+                            guard target.isGoblin else { break gameLoop } // elf died
+                            units.removeAll { $0.id == target.id }
+                        }
+                    }
+                }
+                round += 1
+            }
+            score = round * units.map { $0.hp }.reduce(0, +)
+            let elvesWin = units.count == elvesCount && units.first!.isElf
+            guard !elvesWin else { break partLoop }
+            power += 1
+            print("bumping power to \(power)")
+            units = u.copy()
+            for unit in units where unit.isElf {
+                unit.attack = power
+            }
+        }
+        return (power, score)
+    }
 }
 private extension Y2018Day15 {
-    static func getUnits(_ battlefield: [[Character]]) -> [BattleUnit] {
-        var units = [BattleUnit]()
-        for (y, array) in battlefield.enumerated() {
-            for (x, char) in array.enumerated() where char.isBattleUnit {
-                units.append(BattleUnit(char.isElf ? .good : .bad, x, y))
-            }
-        }
-        return units
-    }
-    static func remove(_ units: [BattleUnit], from battlefield: inout [[Character]]) {
-        for unit in units {
-            battlefield[unit.position.y][unit.position.x] = Character.openCavern
-        }
-    }
-    static func put(_ units: [BattleUnit], on battlefield: inout [[Character]]) {
-        for unit in units {
-            battlefield[unit.position.y][unit.position.x] = unit.type == .good ? .elf : .goblin
-        }
-    }
-    static func getTargets(_ unit: BattleUnit, _ units: [BattleUnit]) -> [BattleUnit] {
-        return units.filter { $0.type != unit.type }
-    }
-    static func getInRange(_ unit: BattleUnit, _ targets: [BattleUnit], _ battlefield: [[Character]]) -> [Point] {
-        return targets.flatMap { $0.position.adjacent }.filter { $0 == unit.position || battlefield[$0.y][$0.x] == .openCavern }
-    }
-    static func getInRangeTargets(_ unit: BattleUnit,  _ targets: [BattleUnit]) -> [BattleUnit] {
-        let inRange = unit.position.adjacent
-        return targets.filter { inRange.contains($0.position) }
-    }
-    static func getBestTarget(_ inRangeTargets: [BattleUnit]) -> BattleUnit {
-        let sorted = inRangeTargets.filter { $0.isAlive }.sorted { $0.hp < $1.hp }
-        let lowest = sorted.first?.hp
-        let targets = sorted.filter { $0.hp == lowest }
-        return targets.sorted(by: Sort.unit).first!
-    }
-    static func pathFinder(_ start: Point, _ end: Point, _ mapWithUnits: [[Character]], _ threshold: Int) -> [Point] {
-        let queue = Queue<(Point, [Point])>() // (point, path)
-        let points = start.adjacent
-            .map { ($0, [$0]) }
-            .filter { Filter.openPoint(mapWithUnits)($0.0) }
-        queue.push(points)
-        
-        var paths = [[Point]]()
-        
-        while !queue.isEmpty && queue.count < 100 * threshold {
-            let (point, path) = queue.pop()!
-            if point == start { break } // unreachable
-            if path.count > threshold { break } // unreachable
-            if point == end {
-                paths.append(path)
-                if path.count > paths.first!.count {
-                    paths.removeLast()
-                    break // all nearest found
-                } else {
-                    continue
-                }
-            }
-            let points = point.adjacent
-                .filter { !path.contains($0) }
-                .map { ($0, path + [$0]) }
-                .filter { Filter.openPoint(mapWithUnits)($0.0) }
-            queue.push(points)
-        }
-        let chosen = paths.sorted(by: Sort.points(true)).first ?? []
-        return chosen
-    }
     static func continueGame(_ round: Int, _ rounds: Int) -> Bool {
         if rounds == -1 {
             return true
         }
         return round < rounds
     }
-    static func printBattlefield(_ mapWithUnits: [[Character]]) {
-        let display = mapWithUnits.reduce("") { $0 + $1.reduce("") { $0 + String($1) } + "\n" }
-        print(display)
+}
+private extension Graph where T == Point {
+    static func generateMap(_ data: [String]) -> (map: Graph, units: [BattleUnit]) {
+        let graph = Graph<Point>()
+        var units = [BattleUnit]()
+        for (y, array) in data.enumerated() {
+            loop: for (x, d) in array.enumerated() {
+                switch d.value {
+                case .wall: continue loop
+                case .open: break
+                case .elf: units.append(BattleUnit(.good, x, y))
+                case .goblin: units.append(BattleUnit(.bad, x, y))
+                }
+                let point = Point(x: x, y: y)
+                let node = graph.create(point)
+                graph.link(node)
+            }
+        }
+        return (graph, units)
+    }
+    private func link(_ node: Node) {
+        let directions: [Direction] = [.up, .left]
+        let nodes = directions.compactMap { self.node($0, of: node) }
+        nodes.forEach {
+            self.link(node, to: $0)
+            self.link($0, to: node)
+        }
+    }
+    func node(_ direction: Direction, of node: Node) -> Node? {
+        let offset = node.value.offset(by: direction.offset)
+        return nodes.first { $0.value == offset }
+    }
+    func adjacent(_ node: Node) -> [Node] {
+        let directions: [Direction] = [.up, .down, .left, .right]
+        return directions.compactMap { self.node($0, of: node) }
+    }
+    func reachable(_ from: Node, to: Node, all: [BattleUnit]) -> Bool {
+        return nearest(from, to: to, all: all) != nil
+    }
+    func nearest(_ from: Node, to: Node, all: [BattleUnit]) -> Int? {
+        guard from != to else { return 1 }
+        var memo = [Node: Int]()
+        var block = all.map { $0.position }
+        block.removeAll { $0 == to.value }
+        
+        let queue = Queue<Node>()
+        queue.push(from)
+        memo[from] = 1
+        
+        while true {
+            guard let node = queue.pop(),
+                let weight = memo[node] else { break }
+            let items = links(node)
+            for item in items {
+                if item.to == to {
+                    return weight // found
+                }
+                if block.contains(item.to.value) {
+                    continue
+                }
+                block.append(item.to.value)
+
+                queue.push(item.to)
+                memo[item.to] = weight + 1
+            }
+        }
+        return nil
+    }
+    func move(_ unit: BattleUnit, all units: [BattleUnit]) -> Node {
+        let unitNode = nodes.first { $0.value == unit.position }!
+        let targets = unit.targets(units)
+        let targetNodes = targets.compactMap { t in
+            self.nodes.first { $0.value == t.position }
+        }
+        let block = units
+            .map { $0.position }
+            .filter { $0 != unit.position }
+        let inRange = targetNodes
+            .flatMap { self.adjacent($0) }
+            .filter { !block.contains($0.value) }
+            .sortedByReadingOrder()
+        guard !inRange.map({ $0.value }).contains(unit.position) else { return unitNode }
+        let nearestTuples = inRange
+            .map { ($0, self.nearest(unitNode, to: $0, all: units)) }
+            .filter { $0.1 != nil }
+            .map { ($0.0, $0.1!) }
+            .sorted { $0.1 < $1.1 }
+        guard !nearestTuples.isEmpty else { return unitNode }
+        let nearestInt = nearestTuples.first!.1
+        let nearest = nearestTuples
+            .filter { $0.1 == nearestInt }
+            .map { $0.0 }
+        return nearest.sortedByReadingOrder().first!
+    }
+    func step(_ unit: BattleUnit, all units: [BattleUnit], chosen: Node) -> Node {
+        guard unit.position != chosen.value else { return chosen }
+        let unitNode = nodes.first { $0.value == unit.position }!
+        let block = units
+            .map { $0.position }
+            .filter { $0 != unit.position }
+        let steps = adjacent(unitNode)
+            .filter { !block.contains($0.value) }
+        let distanceTuples = steps
+            .map { ($0, self.nearest($0, to: chosen, all: units)) }
+            .filter { $0.1 != nil }
+            .map { ($0.0, $0.1!) }
+            .sorted { $0.1 < $1.1 }
+        let distanceInt = distanceTuples.first!.1
+        let distances = distanceTuples
+            .filter { $0.1 == distanceInt }
+            .map { $0.0 }
+        return distances.sortedByReadingOrder().first!
+    }
+    func aim(_ unit: BattleUnit, all units: [BattleUnit]) -> BattleUnit? {
+        let unitNode = nodes.first { $0.value == unit.position }!
+        let adjacentPoints = adjacent(unitNode).map { $0.value }
+        let targetTuples = unit.targets(units)
+            .filter { adjacentPoints.contains($0.position) }
+            .filter { $0.isAlive }
+            .map { ($0, $0.hp) }
+            .sorted { $0.1 < $1.1 }
+        guard !targetTuples.isEmpty else { return nil }
+        let targetInt = targetTuples.first!.1
+        let targets = targetTuples
+            .filter { $0.1 == targetInt }
+            .map { $0.0 }
+        return targets.sortedByReadingOrder().first
+    }
+    func printMap(_ units: [BattleUnit]) {
+        let points = nodes.map { $0.value }
+        let width = points.map { $0.x }.sorted().last! + 2
+        let height = points.map { $0.y }.sorted().last! + 2
+        
+        var map: [[Character]] = Array(repeating: Array(repeating: .wall, count: width), count: height)
+        nodes.forEach {
+            map[$0.value.y][$0.value.x] = .open
+        }
+        units.forEach {
+            if $0.isAlive {
+                map[$0.position.y][$0.position.x] = $0.isElf ? .elf : .goblin
+            }
+        }
+        let display = map.reduce("") { $0 + $1.reduce("") { $0 + String($1) } + "\n" }
+        let stats = units.sortedByReadingOrder().reduce("") { $0 + "(\($1.hp))" }
+        print("\(display)\(stats)\n")
     }
 }
 private extension Character {
     static let wall: Character = "#"
-    static let openCavern: Character = "."
+    static let open: Character = "."
     static let elf: Character = "E"
     static let goblin: Character = "G"
-    
-    var isBattleUnit: Bool {
+
+    var value: Y2018Day15.Value {
         switch self {
-        case .elf, .goblin: return true
-        default: return false
-        }
-    }
-    var isElf: Bool {
-        switch self {
-        case .elf: return true
-        default: return false
-        }
-    }
-    var isGoblin: Bool {
-        switch self {
-        case .goblin: return true
-        default: return false
+        case "#": return .wall
+        case ".": return .open
+        case "E": return .elf
+        case "G": return .goblin
+        default: fatalError()
         }
     }
 }
-private extension Point {
-    var adjacent: [Point] {
-        return [
-            Point(x: x + 1, y: y),
-            Point(x: x - 1, y: y),
-            Point(x: x, y: y + 1),
-            Point(x: x, y: y - 1)
-        ]
-    }
-    func manDis(_ end: Point) -> Int {
-        return manhattanDistance(from: end)
+private extension Direction {
+    var offset: Point {
+        switch self {
+        case .up: return Point(x: 0, y: -1)
+        case .left: return Point(x: -1, y: 0)
+        case .right: return Point(x: 1, y: 0)
+        case .down: return Point(x: 0, y: 1)
+        case .none: fatalError()
+        }
     }
 }
-private struct Sort {
-    static let point: (Point, Point) -> Bool = { (p1, p2) in
-        if p1.y == p2.y {
-            return p1.x < p2.x
-        }
-        return p1.y < p2.y
-    }
-    static func points(_ checkFirst: Bool) -> ([Point], [Point]) -> Bool {
-        return { (points1, points2) in
-            let p1 = checkFirst ? points1.first : points1.last
-            let p2 = checkFirst ? points2.first : points2.last
-            switch (p1, p2) {
-            case (nil, nil): return true
-            case (nil, .some): return false
-            case (.some, nil): return true
-            default: break
+private extension Sequence where Element == BattleUnit {
+    func sortedByReadingOrder() -> [Element] {
+        return sorted {
+            if $0.position.y == $1.position.y {
+                return $0.position.x < $1.position.x
             }
-            let f1 = p1!
-            let f2 = p2!
-            if f1.y == f2.y {
-                return f1.x < f2.x
+            return $0.position.y < $1.position.y
+        }
+    }
+    func copy() -> [Element] {
+        return map { $0.copy() }
+    }
+}
+private extension Sequence where Element == Y2018Day15.Node {
+    func sortedByReadingOrder() -> [Element] {
+        return sorted {
+            if $0.value.y == $1.value.y {
+                return $0.value.x < $1.value.x
             }
-            return f1.y < f2.y
-        }
-    }
-    static let unit: (BattleUnit, BattleUnit) -> Bool = { (unit1, unit2) in
-        if unit1.position.y == unit2.position.y {
-            return unit1.position.x < unit2.position.x
-        }
-        return unit1.position.y < unit2.position.y
-    }
-    static func point(manDis end: Point) -> (Point, Point) -> Bool {
-        return { (p1, p2) in
-            return p1.manDis(end) < p2.manDis(end)
+            return $0.value.y < $1.value.y
         }
     }
 }
-private struct Filter {
-    static func openPoint(_ mapWithUnits: [[Character]]) -> (Point) -> Bool {
-        return { mapWithUnits[$0.y][$0.x] == .openCavern }
+private extension Sequence where Element == Point {
+    func sortedByReadingOrder() -> [Element] {
+        return sorted {
+            if $0.y == $1.y {
+                return $0.x < $1.x
+            }
+            return $0.y < $1.y
+        }
+    }
+}
+private extension BattleUnit {
+    var isElf: Bool { return type == .good }
+    var isGoblin: Bool { return type == .bad }
+
+    func targets(_ all: [BattleUnit]) -> [BattleUnit] {
+        return all.filter { $0.type != type }
     }
 }
