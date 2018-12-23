@@ -298,11 +298,16 @@ class aoc2018Tests: XCTestCase {
     }
     func testDay17Part1() {
         let testData1 = testDataDay17()
-        assert(Y2018Day17.Part1(testData1.newlineSplit(), 0) == 57)
+        assert(Y2018Day17.Part1(testData1.newlineSplit(), 0).score == 57)
         
-//        let answer = Y2018Day17.Part1(readInput(year: year, day: 17), 99) // 448
-//        print("\(#function):\(answer)")
-//        assert(answer == 531)
+        let answer = Y2018Day17.Part1(readInput(year: year, day: 17), 4239)
+        print("\(#function):\(answer)")
+        assert(answer.score == 27736)
+    }
+    func testDay17Part2() {
+        let answer = Y2018Day17.Part2(readInput(year: year, day: 17), 4239)
+        print("\(#function):\(answer)")
+        assert(answer == 22474)
     }
     func testDay18Part1() {
         let testData1 = testDataDay18()

@@ -9,176 +9,217 @@
 import Foundation
 
 struct Y2018Day17 {
-    static func Part1(_ data: [String], _ printAfter: Int) -> Int {
+    static func Part0(_ data: [String], _ printAfter: Int) -> (score: (flow: Int, pool: Int), round: Int) {
         let points = data.flatMap(Point.multiplePoints)
-        var (offset, ground) = generateGround(points)
+        var (ground, flow) = generateGround(points)
         
-        var flows = [Point.spring.offset(by: offset)]
-        var direction = [Direction.down]
-        var printCount = 0
+        var flows: [Flow] = [flow]
+        var block = Set<Point>()
+        var round = 0
         
         gameLoop: while true {
-            flowLoop: for (f, flow) in flows.enumerated() {
+            flowLoop: for flow in flows {
                 guard flow.y < ground.count else { break gameLoop }
                 guard flows.contains(flow) else { continue flowLoop }
-                var flow = flow
-                var f = f
-                f = flows.firstIndex(of: flow)!
-
+                
                 switch ground[flow.y][flow.x] {
                 case .spring:
-                    flows[f] = flow.offset(by: 0, 1)
-                case .sand:
-                    ground[flow.y][flow.x] = .water
-                    flows[f] = flow.offset(by: 0, 1)
-                case .clay:
-                    flows[f] = flow.offset(by: 0, -1)
-                    direction[f] = .up
-                case .water where direction[f] == .down:
-                    flows[f] = flow.offset(by: 0, -1)
-                    direction[f] = .up
-                    flow = flows[f]
-                    fallthrough
-                case .water:
-                    let (newDirection, leftOffset, rightOffset, remove) = fill(flow, direction[f], &ground)
-                    if remove {
-                        flows.remove(at: f)
-                        continue flowLoop
-                    }
-                    f = flows.firstIndex(of: flow)!
+                    flow.offset(by: 0, 1)
                     
-                    switch newDirection {
+                case .sand:
+                    checkBlocking(flow, ground, &block)
+                    ground[flow.y][flow.x] = .flow
+                    flow.offset(by: 0, 1)
+                    
+                case .clay:
+                    fallthrough
+                    
+                case .pool:
+                    flow.offset(by: 0, -1)
+                    fallthrough
+
+                case .flow:
+                    let (direction, lhs, rhs) = fill(flow.location, &ground)
+                    
+                    func computeFlow(_ first: Point?, _ second: Point? = nil) {
+                        let points = [first, second].compactMap { $0 }
+                        let good = points.filter { !block.contains($0) }
+                        points.forEach { block.insert($0) }
+
+                        switch good.count {
+                        case 0:
+                            flows.removeAll { $0 == flow }
+                        case 2:
+                            flows.append(.init(good[1]))
+                            fallthrough
+                        case 1:
+                            flow.location = good[0]
+                        default: fatalError()
+                        }
+                    }
+                    
+                    switch direction {
                     case .up:
-                        flows[f] = flow.offset(by: 0, -1)
-                        direction[f] = .up
+                        flow.offset(by: 0, -1)
+                        
                     case .left:
-                        flows[f] = flow.offset(by: leftOffset, 0)
-                        direction[f] = .down
+                        computeFlow(flow.location.offset(by: lhs - 1, 0))
+
                     case .right:
-                        flows[f] = flow.offset(by: rightOffset, 0)
-                        direction[f] = .down
-                    case .none: // both
-                        flows[f] = flow.offset(by: leftOffset, 0)
-                        direction[f] = .down
-                        flows.append(flow.offset(by: rightOffset, 0))
-                        direction.append(.down)
+                        computeFlow(flow.location.offset(by: rhs + 1, 0))
+                        
+                    case .down: // both sides
+                        let first = flow.location.offset(by: lhs - 1, 0)
+                        let second = flow.location.offset(by: rhs + 1, 0)
+                        computeFlow(first, second)
+
                     default: fatalError()
                     }
                 default: fatalError()
                 }
             }
-            printCount += 1
-            if printCount > printAfter {
+            round += 1
+            if round > printAfter {
                 printGround(ground)
             }
         }
-        printGround(ground)
-        return ground.reduce(0) { $0 + $1.reduce(0) { $0 + ($1 == .water ? 1 : 0) }}
+        let score = ground.reduce((0, 0)) {
+            let water = $1.reduce((0, 0)) {
+                let flow = $1.isFlow ? 1 : 0
+                let pool = $1.isPool ? 1 : 0
+                return ($0.0 + flow, $0.1 + pool)
+            }
+            return ($0.0 + water.0, $0.1 + water.1)
+        }
+        return (score, round)
+    }
+    static func Part1(_ data: [String], _ printAfter: Int) -> (score: Int, round: Int) {
+        let tuple = Part0(data, printAfter)
+        let score = tuple.score.flow + tuple.score.pool
+        return (score, tuple.round)
+    }
+    static func Part2(_ data: [String], _ printAfter: Int) -> Int {
+        return Part0(data, printAfter).score.pool
+    }
+}
+private class Flow: Equatable {
+    var location: Point
+    var x: Int { return location.x }
+    var y: Int { return location.y }
+    init(_ point: Point) { location = point }
+    static func == (lhs: Flow, rhs: Flow) -> Bool {
+        return lhs.location ==  rhs.location
+    }
+    func offset(by x: Int, _ y: Int) {
+        location = location.offset(by: x, y)
     }
 }
 private extension Y2018Day17 {
-    static func generateGround(_ points: [Point]) -> (offset: Point, ground: [[Character]]) {
-        var points = points
-        points.append(Point.spring)
-        
-        let xSort = points.sorted { $0.x < $1.x }
-        let ySort = points.sorted { $0.y < $1.y }
-        let minX = xSort.first!.x - 1
-        let maxX = xSort.last!.x + 1
-        let minY = ySort.first!.y
-        let maxY = ySort.last!.y
+    static func generateGround(_ points: [Point]) -> (ground: [[Character]], flow: Flow) {
+        let xValues = points.sorted { $0.x < $1.x }
+        let yValues = points.sorted { $0.y < $1.y }
+        let minX = xValues.first!.x - 1
+        let maxX = xValues.last!.x + 1
+        let minY = yValues.first!.y
+        let maxY = yValues.last!.y
         let xOffset = -minX
         let yOffset = -minY
 
-        var ground = Array(repeating: Array(repeating: Character.sand, count: maxX + xOffset + 1), count: maxY + yOffset + 1)
+        var ground: [[Character]] = Array(repeating: Array(repeating: .sand, count: maxX + xOffset + 1), count: maxY + yOffset + 2)
         for point in points {
-            ground[point.y + yOffset][point.x + xOffset] = .clay
+            ground[point.y + yOffset + 1][point.x + xOffset] = .clay
         }
-        ground[Point.spring.y + yOffset][Point.spring.x + xOffset] = .spring
         
-        return (Point(x: xOffset, y: yOffset), ground)
+        let spring = Point(x: Point.spring.x + xOffset, y: Point.spring.y)
+        ground[spring.y][spring.x] = .spring
+        
+        return (ground, Flow(spring))
     }
     static func printGround(_ ground: [[Character]]) {
-        let prefix = 75
-        let ground = ground.map { $0.prefix(prefix) }
-        
         let display = ground.reduce("") { $0 + $1.reduce("") { $0 + String($1) } + "\n" }
         print(display)
     }
-    static func fill(_ point: Point, _ direction: Direction, _ ground: inout [[Character]]) -> (direction: Direction, leftOffset: Int, rightOffset: Int, remove: Bool) {
+    static func fill(_ point: Point, _ ground: inout [[Character]]) -> (direction: Direction, leftOffset: Int, rightOffset: Int) {
         // left
         var x = point.x - 1
         let y = point.y
-        var l1 = 0
-        var l2 = 0
-        while canFill(x, y, ground) {
-            l1 += 1
-            if ground[y][x] == .water {
-                l2 += 1
-            }
-            ground[y][x] = .water
-            x -= 1
-        }
-        let left = canSpill(x, y, ground)
-        let leftOffset = x - point.x
+        while canFill(x, y, ground) { x -= 1 }
+        let lhs = canSpill(x, y, ground)
+        let left = x - point.x + 1
         
         // right
         x = point.x + 1
-        var r1 = 0
-        var r2 = 0
-        while canFill(x, y, ground) {
-            r1 += 1
-            if ground[y][x] == .water {
-                r2 += 1
-            }
-            ground[y][x] = .water
-            x += 1
-        }
-        let right = canSpill(x, y, ground)
-        let rightOffset = x - point.x
+        while canFill(x, y, ground) { x += 1 }
+        let rhs = canSpill(x, y, ground)
+        let right = x - point.x - 1
         
-        let newDirection = { (left, right) -> Direction in
-            switch (left, right) {
-            case (true, true): return .none // both
+        let direction = { (lhs, rhs) -> Direction in
+            switch (lhs, rhs) {
+            case (true, true): return .down // both sides
             case (false, false): return .up
             case (true, false): return .left
             case (false, true): return .right
             }
-        }(left, right)
+        }(lhs, rhs)
         
-        var remove = false
-        if l2 > 0 || r2 > 0 {
-            remove = true
-        }
+        let c = { direction -> Character in
+            switch direction {
+            case .up: return .pool
+            case .left, .right, .down: return .flow
+            default: fatalError()
+            }
+        }(direction)
         
-        return (newDirection, leftOffset, rightOffset, remove)
-    }
-    static func canFill(_ x: Int, _ y: Int, _ ground: [[Character]]) -> Bool {
-        switch (ground[y][x], ground[y + 1][x]) {
-        case (.water, .water),
-             (.sand, .water),
-             (.sand, .clay): return true
-        default: return false
+        for x in (point.x + left)...(point.x + right) {
+            ground[y][x] = c
         }
+
+        return (direction, left, right)
     }
-    static func canSpill(_ x: Int, _ y: Int, _ ground: [[Character]]) -> Bool {
+    private static func canFill(_ x: Int, _ y: Int, _ ground: [[Character]]) -> Bool {
+        return ground[y][x].canFlow && ground[y + 1][x].canBlock
+    }
+    private static func canSpill(_ x: Int, _ y: Int, _ ground: [[Character]]) -> Bool {
         guard x >= 0, x < ground[0].count else { return false }
-        switch ground[y][x] {
-        case .clay, .water: return false
-        default: return true
+        return !ground[y][x].canBlock
+    }
+    private static func existingFlow(_ x: Int, _ y: Int, _ ground: [[Character]]) -> Bool {
+        return ground[y][x].isFlow && ground[y + 1][x].isFlow
+    }
+    static func checkBlocking(_ flow: Flow, _ ground: [[Character]], _ block: inout Set<Point>) {
+        let x = flow.x
+        let y = flow.y
+        guard ground[y][x] == .sand else { return }
+        guard x > 0, x < ground[0].count - 1, y < ground.count - 1 else { return }
+        let left = ground[y + 1][x - 1]
+        let middle = ground[y + 1][x]
+        let right = ground[y + 1][x + 1]
+        switch (left, middle, right) {
+        case (.clay, .sand, _), (_, .sand, .clay): break
+        default: return
         }
+        block.insert(flow.location)
     }
 }
 private extension Character {
     static let spring: Character = "+"
     static let sand: Character = "."
     static let clay: Character = "#"
-    static let water: Character = "|"
+    static let flow: Character = "|"
+    static let pool: Character = "~"
     
-//    var isSpring: Bool { return self == Character.spring }
-//    var isSand: Bool { return self == Character.sand }
-//    var isClay: Bool { return self == Character.clay }
-//    var isWater: Bool { return self == Character.water }
+    var isFlow: Bool {
+        return self == .flow
+    }
+    var isPool: Bool {
+        return self == .pool
+    }
+    var canFlow: Bool {
+        return self == .sand || self == .flow
+    }
+    var canBlock: Bool {
+        return self == .clay || self == .pool
+    }
 }
 private extension Point {
     static let spring = Point(x: 500, y: 0)
