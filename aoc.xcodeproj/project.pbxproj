@@ -25,6 +25,9 @@
 		17441DA921CD3DF400878A08 /* 2018Day21.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17441DA821CD3DF400878A08 /* 2018Day21.txt */; };
 		17441DAB21CD3E9500878A08 /* 2018Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17441DAA21CD3E9500878A08 /* 2018Day21.swift */; };
 		17441DAF21D1307A00878A08 /* 2018Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17441DAE21D1307A00878A08 /* 2018Day22.swift */; };
+		17441DB321D2C91B00878A08 /* 2018Day23.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17441DB221D2C91A00878A08 /* 2018Day23.txt */; };
+		17441DB521D2C9F900878A08 /* Point3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17441DB421D2C9F900878A08 /* Point3D.swift */; };
+		17441DB721D2CD6F00878A08 /* 2018Day23.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17441DB621D2CD6F00878A08 /* 2018Day23.swift */; };
 		174F9EC721B9CDC0001C0EA6 /* Guard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EC621B9CDC0001C0EA6 /* Guard.swift */; };
 		174F9EC921BAAE0F001C0EA6 /* 2018Day7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */; };
 		174F9ECB21BAAE84001C0EA6 /* 2018Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */; };
@@ -119,6 +122,9 @@
 		17441DA821CD3DF400878A08 /* 2018Day21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day21.txt; sourceTree = "<group>"; };
 		17441DAA21CD3E9500878A08 /* 2018Day21.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day21.swift; sourceTree = "<group>"; };
 		17441DAE21D1307A00878A08 /* 2018Day22.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day22.swift; sourceTree = "<group>"; };
+		17441DB221D2C91A00878A08 /* 2018Day23.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day23.txt; sourceTree = "<group>"; };
+		17441DB421D2C9F900878A08 /* Point3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point3D.swift; sourceTree = "<group>"; };
+		17441DB621D2CD6F00878A08 /* 2018Day23.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day23.swift; sourceTree = "<group>"; };
 		174F9EC621B9CDC0001C0EA6 /* Guard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guard.swift; sourceTree = "<group>"; };
 		174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day7.txt; sourceTree = "<group>"; };
 		174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day7.swift; sourceTree = "<group>"; };
@@ -309,6 +315,7 @@
 				1764012621C74FDA00046721 /* OpCodeInstruction.swift */,
 				1764013C21CA0A6300046721 /* OpCodeProgram.swift */,
 				17E36BD821B7070D0060025A /* Point.swift */,
+				17441DB421D2C9F900878A08 /* Point3D.swift */,
 				17E36BF121B80A120060025A /* Polarity.swift */,
 				17E36BEF21B809E00060025A /* PolymerUnit.swift */,
 				172D6E0221C46E220061862E /* Queue.swift */,
@@ -347,6 +354,7 @@
 				17441DA421CC900100878A08 /* 2018Day20.swift */,
 				17441DAA21CD3E9500878A08 /* 2018Day21.swift */,
 				17441DAE21D1307A00878A08 /* 2018Day22.swift */,
+				17441DB621D2CD6F00878A08 /* 2018Day23.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -376,6 +384,7 @@
 				1764013821CA070900046721 /* 2018Day19.txt */,
 				17441DA221CC8F4A00878A08 /* 2018Day20.txt */,
 				17441DA821CD3DF400878A08 /* 2018Day21.txt */,
+				17441DB221D2C91A00878A08 /* 2018Day23.txt */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -487,6 +496,7 @@
 				174F9EE021BE8067001C0EA6 /* 2018Day10.txt in Resources */,
 				17E36BCB21B6DD550060025A /* 2018Day2.txt in Resources */,
 				1764012D21C769C000046721 /* 2018Day17.txt in Resources */,
+				17441DB321D2C91B00878A08 /* 2018Day23.txt in Resources */,
 				172D6E0521C4C1400061862E /* 2018Day15.txt in Resources */,
 				17E36BEC21B8090E0060025A /* 2018Day5.txt in Resources */,
 				1764012921C75B8E00046721 /* 2018Day166.txt in Resources */,
@@ -531,6 +541,7 @@
 				174F9EEA21C019EE001C0EA6 /* DimensionalArray.swift in Sources */,
 				174F9ECF21BABDA8001C0EA6 /* Node.swift in Sources */,
 				17E36BE121B7279E0060025A /* Timestamp.swift in Sources */,
+				17441DB521D2C9F900878A08 /* Point3D.swift in Sources */,
 				17441DA721CC914700878A08 /* Graph.swift in Sources */,
 				17441DAB21CD3E9500878A08 /* 2018Day21.swift in Sources */,
 				172D6E0721C4C1680061862E /* 2018Day15.swift in Sources */,
@@ -543,6 +554,7 @@
 				17E36BF821B8E7070060025A /* 2018Day6.swift in Sources */,
 				1764012F21C76A4300046721 /* 2018Day17.swift in Sources */,
 				17E36BCD21B6DEC10060025A /* 2018Day2.swift in Sources */,
+				17441DB721D2CD6F00878A08 /* 2018Day23.swift in Sources */,
 				174F9EC721B9CDC0001C0EA6 /* Guard.swift in Sources */,
 				17FFBCDC21C13A04004CD1CC /* 2018Day12.swift in Sources */,
 				17441DA521CC900100878A08 /* 2018Day20.swift in Sources */,
