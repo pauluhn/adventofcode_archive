@@ -15,38 +15,80 @@ struct Y2018Day22 {
         printCave(cave)
         return riskLevel(cave)
     }
-    static func Part2(_ depth: Int, _ x: Int, _ y: Int) -> Double {
+    static func Part2(_ depth: Int, _ x: Int, _ y: Int, _ padding: Int) -> (minutes: Double, padding: Int) {
         let mouth = Point(x: 0, y: 0)
         let target = Point(x: x, y: y)
-        let padding = 100
         let cave = computeCave(depth, x, y, padding)
         printCave(cave)
         let graph = Graph.generateMap(cave, mouth, target)
         print(graph)
         
-        var unvisited = Set(graph.nodes)
-        var data = graph.nodes.reduce(into: [Node: Double]()) { $0[$1] = Double.greatestFiniteMagnitude }
-        
-        var node = graph.nodes.first { $0.value == PointTool(mouth, .torch) }!
-        data[node] = 0
-        
-        while node.value.point != target {
-            let neighbors = graph.links(node).map { (node: $0.to, weight: $0.weight ?? 0) }
-            let visit = neighbors.filter { unvisited.contains($0.node) }
-            let current = data[node]!
-            visit.forEach {
-                data[$0.node] = min(data[$0.node]!, $0.weight + current)
-                
-            }
-            unvisited.remove(node)
+        var open = Set<Node>()
+        var closed = Set<Node>()
+        var previous = [Node: Node]()
+        // g = from start
+        var g = graph.nodes.reduce(into: [Node: Double]()) { $0[$1] = Double.greatestFiniteMagnitude }
+        // f = known + h
+        var f = graph.nodes.reduce(into: [Node: Double]()) { $0[$1] = Double.greatestFiniteMagnitude }
 
-            node = unvisited
-                .map { (node: $0, weight: data[$0]!) }
+        var node = graph.nodes.first { $0.value == PointTool(mouth, .torch) }!
+        open.insert(node)
+        g[node] = 0
+        f[node] = node.manhattanDistance(from: target)
+        
+        while !open.isEmpty {
+            node = open
+                .map { (node: $0, weight: f[$0]!) }
                 .sorted { $0.weight < $1.weight }
-                .first
-                .map { $0.node }!
+                .first!.node
+            if node.point == target {
+                break
+            }
+            open.remove(node)
+            closed.insert(node)
+            
+            let neighbors = graph.links(node).map { (node: $0.to, weight: $0.weight!) }
+            for neighbor in neighbors where !closed.contains(neighbor.node) {
+                let maybe = g[node]! + neighbor.weight
+                
+                if !open.contains(neighbor.node) {
+                    open.insert(neighbor.node)
+                } else if maybe >= g[neighbor.node]! {
+                    continue
+                }
+                
+                previous[neighbor.node] = node
+                g[neighbor.node] = maybe
+                f[neighbor.node] = maybe + neighbor.node.manhattanDistance(from: target)
+            }
         }
-        return data[node]!
+        let path = thePath(previous, node)
+        let minutes = walk(path: path, graph)
+        
+        let points = path.map { $0.point }
+        let maxX = points.map { $0.x }.sorted().last! - x
+        let maxY = points.map { $0.y }.sorted().last! - y
+        
+        return (minutes, max(maxX, maxY))
+    }
+    private static func thePath(_ previous: [Node: Node], _ node: Node) -> [Node] {
+        var node = node
+        var path = [node]
+        while let next = previous[node] {
+            path.append(next)
+            node = next
+        }
+        return path.reversed()
+    }
+    private static func walk(path: [Node], _ graph: Graph<PointTool>) -> Double {
+        var path = path
+        var node = path.removeFirst()
+        var weight = 0.0
+        path.forEach {
+            weight += graph.weight(node, to: $0)!
+            node = $0
+        }
+        return weight
     }
 }
 private struct Region {
@@ -198,7 +240,15 @@ private extension Graph where T == PointTool {
     }
 }
 private extension Graph.GraphNode where T == PointTool {
-    var tool: Tool { return value.tool }
+    var point: Point {
+        return value.point
+    }
+    var tool: Tool {
+        return value.tool
+    }
+    func manhattanDistance(from point: Point) -> Double {
+        return Double(point.manhattanDistance(from: point))
+    }
 }
 private extension Region {
     var tools: [Tool] {
