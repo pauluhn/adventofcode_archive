@@ -9,47 +9,46 @@
 import Foundation
 
 struct Y2018Day22 {
-    struct Region {
-        let depth: Int
-        let geologicIndex: Int
-        let erosionLevel: Int
-        enum RegionType: Int {
-            case rocky
-            case wet
-            case narrow
-            case mouth
-            case target
-        }
-        let type: RegionType
-        let special: RegionType?
-        init(_ depth: Int, _ geologicIndex: Int) {
-            self.depth = depth
-            self.geologicIndex = geologicIndex
-            erosionLevel = (geologicIndex + depth) % 20183
-            type = RegionType(rawValue: erosionLevel % 3)!
-            special = nil
-        }
-        init(_ depth: Int, _ special: RegionType) {
-            self.depth = depth
-            geologicIndex = 0
-            erosionLevel = (geologicIndex + depth) % 20183
-            type = RegionType(rawValue: erosionLevel % 3)!
-            self.special = special
-        }
-    }
     static func Part1(_ depth: Int, _ x: Int, _ y: Int) -> Int {
         let cave = computeCave(depth, x, y)
         printCave(cave)
-        
         return riskLevel(cave)
     }
 }
+private struct Region {
+    let depth: Int
+    let geologicIndex: Int
+    let erosionLevel: Int
+    enum RegionType: Int {
+        case rocky
+        case wet
+        case narrow
+        case mouth
+        case target
+    }
+    let type: RegionType
+    let special: RegionType?
+    init(_ depth: Int, _ geologicIndex: Int) {
+        self.depth = depth
+        self.geologicIndex = geologicIndex
+        erosionLevel = (geologicIndex + depth) % 20183
+        type = RegionType(rawValue: erosionLevel % 3)!
+        special = nil
+    }
+    init(_ depth: Int, _ special: RegionType) {
+        self.depth = depth
+        geologicIndex = 0
+        erosionLevel = (geologicIndex + depth) % 20183
+        type = RegionType(rawValue: erosionLevel % 3)!
+        self.special = special
+    }
+}
 private extension Y2018Day22 {
-    static func computeCave(_ depth: Int, _ targetX: Int, _ targetY: Int) -> [[Region]] {
+    static func computeCave(_ depth: Int, _ targetX: Int, _ targetY: Int, _ padding: Int = 0) -> [[Region]] {
         var cave = [[Region]]()
-        for y in 0..<targetY + 1 {
+        for y in 0..<targetY + padding + 1 {
             cave.append([])
-            for x in 0..<targetX + 1 {
+            for x in 0..<targetX + padding + 1 {
                 switch (x, y) {
                 case (0, 0):
                     cave[y].append(Region(depth, .mouth))
@@ -75,12 +74,12 @@ private extension Y2018Day22 {
         return cave.reduce(0) { $0 + $1.reduce(0) { $0 + $1.type.rawValue }}
     }
 }
-extension Y2018Day22.Region: CustomStringConvertible {
+extension Region: CustomStringConvertible {
     var description: String {
         return special?.description ?? type.description
     }
 }
-extension Y2018Day22.Region.RegionType: CustomStringConvertible {
+extension Region.RegionType: CustomStringConvertible {
     var description: String {
         switch self {
         case .rocky: return "."

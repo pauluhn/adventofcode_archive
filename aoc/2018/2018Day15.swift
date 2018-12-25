@@ -411,17 +411,6 @@ private extension Character {
         }
     }
 }
-private extension Direction {
-    var offset: Point {
-        switch self {
-        case .up: return Point(x: 0, y: -1)
-        case .left: return Point(x: -1, y: 0)
-        case .right: return Point(x: 1, y: 0)
-        case .down: return Point(x: 0, y: 1)
-        case .none: fatalError()
-        }
-    }
-}
 private extension Sequence where Element == BattleUnit {
     func sortedByReadingOrder() -> [Element] {
         return sorted {
