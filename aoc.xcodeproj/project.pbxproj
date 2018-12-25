@@ -24,6 +24,7 @@
 		17441DA721CC914700878A08 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17441DA621CC914700878A08 /* Graph.swift */; };
 		17441DA921CD3DF400878A08 /* 2018Day21.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17441DA821CD3DF400878A08 /* 2018Day21.txt */; };
 		17441DAB21CD3E9500878A08 /* 2018Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17441DAA21CD3E9500878A08 /* 2018Day21.swift */; };
+		17441DAF21D1307A00878A08 /* 2018Day22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17441DAE21D1307A00878A08 /* 2018Day22.swift */; };
 		174F9EC721B9CDC0001C0EA6 /* Guard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9EC621B9CDC0001C0EA6 /* Guard.swift */; };
 		174F9EC921BAAE0F001C0EA6 /* 2018Day7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */; };
 		174F9ECB21BAAE84001C0EA6 /* 2018Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */; };
@@ -117,6 +118,7 @@
 		17441DA621CC914700878A08 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		17441DA821CD3DF400878A08 /* 2018Day21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day21.txt; sourceTree = "<group>"; };
 		17441DAA21CD3E9500878A08 /* 2018Day21.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day21.swift; sourceTree = "<group>"; };
+		17441DAE21D1307A00878A08 /* 2018Day22.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day22.swift; sourceTree = "<group>"; };
 		174F9EC621B9CDC0001C0EA6 /* Guard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guard.swift; sourceTree = "<group>"; };
 		174F9EC821BAAE0F001C0EA6 /* 2018Day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day7.txt; sourceTree = "<group>"; };
 		174F9ECA21BAAE84001C0EA6 /* 2018Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day7.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				1764013A21CA073100046721 /* 2018Day19.swift */,
 				17441DA421CC900100878A08 /* 2018Day20.swift */,
 				17441DAA21CD3E9500878A08 /* 2018Day21.swift */,
+				17441DAE21D1307A00878A08 /* 2018Day22.swift */,
 			);
 			path = 2018;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */,
 				174F9EE621BFD2BF001C0EA6 /* 2018Day11.swift in Sources */,
 				172D6DFD21C2B1E70061862E /* Direction.swift in Sources */,
+				17441DAF21D1307A00878A08 /* 2018Day22.swift in Sources */,
 				174F9ECD21BAAECC001C0EA6 /* Instruction.swift in Sources */,
 				1764012721C74FDA00046721 /* OpCodeInstruction.swift in Sources */,
 				1764013B21CA073100046721 /* 2018Day19.swift in Sources */,
