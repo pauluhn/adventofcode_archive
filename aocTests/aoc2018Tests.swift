@@ -408,6 +408,20 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer.units == 434)
     }
+    func testDay25Part1() { // ~2min
+        let testData1 = testDataDay25a()
+        assert(Y2018Day25.Part1(testData1.newlineSplit()) == 2)
+        let testData2 = testDataDay25b()
+        assert(Y2018Day25.Part1(testData2.newlineSplit()) == 4)
+        let testData3 = testDataDay25c()
+        assert(Y2018Day25.Part1(testData3.newlineSplit()) == 3)
+        let testData4 = testDataDay25d()
+        assert(Y2018Day25.Part1(testData4.newlineSplit()) == 8)
+
+        let answer = Y2018Day25.Part1(readInput(year: year, day: 25))
+        print("\(#function):\(answer)")
+        assert(answer == 367)
+    }
 }
 
 extension aoc2018Tests {
@@ -704,6 +718,60 @@ extension aoc2018Tests {
         Infection:
         801 units each with 4706 hit points (weak to radiation) with an attack that does 116 bludgeoning damage at initiative 1
         4485 units each with 2961 hit points (immune to radiation; weak to fire, cold) with an attack that does 12 slashing damage at initiative 4
+        """
+    }
+    func testDataDay25a() -> String {
+        return """
+        0,0,0,0
+        3,0,0,0
+        0,3,0,0
+        0,0,3,0
+        0,0,0,3
+        0,0,0,6
+        9,0,0,0
+        12,0,0,0
+        """
+    }
+    func testDataDay25b() -> String {
+        return """
+        -1,2,2,0
+        0,0,2,-2
+        0,0,0,-2
+        -1,2,0,0
+        -2,-2,-2,2
+        3,0,2,-1
+        -1,3,2,2
+        -1,0,-1,0
+        0,2,1,-2
+        3,0,0,0
+        """
+    }
+    func testDataDay25c() -> String {
+        return """
+        1,-1,0,1
+        2,0,-1,0
+        3,2,-1,0
+        0,0,3,1
+        0,0,-1,-1
+        2,3,-2,0
+        -2,2,0,0
+        2,-2,0,-1
+        1,-1,0,-1
+        3,2,0,2
+        """
+    }
+    func testDataDay25d() -> String {
+        return """
+        1,-1,-1,-2
+        -2,-2,0,1
+        0,2,1,3
+        -2,3,-2,1
+        0,2,3,-2
+        -1,-1,1,-2
+        0,-2,-1,0
+        -2,2,3,-1
+        1,2,2,0
+        -1,-2,0,-2
         """
     }
 }
