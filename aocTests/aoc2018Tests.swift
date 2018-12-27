@@ -378,7 +378,7 @@ class aoc2018Tests: XCTestCase {
     func testDay23Part1() {
         let testData1 = testDataDay23()
         assert(Y2018Day23.Part1(testData1.newlineSplit()) == 7)
-
+        
         let answer = Y2018Day23.Part1(readInput(year: year, day: 23))
         print("\(#function):\(answer)")
         assert(answer == 383)
@@ -390,6 +390,23 @@ class aoc2018Tests: XCTestCase {
         let answer = Y2018Day23.Part2(readInput(year: year, day: 23))
         print("\(#function):\(answer)")
 //        assert(answer == 383)
+    }
+    func testDay24Part1() {
+        Y2018Day24.Part0()
+        let testData1 = testDataDay24()
+        assert(Y2018Day24.Part1(testData1.newlineSplit()) == 5216)
+        
+        let answer = Y2018Day24.Part1(readInput(year: year, day: 24))
+        print("\(#function):\(answer)")
+        assert(answer == 26868)
+    }
+    func testDay24Part2() {
+        let testData1 = testDataDay24()
+        assert(Y2018Day24.Part2(testData1.newlineSplit(), 1570).units == 51)
+        
+        let answer = Y2018Day24.Part2(readInput(year: year, day: 24), 88)
+        print("\(#function):\(answer)")
+        assert(answer.units == 434)
     }
 }
 
@@ -676,6 +693,17 @@ extension aoc2018Tests {
         pos=<14,14,14>, r=6
         pos=<50,50,50>, r=200
         pos=<10,10,10>, r=5
+        """
+    }
+    func testDataDay24() -> String {
+        return """
+        Immune System:
+        17 units each with 5390 hit points (weak to radiation, bludgeoning) with an attack that does 4507 fire damage at initiative 2
+        989 units each with 1274 hit points (immune to fire; weak to bludgeoning, slashing) with an attack that does 25 slashing damage at initiative 3
+        
+        Infection:
+        801 units each with 4706 hit points (weak to radiation) with an attack that does 116 bludgeoning damage at initiative 1
+        4485 units each with 2961 hit points (immune to radiation; weak to fire, cold) with an attack that does 12 slashing damage at initiative 4
         """
     }
 }
