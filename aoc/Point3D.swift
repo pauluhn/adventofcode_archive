@@ -13,6 +13,11 @@ struct Point3D {
     let y: Int
     let z: Int
     
+    init(x: Int, y: Int, z: Int) {
+        self.x = x
+        self.y = y
+        self.z = z
+    }
     init?(_ data: String) {
         let regex = try! NSRegularExpression(pattern: "^\\s*(-?\\d+),\\s*(-?\\d+),\\s*(-?\\d+)$")
         guard let match = regex.firstMatch(in: data, options: [], range: NSRange(location: 0, length: data.count)) else { return nil }
@@ -21,9 +26,13 @@ struct Point3D {
         y = data.match(match, at: 2).int
         z = data.match(match, at: 3).int
     }
+    static let zero = Point3D(x: 0, y: 0, z: 0)
     
     func manhattanDistance(from other: Point3D) -> Int {
         return abs(x - other.x) + abs(y - other.y) + abs(z - other.z)
+    }
+    func offset(by other: Point3D) -> Point3D {
+        return Point3D(x: x + other.x, y: y + other.y, z: z + other.z)
     }
 }
 extension Point3D: Hashable {}

@@ -383,6 +383,14 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 383)
     }
+    func testDay23Part2() {
+//        let testData1 = testDataDay23a()
+//        assert(Y2018Day23.Part2(testData1.newlineSplit()) == 36)
+        
+        let answer = Y2018Day23.Part2(readInput(year: year, day: 23))
+        print("\(#function):\(answer)")
+//        assert(answer == 383)
+    }
 }
 
 extension aoc2018Tests {
@@ -658,6 +666,16 @@ extension aoc2018Tests {
         pos=<1,1,1>, r=1
         pos=<1,1,2>, r=1
         pos=<1,3,1>, r=1
+        """
+    }
+    func testDataDay23a() -> String {
+        return """
+        pos=<10,12,12>, r=2
+        pos=<12,14,12>, r=2
+        pos=<16,12,12>, r=4
+        pos=<14,14,14>, r=6
+        pos=<50,50,50>, r=200
+        pos=<10,10,10>, r=5
         """
     }
 }
