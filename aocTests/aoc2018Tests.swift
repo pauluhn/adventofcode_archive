@@ -368,12 +368,12 @@ class aoc2018Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 8681)
     }
-    func testDay22Part2() { // ~5.5m
+    func DISABLED_testDay22Part2() { // ~10m
         assert(Y2018Day22.Part2(510, 10, 10, 10).minutes == 45)
 
-        let answer = Y2018Day22.Part2(5616, 10, 785, 20)
+        let answer = Y2018Day22.Part2(5616, 10, 785, 38)
         print("\(#function):\(answer)")
-//        assert(answer == 8681)
+        assert(answer.minutes == 1070)
     }
     func testDay23Part1() {
         let testData1 = testDataDay23()

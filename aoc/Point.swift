@@ -24,6 +24,8 @@ struct Point {
         y = data.match(match, at: 2).int
     }
     
+    static let zero = Point(x: 0, y: 0)
+    
     func manhattanDistance(from other: Point) -> Int {
         return abs(x - other.x) + abs(y - other.y)
     }

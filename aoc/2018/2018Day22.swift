@@ -9,29 +9,31 @@
 import Foundation
 
 struct Y2018Day22 {
-    fileprivate typealias Node = Graph<PointTool>.GraphNode<PointTool>
+    fileprivate typealias Node = GraphCap<PointTool>.GraphNode<PointTool>
+    
     static func Part1(_ depth: Int, _ x: Int, _ y: Int) -> Int {
         let cave = computeCave(depth, x, y)
         printCave(cave)
         return riskLevel(cave)
     }
     static func Part2(_ depth: Int, _ x: Int, _ y: Int, _ padding: Int) -> (minutes: Double, padding: Int) {
-        let mouth = Point(x: 0, y: 0)
+        let mouth = Point.zero
         let target = Point(x: x, y: y)
         let cave = computeCave(depth, x, y, padding)
         printCave(cave)
-        let graph = Graph.generateMap(cave, mouth, target)
+        let graph = GraphCap.generateMap(cave, mouth, target)
         print(graph)
         
         var open = Set<Node>()
         var closed = Set<Node>()
         var previous = [Node: Node]()
         // g = from start
-        var g = graph.nodes.reduce(into: [Node: Double]()) { $0[$1] = Double.greatestFiniteMagnitude }
+        var g = graph.data(initial: Double.greatestFiniteMagnitude)
         // f = known + h
-        var f = graph.nodes.reduce(into: [Node: Double]()) { $0[$1] = Double.greatestFiniteMagnitude }
+        var f = graph.data(initial: Double.greatestFiniteMagnitude)
 
-        var node = graph.nodes.first { $0.value == PointTool(mouth, .torch) }!
+        var node = graph.get(index: 0)!
+        assert(node.value == PointTool(mouth, .torch))
         open.insert(node)
         g[node] = 0
         f[node] = node.manhattanDistance(from: target)
@@ -80,7 +82,7 @@ struct Y2018Day22 {
         }
         return path.reversed()
     }
-    private static func walk(path: [Node], _ graph: Graph<PointTool>) -> Double {
+    private static func walk(path: [Node], _ graph: GraphCap<PointTool>) -> Double {
         var path = path
         var node = path.removeFirst()
         var weight = 0.0
@@ -121,7 +123,6 @@ private struct Region {
 }
 private enum Time {
     static let move = 1.0
-    static let keep = 0.0
     static let `switch` = 7.0
 }
 private enum Tool: String {
@@ -139,6 +140,7 @@ private struct PointTool: Hashable {
         self.tool = tool
     }
     var point: Point { return Point(x: x, y: y) }
+    static let zero = PointTool(.zero, .torch)
 }
 extension PointTool: CustomStringConvertible {
     var description: String {
@@ -192,9 +194,10 @@ extension Region.RegionType: CustomStringConvertible {
         }
     }
 }
-private extension Graph where T == PointTool {
-    static func generateMap(_ data: [[Region]], _ mouth: Point, _ target: Point) -> Graph {
-        let graph = Graph<PointTool>()
+private extension GraphCap where T == PointTool {
+    static func generateMap(_ data: [[Region]], _ mouth: Point, _ target: Point) -> GraphCap {
+        let total = data.count * data[0].count * 2 - 2
+        let graph = GraphCap<PointTool>(repeating: .zero, capacity: total)
         for y in 0..<data.count {
             for x in 0..<data[0].count {
                 graph.link(data, x, y, mouth, target)
@@ -205,15 +208,14 @@ private extension Graph where T == PointTool {
     private func link(_ data: [[Region]], _ x: Int, _ y: Int, _ mouth: Point, _ target: Point) {
         let point = Point(x: x, y: y)
         let tools = data[y][x].tools
-        let nodes = tools.map { create(.init(point, $0)) }
+        let nodes = tools.map { append(.init(point, $0)) }
         
         let directions: [Direction] = [.up, .left]
         let others = directions.flatMap { self.nodes($0, of: point) }
         
         for node in nodes {
-            otherLoop: for other in others {
-                let penalty = node.tool == other.tool ? Time.keep : Time.switch
-                let weight = Time.move + penalty
+            otherLoop: for other in others where node.tool == other.tool {
+                let weight = Time.move
                 // mouth
                 if other.value.point == mouth {
                     link(other, to: node, weight: weight)
@@ -233,13 +235,18 @@ private extension Graph where T == PointTool {
                 link(other, to: node, weight: weight)
             }
         }
+        if nodes.count == 2 {
+            let weight = Time.switch
+            link(nodes[0], to: nodes[1], weight: weight)
+            link(nodes[1], to: nodes[0], weight: weight)
+        }
     }
     private func nodes(_ direction: Direction, of point: Point) -> [Node] {
         let offset = point.offset(by: direction.offset)
-        return nodes.filter { $0.value.x == offset.x && $0.value.y == offset.y }
+        return filter { $0.point == offset }
     }
 }
-private extension Graph.GraphNode where T == PointTool {
+private extension GraphCap.GraphNode where T == PointTool {
     var point: Point {
         return value.point
     }
