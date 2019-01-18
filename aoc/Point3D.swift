@@ -34,6 +34,25 @@ struct Point3D {
     func offset(by other: Point3D) -> Point3D {
         return Point3D(x: x + other.x, y: y + other.y, z: z + other.z)
     }
+    func offset(by distance: Int, toward direction: Direction3D) -> Point3D {
+        switch direction {
+        case .top: return offset(by: Point3D(x: 0, y: distance, z: 0))
+        case .bottom: return offset(by: Point3D(x: 0, y: -distance, z: 0))
+        case .left: return offset(by: Point3D(x: -distance, y: 0, z: 0))
+        case .right: return offset(by: Point3D(x: distance, y: 0, z: 0))
+        case .front: return offset(by: Point3D(x: 0, y: 0, z: distance))
+        case .back: return offset(by: Point3D(x: 0, y: 0, z: -distance))
+        }
+    }
+    static func + (lhs: Point3D, rhs: Point3D) -> Point3D {
+        return Point3D(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
+    }
+    static func - (lhs: Point3D, rhs: Point3D) -> Point3D {
+        return Point3D(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
+    }
+    static func / (lhs: Point3D, rhs: Int) -> Point3D {
+        return Point3D(x: lhs.x / rhs, y: lhs.y / rhs, z: lhs.z / rhs)
+    }
 }
 extension Point3D: Hashable {}
 extension Point3D: CustomStringConvertible {

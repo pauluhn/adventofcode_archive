@@ -384,12 +384,12 @@ class aoc2018Tests: XCTestCase {
         assert(answer == 383)
     }
     func testDay23Part2() {
-//        let testData1 = testDataDay23a()
-//        assert(Y2018Day23.Part2(testData1.newlineSplit()) == 36)
+        let testData1 = testDataDay23a()
+        assert(Y2018Day23.Part2(testData1.newlineSplit(), 0) == 36)
         
-        let answer = Y2018Day23.Part2(readInput(year: year, day: 23))
+        let answer = Y2018Day23.Part2(readInput(year: year, day: 23), 1)
         print("\(#function):\(answer)")
-//        assert(answer == 383)
+        assert(answer == 100474026)
     }
     func testDay24Part1() {
         Y2018Day24.Part0()
