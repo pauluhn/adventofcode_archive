@@ -24,6 +24,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day1.Part1(readInput(year: year, day: 1))
         print("\(#function):\(answer)")
+        assert(answer == 525)
     }
     func testDay1Part2() {
         let testData1 = "+1, -2, +3, +1".commaSplit()
@@ -39,6 +40,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day1.Part2(readInput(year: year, day: 1))
         print("\(#function):\(answer)")
+        assert(answer == 75749)
     }
     func testDay2Part1() {
         let testData1 = testDataDay2Part1()
@@ -46,6 +48,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day2.Part1(readInput(year: year, day: 2))
         print("\(#function):\(answer)")
+        assert(answer == 6448)
     }
     func testDay2Part2() {
         let testData1 = testDataDay2Part2()
@@ -53,6 +56,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day2.Part2(readInput(year: year, day: 2))
         print("\(#function):\(answer)")
+        assert(answer == "evsialkqyiurohzpwucngttmf")
     }
     func testDay3Part1() {
         let testData1 = testDataDay3()
@@ -60,6 +64,7 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day3.Part1(readInput(year: year, day: 3))
         print("\(#function):\(answer)")
+        assert(answer == 105071)
     }
     func testDay3Part2() {
         let testData1 = testDataDay3()
@@ -67,6 +72,7 @@ class aoc2018Tests: XCTestCase {
         
         let answer = Y2018Day3.Part2(readInput(year: year, day: 3))
         print("\(#function):\(answer)")
+        assert(answer == 222)
     }
     func testDay4Part1() {
         let testData1 = testDataDay4()
@@ -74,6 +80,7 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day4.Part1(readInput(year: year, day: 4))
         print("\(#function):\(answer)")
+        assert(answer == 38813)
     }
     func testDay4Part2() {
         let testData1 = testDataDay4()
@@ -81,6 +88,339 @@ class aoc2018Tests: XCTestCase {
 
         let answer = Y2018Day4.Part2(readInput(year: year, day: 4))
         print("\(#function):\(answer)")
+        assert(answer == 141071)
+    }
+    func testDay5Part1() {
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("a")) == false)
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("b")) == false)
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("A")) == true)
+        assert(PolymerUnit("a").reacts(to: PolymerUnit("B")) == false)
+
+        let testData1 = "dabAcCaCBAcCcaDA"
+        assert(Y2018Day5.Part1(testData1) == 10)
+
+        let answer = Y2018Day5.Part1(readInput(year: year, day: 5).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 11814)
+    }
+    func testDay5Part2() {
+        let testData1 = "dabAcCaCBAcCcaDA"
+        assert(Y2018Day5.Part2(testData1) == 4)
+
+        let answer = Y2018Day5.Part2(readInput(year: year, day: 5).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 4282)
+    }
+    func testDay6Part1() {
+        let testData1 = testDataDay6()
+        assert(Y2018Day6.Part1(testData1.newlineSplit()) == 17)
+        
+        let answer = Y2018Day6.Part1(readInput(year: year, day: 6))
+        print("\(#function):\(answer)")
+        assert(answer == 4976)
+    }
+    func testDay6Part2() {
+        let testData1 = testDataDay6()
+        assert(Y2018Day6.Part2(testData1.newlineSplit(), 32) == 16)
+
+        let answer = Y2018Day6.Part2(readInput(year: year, day: 6), 10000)
+        print("\(#function):\(answer)")
+        assert(answer == 46462)
+    }
+    func testDay7Part1() {
+        let testData1 = testDataDay7()
+        assert(Y2018Day7.Part1(testData1.newlineSplit()) == "CABDFE")
+        
+        let answer = Y2018Day7.Part1(readInput(year: year, day: 7))
+        print("\(#function):\(answer)")
+        assert(answer == "FHMEQGIRSXNWZBCLOTUADJPKVY")
+    }
+    func testDay7Part2() {
+        let testData1 = testDataDay7()
+        assert(Y2018Day7.Part2(testData1.newlineSplit(), 0, 2) == 15)
+        
+        let answer = Y2018Day7.Part2(readInput(year: year, day: 7), 60, 5)
+        print("\(#function):\(answer)")
+        assert(answer == 917)
+    }
+    func testDay8Part1() {
+        let testData1 = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+        assert(Y2018Day8.Part1(testData1) == 138)
+        
+        let answer = Y2018Day8.Part1(readInput(year: year, day: 8).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 35911)
+    }
+    func testDay8Part2() {
+        let testData1 = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+        assert(Y2018Day8.Part2(testData1) == 66)
+        
+        let answer = Y2018Day8.Part2(readInput(year: year, day: 8).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 17206)
+    }
+    func testDay9Part1() {
+        let testData1 = testDataDay9()
+        assert(Y2018Day9.Part1(testData1.newlineSplit(), 1) == [32, 8317, 146373, 2764, 54718, 37305])
+        
+        let answer = Y2018Day9.Part1(readInput(year: year, day: 9), 1)
+        print("\(#function):\(answer)")
+        assert(answer == [388024])
+    }
+    func testDay9Part2() {
+        let answer = Y2018Day9.Part1(readInput(year: year, day: 9), 100)
+        print("\(#function):\(answer)")
+        assert(answer == [3180929875])
+    }
+    func testDay10Part1() {
+        let testData1 = testDataDay10()
+        assert(Y2018Day10.Part1(testData1.newlineSplit(), 10).seconds == 3)
+        
+        let answer = Y2018Day10.Part1(readInput(year: year, day: 10), 100000)
+        print("\(#function):\(answer)")
+        assert(answer.seconds == 10659)
+    }
+    func testDay11Part1() {
+        assert(Y2018Day11.Part1([18, 42], 3) == [FuelCell(33, 45, 29), FuelCell(21, 61, 30)])
+
+        let answer = Y2018Day11.Part1([5034], 3)
+        print("\(#function):\(answer)")
+        assert(answer == [FuelCell(235, 63, 29)])
+    }
+    func DISABLED_testDay11Part2() { // takes ~40min
+        assert(Y2018Day11.Part2([18, 42], 20) == [FuelCell(90, 269, 16), FuelCell(232, 251, 12)])
+        
+        let answer = Y2018Day11.Part2([5034], 300)
+        print("\(#function):\(answer)")
+        assert(answer == [FuelCell(229, 251, 16)])
+    }
+    func testDay12Part1() {
+        let testData1 = testDataDay12()
+        assert(Y2018Day12.Part1(testData1.newlineSplit(), 20) == 325)
+
+        let answer = Y2018Day12.Part1(readInput(year: year, day: 12), 20)
+        print("\(#function):\(answer)")
+        assert(answer == 1623)
+    }
+    func testDay12Part2() {
+        let answer = Y2018Day12.Part2(readInput(year: year, day: 12), 50000000000)
+        print("\(#function):\(answer)")
+        assert(answer == 1600000000401)
+    }
+    func testDay13Part1() {
+        assert(Y2018Day13.Part1(readInput(year: year, day: 130), 1) == Point(x: 7, y: 3))
+        
+        let answer = Y2018Day13.Part1(readInput(year: year, day: 13), 1)
+        print("\(#function):\(answer)")
+        assert(answer == Point(x: 100, y: 21))
+    }
+    func testDay13Part2() {
+        assert(Y2018Day13.Part2(readInput(year: year, day: 131), 1) == Point(x: 6, y: 4))
+        
+        let answer = Y2018Day13.Part2(readInput(year: year, day: 13), 1)
+        print("\(#function):\(answer)")
+        assert(answer == Point(x: 113, y: 109))
+    }
+    func testDay14Part1() {
+        let recipes = [3, 7]
+        let elves = 2
+        let answerLength = 10
+        assert(Y2018Day14.Part1(recipes, elves, 9, answerLength) == "5158916779")
+        assert(Y2018Day14.Part1(recipes, elves, 5, answerLength) == "0124515891")
+        assert(Y2018Day14.Part1(recipes, elves, 18, answerLength) == "9251071085")
+        assert(Y2018Day14.Part1(recipes, elves, 2018, answerLength) == "5941429882")
+
+        let answer = Y2018Day14.Part1(recipes, elves, 920831, answerLength)
+        print("\(#function):\(answer)")
+        assert(answer == "7121102535")
+    }
+    func DISABLED_testDay14Part2() { // ~125s
+        let recipes = [3, 7]
+        let elves = 2
+        assert(Y2018Day14.Part2(recipes, elves, "51589") == 9)
+        assert(Y2018Day14.Part2(recipes, elves, "01245") == 5)
+        assert(Y2018Day14.Part2(recipes, elves, "92510") == 18)
+        assert(Y2018Day14.Part2(recipes, elves, "59414") == 2018)
+
+        let answer = Y2018Day14.Part2(recipes, elves, "920831")
+        print("\(#function):\(answer)")
+        assert(answer == 20236441)
+    }
+    func DISABLED_testDay15Part1() { // ~3.5m
+        Y2018Day15.Part0()
+        let testData1 = testDataDay15()
+        assert(Y2018Day15.Part1(testData1.newlineSplit()) == 27730)
+        let testDataA = testDataDay15a()
+        assert(Y2018Day15.Part1(testDataA.newlineSplit()) == 36334)
+        let testDataB = testDataDay15b()
+        assert(Y2018Day15.Part1(testDataB.newlineSplit()) == 39514)
+        let testDataC = testDataDay15c()
+        assert(Y2018Day15.Part1(testDataC.newlineSplit()) == 27755)
+        let testDataD = testDataDay15d()
+        assert(Y2018Day15.Part1(testDataD.newlineSplit()) == 28944)
+        let testDataE = testDataDay15e()
+        assert(Y2018Day15.Part1(testDataE.newlineSplit()) == 18740)
+
+        let answer = Y2018Day15.Part1(readInput(year: year, day: 15))
+        print("\(#function):\(answer)")
+        assert(answer == 229950)
+    }
+    func DISABLED_testDay15Part2() { // ~32m
+        let testData1 = testDataDay15()
+        assert(Y2018Day15.Part2(testData1.newlineSplit()) == (15, 4988))
+        let testDataB = testDataDay15b()
+        assert(Y2018Day15.Part2(testDataB.newlineSplit()) == (4, 31284))
+        let testDataC = testDataDay15c()
+        assert(Y2018Day15.Part2(testDataC.newlineSplit()) == (15, 3478))
+        let testDataD = testDataDay15d()
+        assert(Y2018Day15.Part2(testDataD.newlineSplit()) == (12, 6474))
+        let testDataE = testDataDay15e()
+        assert(Y2018Day15.Part2(testDataE.newlineSplit()) == (34, 1140))
+        
+        let answer = Y2018Day15.Part2(readInput(year: year, day: 15))
+        print("\(#function):\(answer)")
+        assert(answer == (13, 54360))
+    }
+    func testDay16Part1() {
+        let testData1 = testDataDay16()
+        assert(Y2018Day16.Part1(testData1.newlineSplit(), 3).count == 1)
+        
+        let answer = Y2018Day16.Part1(readInput(year: year, day: 16), 3).count
+        print("\(#function):\(answer)")
+        assert(answer == 531)
+    }
+    func testDay16Part2() {
+        let answer = Y2018Day16.Part2(readInput(year: year, day: 16),
+                                      readInput(year: year, day: 166),
+                                      0)
+        print("\(#function):\(answer)")
+        assert(answer == 649)
+    }
+    func testDay17Part1() {
+        let testData1 = testDataDay17()
+        assert(Y2018Day17.Part1(testData1.newlineSplit(), 0).score == 57)
+        
+        let answer = Y2018Day17.Part1(readInput(year: year, day: 17), 4239)
+        print("\(#function):\(answer)")
+        assert(answer.score == 27736)
+    }
+    func testDay17Part2() {
+        let answer = Y2018Day17.Part2(readInput(year: year, day: 17), 4239)
+        print("\(#function):\(answer)")
+        assert(answer == 22474)
+    }
+    func testDay18Part1() {
+        let testData1 = testDataDay18()
+        assert(Y2018Day18.Part1(testData1.newlineSplit(), 10) == 1147)
+        
+        let answer = Y2018Day18.Part1(readInput(year: year, day: 18), 10)
+        print("\(#function):\(answer)")
+        assert(answer == 466312)
+    }
+    func testDay18Part2() {
+        let answer = Y2018Day18.Part1(readInput(year: year, day: 18), 1000000000)
+        print("\(#function):\(answer)")
+        assert(answer == 176782)
+    }
+    func testDay19Part1() {
+        let testData1 = testDataDay19()
+        assert(Y2018Day19.Part1(testData1.newlineSplit())[0] == 7)
+        
+        let answer = Y2018Day19.Part1(readInput(year: year, day: 19))[0]
+        print("\(#function):\(answer)")
+        assert(answer == 1872)
+    }
+    func testDay19Part2() {
+        let answer = Y2018Day19.Part2(readInput(year: year, day: 19))[0]
+        print("\(#function):\(answer)")
+        assert(answer == 18992592)
+    }
+    func testDay20Part1() {
+        assert(Y2018Day20.Part1("^WNE$") == 3)
+        assert(Y2018Day20.Part1("^ENWWW(NEEE|SSE(EE|N))$") == 10)
+        assert(Y2018Day20.Part1("^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$") == 18)
+        assert(Y2018Day20.Part1("^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$") == 23)
+        assert(Y2018Day20.Part1("^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$") == 31)
+        
+        let answer = Y2018Day20.Part1(readInput(year: year, day: 20)[0])
+        print("\(#function):\(answer)")
+        assert(answer == 3476)
+    }
+    func testDay20Part2() {
+        let answer = Y2018Day20.Part2(readInput(year: year, day: 20)[0])
+        print("\(#function):\(answer)")
+        assert(answer == 8514)
+    }
+    func testDay21Part1() {
+        let answer = Y2018Day21.Part1(readInput(year: year, day: 21), 9959629)
+        print("\(#function):\(answer)")
+        assert(answer == 9959629)
+    }
+    func DISABLED_testDay21Part2() { // ~18.5m
+        let answer = Y2018Day21.Part1(readInput(year: year, day: 21), 12691260)
+        print("\(#function):\(answer)")
+        assert(answer == 12691260)
+    }
+    func testDay22Part1() {
+        assert(Y2018Day22.Part1(510, 10, 10) == 114)
+        
+        let answer = Y2018Day22.Part1(5616, 10, 785)
+        print("\(#function):\(answer)")
+        assert(answer == 8681)
+    }
+    func DISABLED_testDay22Part2() { // ~10m
+        assert(Y2018Day22.Part2(510, 10, 10, 10).minutes == 45)
+
+        let answer = Y2018Day22.Part2(5616, 10, 785, 38)
+        print("\(#function):\(answer)")
+        assert(answer.minutes == 1070)
+    }
+    func testDay23Part1() {
+        let testData1 = testDataDay23()
+        assert(Y2018Day23.Part1(testData1.newlineSplit()) == 7)
+        
+        let answer = Y2018Day23.Part1(readInput(year: year, day: 23))
+        print("\(#function):\(answer)")
+        assert(answer == 383)
+    }
+    func testDay23Part2() {
+        let testData1 = testDataDay23a()
+        assert(Y2018Day23.Part2(testData1.newlineSplit(), 0) == 36)
+        
+        let answer = Y2018Day23.Part2(readInput(year: year, day: 23), 1)
+        print("\(#function):\(answer)")
+        assert(answer == 100474026)
+    }
+    func testDay24Part1() {
+        Y2018Day24.Part0()
+        let testData1 = testDataDay24()
+        assert(Y2018Day24.Part1(testData1.newlineSplit()) == 5216)
+        
+        let answer = Y2018Day24.Part1(readInput(year: year, day: 24))
+        print("\(#function):\(answer)")
+        assert(answer == 26868)
+    }
+    func testDay24Part2() {
+        let testData1 = testDataDay24()
+        assert(Y2018Day24.Part2(testData1.newlineSplit(), 1570).units == 51)
+        
+        let answer = Y2018Day24.Part2(readInput(year: year, day: 24), 88)
+        print("\(#function):\(answer)")
+        assert(answer.units == 434)
+    }
+    func testDay25Part1() { // ~2min
+        let testData1 = testDataDay25a()
+        assert(Y2018Day25.Part1(testData1.newlineSplit()) == 2)
+        let testData2 = testDataDay25b()
+        assert(Y2018Day25.Part1(testData2.newlineSplit()) == 4)
+        let testData3 = testDataDay25c()
+        assert(Y2018Day25.Part1(testData3.newlineSplit()) == 3)
+        let testData4 = testDataDay25d()
+        assert(Y2018Day25.Part1(testData4.newlineSplit()) == 8)
+
+        let answer = Y2018Day25.Part1(readInput(year: year, day: 25))
+        print("\(#function):\(answer)")
+        assert(answer == 367)
     }
 }
 
@@ -133,6 +473,305 @@ extension aoc2018Tests {
         [1518-11-05 00:03] Guard #99 begins shift
         [1518-11-05 00:45] falls asleep
         [1518-11-05 00:55] wakes up
+        """
+    }
+    func testDataDay6() -> String {
+        return """
+        1, 1
+        1, 6
+        8, 3
+        3, 4
+        5, 5
+        8, 9
+        """
+    }
+    func testDataDay7() -> String {
+        return """
+        Step C must be finished before step A can begin.
+        Step C must be finished before step F can begin.
+        Step A must be finished before step B can begin.
+        Step A must be finished before step D can begin.
+        Step B must be finished before step E can begin.
+        Step D must be finished before step E can begin.
+        Step F must be finished before step E can begin.
+        """
+    }
+    func testDataDay9() -> String {
+        return """
+        9 players; last marble is worth 25 points
+        10 players; last marble is worth 1618 points
+        13 players; last marble is worth 7999 points
+        17 players; last marble is worth 1104 points
+        21 players; last marble is worth 6111 points
+        30 players; last marble is worth 5807 points
+        """
+    }
+    func testDataDay10() -> String {
+        return """
+        position=< 9,  1> velocity=< 0,  2>
+        position=< 7,  0> velocity=<-1,  0>
+        position=< 3, -2> velocity=<-1,  1>
+        position=< 6, 10> velocity=<-2, -1>
+        position=< 2, -4> velocity=< 2,  2>
+        position=<-6, 10> velocity=< 2, -2>
+        position=< 1,  8> velocity=< 1, -1>
+        position=< 1,  7> velocity=< 1,  0>
+        position=<-3, 11> velocity=< 1, -2>
+        position=< 7,  6> velocity=<-1, -1>
+        position=<-2,  3> velocity=< 1,  0>
+        position=<-4,  3> velocity=< 2,  0>
+        position=<10, -3> velocity=<-1,  1>
+        position=< 5, 11> velocity=< 1, -2>
+        position=< 4,  7> velocity=< 0, -1>
+        position=< 8, -2> velocity=< 0,  1>
+        position=<15,  0> velocity=<-2,  0>
+        position=< 1,  6> velocity=< 1,  0>
+        position=< 8,  9> velocity=< 0, -1>
+        position=< 3,  3> velocity=<-1,  1>
+        position=< 0,  5> velocity=< 0, -1>
+        position=<-2,  2> velocity=< 2,  0>
+        position=< 5, -2> velocity=< 1,  2>
+        position=< 1,  4> velocity=< 2,  1>
+        position=<-2,  7> velocity=< 2, -2>
+        position=< 3,  6> velocity=<-1, -1>
+        position=< 5,  0> velocity=< 1,  0>
+        position=<-6,  0> velocity=< 2,  0>
+        position=< 5,  9> velocity=< 1, -2>
+        position=<14,  7> velocity=<-2,  0>
+        position=<-3,  6> velocity=< 2, -1>
+        """
+    }
+    func testDataDay12() -> String {
+        return """
+        initial state: #..#.#..##......###...###
+
+        ...## => #
+        ..#.. => #
+        .#... => #
+        .#.#. => #
+        .#.## => #
+        .##.. => #
+        .#### => #
+        #.#.# => #
+        #.### => #
+        ##.#. => #
+        ##.## => #
+        ###.. => #
+        ###.# => #
+        ####. => #
+        """
+    }
+    func testDataDay15() -> String {
+        return """
+        #######
+        #.G...#
+        #...EG#
+        #.#.#G#
+        #..G#E#
+        #.....#
+        #######
+        """
+    }
+    func testDataDay15a() -> String {
+        return """
+        #######
+        #G..#E#
+        #E#E.E#
+        #G.##.#
+        #...#E#
+        #...E.#
+        #######
+        """
+    }
+    func testDataDay15b() -> String {
+        return """
+        #######
+        #E..EG#
+        #.#G.E#
+        #E.##E#
+        #G..#.#
+        #..E#.#
+        #######
+        """
+    }
+    func testDataDay15c() -> String {
+        return """
+        #######
+        #E.G#.#
+        #.#G..#
+        #G.#.G#
+        #G..#.#
+        #...E.#
+        #######
+        """
+    }
+    func testDataDay15d() -> String {
+        return """
+        #######
+        #.E...#
+        #.#..G#
+        #.###.#
+        #E#G#G#
+        #...#G#
+        #######
+        """
+    }
+    func testDataDay15e() -> String {
+        return """
+        #########
+        #G......#
+        #.E.#...#
+        #..##..G#
+        #...##..#
+        #...#...#
+        #.G...G.#
+        #.....G.#
+        #########
+        """
+    }
+    func testDataDay16() -> String {
+        return """
+        Before: [3, 2, 1, 1]
+        9 2 1 2
+        After:  [3, 2, 2, 1]
+        """
+    }
+    func testDataDay17() -> String {
+        return """
+        x=495, y=2..7
+        y=7, x=495..501
+        x=501, y=3..7
+        x=498, y=2..4
+        x=506, y=1..2
+        x=498, y=10..13
+        x=504, y=10..13
+        y=13, x=498..504
+        """
+    }
+    func testDataDay17a() -> String {
+        return """
+        x=501, y=2..5
+        x=499, y=2..5
+        y=6, x=499..501
+        """
+    }
+    func testDataDay17b() -> String {
+        return """
+        x=500, y=2..5
+        """
+    }
+    func testDataDay18() -> String {
+        return """
+        .#.#...|#.
+        .....#|##|
+        .|..|...#.
+        ..|#.....#
+        #.#|||#|#|
+        ...#.||...
+        .|....|...
+        ||...#|.#|
+        |.||||..|.
+        ...#.|..|.
+        """
+    }
+    func testDataDay19() -> String {
+        return """
+        #ip 0
+        seti 5 0 1
+        seti 6 0 2
+        addi 0 1 0
+        addr 1 2 3
+        setr 1 0 0
+        seti 8 0 4
+        seti 9 0 5
+        """
+    }
+    func testDataDay23() -> String {
+        return """
+        pos=<0,0,0>, r=4
+        pos=<1,0,0>, r=1
+        pos=<4,0,0>, r=3
+        pos=<0,2,0>, r=1
+        pos=<0,5,0>, r=3
+        pos=<0,0,3>, r=1
+        pos=<1,1,1>, r=1
+        pos=<1,1,2>, r=1
+        pos=<1,3,1>, r=1
+        """
+    }
+    func testDataDay23a() -> String {
+        return """
+        pos=<10,12,12>, r=2
+        pos=<12,14,12>, r=2
+        pos=<16,12,12>, r=4
+        pos=<14,14,14>, r=6
+        pos=<50,50,50>, r=200
+        pos=<10,10,10>, r=5
+        """
+    }
+    func testDataDay24() -> String {
+        return """
+        Immune System:
+        17 units each with 5390 hit points (weak to radiation, bludgeoning) with an attack that does 4507 fire damage at initiative 2
+        989 units each with 1274 hit points (immune to fire; weak to bludgeoning, slashing) with an attack that does 25 slashing damage at initiative 3
+        
+        Infection:
+        801 units each with 4706 hit points (weak to radiation) with an attack that does 116 bludgeoning damage at initiative 1
+        4485 units each with 2961 hit points (immune to radiation; weak to fire, cold) with an attack that does 12 slashing damage at initiative 4
+        """
+    }
+    func testDataDay25a() -> String {
+        return """
+        0,0,0,0
+        3,0,0,0
+        0,3,0,0
+        0,0,3,0
+        0,0,0,3
+        0,0,0,6
+        9,0,0,0
+        12,0,0,0
+        """
+    }
+    func testDataDay25b() -> String {
+        return """
+        -1,2,2,0
+        0,0,2,-2
+        0,0,0,-2
+        -1,2,0,0
+        -2,-2,-2,2
+        3,0,2,-1
+        -1,3,2,2
+        -1,0,-1,0
+        0,2,1,-2
+        3,0,0,0
+        """
+    }
+    func testDataDay25c() -> String {
+        return """
+        1,-1,0,1
+        2,0,-1,0
+        3,2,-1,0
+        0,0,3,1
+        0,0,-1,-1
+        2,3,-2,0
+        -2,2,0,0
+        2,-2,0,-1
+        1,-1,0,-1
+        3,2,0,2
+        """
+    }
+    func testDataDay25d() -> String {
+        return """
+        1,-1,-1,-2
+        -2,-2,0,1
+        0,2,1,3
+        -2,3,-2,1
+        0,2,3,-2
+        -1,-1,1,-2
+        0,-2,-1,0
+        -2,2,3,-1
+        1,2,2,0
+        -1,-2,0,-2
         """
     }
 }

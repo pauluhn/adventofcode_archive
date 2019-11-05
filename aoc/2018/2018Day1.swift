@@ -14,19 +14,16 @@ struct Y2018Day1 {
     }
     static func Part2(_ data: [String]) -> Int {
         let frequencies = data.compactMap(Int.init)
-        var duplicate = false
         var runningFrequency = 0
-        let countedSet = NSCountedSet(array: [0])
-        while !duplicate {
+        var set: Set<Int> = [0]
+        while true {
             for frequency in frequencies {
                 runningFrequency += frequency
-                countedSet.add(runningFrequency)
-                if countedSet.count(for: runningFrequency) == 2 {
-                    duplicate = true
-                    break
+                if set.contains(runningFrequency) {
+                    return runningFrequency
                 }
+                set.insert(runningFrequency)
             }
         }
-        return runningFrequency
     }
 }

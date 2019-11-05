@@ -9,14 +9,10 @@
 import Foundation
 
 struct Tracker<T: Hashable> {
-    private var data: [T: Int] = [:]
+    private(set) var data: [T: Int] = [:]
     
     mutating func add(_ key: T, value: Int) {
-        if let current = data[key] {
-            data[key] = current + value
-        } else {
-            data[key] = value
-        }
+        data[key, default: 0] += value
     }
     
     var maxKey: T? {

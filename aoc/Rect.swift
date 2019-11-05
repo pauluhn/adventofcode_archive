@@ -10,7 +10,7 @@ import Foundation
 
 struct Rect {
     let id: Int
-    let origin: Coord
+    let origin: Point
     let size: Size
     
     var minX: Int { return origin.x }
@@ -23,7 +23,7 @@ struct Rect {
         guard let match = regex.firstMatch(in: data, options: [], range: NSRange(location: 0, length: data.count)) else { return nil }
         
         id = data.match(match, at: 1).int
-        origin = Coord(x: data.match(match, at: 2).int,
+        origin = Point(x: data.match(match, at: 2).int,
                        y: data.match(match, at: 3).int)
         size = Size(width: data.match(match, at: 4).int,
                     height: data.match(match, at: 5).int)
