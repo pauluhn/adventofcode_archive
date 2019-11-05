@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171FBC9423710C5A00149618 /* aoc2017Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FBC9323710C5A00149618 /* aoc2017Tests.swift */; };
+		171FBC9723710C9000149618 /* 2017Day8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 171FBC9623710C9000149618 /* 2017Day8.txt */; };
+		171FBC9923710DDE00149618 /* 2017Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FBC9823710DDE00149618 /* 2017Day8.swift */; };
 		172D6DF321C18DBF0061862E /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D6DF221C18DBF0061862E /* BinaryTree.swift */; };
 		172D6DF521C2997D0061862E /* 2018Day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = 172D6DF421C2997D0061862E /* 2018Day13.txt */; };
 		172D6DF721C29B110061862E /* 2018Day130.txt in Resources */ = {isa = PBXBuildFile; fileRef = 172D6DF621C29B110061862E /* 2018Day130.txt */; };
@@ -112,6 +115,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		171FBC9323710C5A00149618 /* aoc2017Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aoc2017Tests.swift; sourceTree = "<group>"; };
+		171FBC9623710C9000149618 /* 2017Day8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day8.txt; sourceTree = "<group>"; };
+		171FBC9823710DDE00149618 /* 2017Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day8.swift; sourceTree = "<group>"; };
 		172D6DF221C18DBF0061862E /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		172D6DF421C2997D0061862E /* 2018Day13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day13.txt; sourceTree = "<group>"; };
 		172D6DF621C29B110061862E /* 2018Day130.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day130.txt; sourceTree = "<group>"; };
@@ -229,6 +235,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		171FBC9523710C6F00149618 /* 2017 */ = {
+			isa = PBXGroup;
+			children = (
+				171FBC9623710C9000149618 /* 2017Day8.txt */,
+			);
+			path = 2017;
+			sourceTree = "<group>";
+		};
 		17E36B8921B6C56D0060025A = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +277,7 @@
 		17E36BA921B6C5710060025A /* aocTests */ = {
 			isa = PBXGroup;
 			children = (
+				171FBC9323710C5A00149618 /* aoc2017Tests.swift */,
 				17E36BAA21B6C5710060025A /* aoc2018Tests.swift */,
 				17E36BC021B6CA860060025A /* Inputs */,
 				17E36BC621B6CCFA0060025A /* Helpers */,
@@ -286,6 +301,7 @@
 		17E36BC021B6CA860060025A /* Inputs */ = {
 			isa = PBXGroup;
 			children = (
+				171FBC9523710C6F00149618 /* 2017 */,
 				17E36BE821B76A670060025A /* 2018 */,
 			);
 			name = Inputs;
@@ -416,6 +432,7 @@
 		17E36BE921B8076F0060025A /* 2017 */ = {
 			isa = PBXGroup;
 			children = (
+				171FBC9823710DDE00149618 /* 2017Day8.swift */,
 			);
 			path = 2017;
 			sourceTree = "<group>";
@@ -535,6 +552,7 @@
 				1749816A21D5737E00F5E334 /* 2018Day25.txt in Resources */,
 				17E36BF621B8E6810060025A /* 2018Day6.txt in Resources */,
 				1764013921CA070900046721 /* 2018Day19.txt in Resources */,
+				171FBC9723710C9000149618 /* 2017Day8.txt in Resources */,
 				174F9ED721BCFA5C001C0EA6 /* 2018Day9.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,6 +621,7 @@
 				172D6DFD21C2B1E70061862E /* Direction.swift in Sources */,
 				17441DAF21D1307A00878A08 /* 2018Day22.swift in Sources */,
 				174F9ECD21BAAECC001C0EA6 /* Instruction.swift in Sources */,
+				171FBC9923710DDE00149618 /* 2017Day8.swift in Sources */,
 				1764012721C74FDA00046721 /* OpCodeInstruction.swift in Sources */,
 				1764013B21CA073100046721 /* 2018Day19.swift in Sources */,
 				1764013521C93E9300046721 /* Acre.swift in Sources */,
@@ -615,6 +634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17E36BAB21B6C5710060025A /* aoc2018Tests.swift in Sources */,
+				171FBC9423710C5A00149618 /* aoc2017Tests.swift in Sources */,
 				17E36BC921B6D21D0060025A /* Extensions.swift in Sources */,
 				17E36BC521B6CCDF0060025A /* Functions.swift in Sources */,
 			);
