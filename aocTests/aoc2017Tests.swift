@@ -51,6 +51,13 @@ class aoc2017Tests: XCTestCase {
         assert(answer == 7031)
     }
 
+    func testDay10Part1() {
+        assert(Y2017Day10.Part1(5, "3,4,1,5") == 12)
+        
+        let answer = Y2017Day10.Part1(256, readInput(year: year, day: 10).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 9656)
+    }
 }
 
 extension aoc2017Tests {
