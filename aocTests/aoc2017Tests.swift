@@ -29,6 +29,28 @@ class aoc2017Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 3818)
     }
+    
+    func testDay9Part1() {
+        assert(Y2017Day9.Part1("{}") == 1) // score of 1.
+        assert(Y2017Day9.Part1("{{{}}}") == 6) // score of 1 + 2 + 3 = 6.
+        assert(Y2017Day9.Part1("{{},{}}") == 5) // score of 1 + 2 + 2 = 5.
+        assert(Y2017Day9.Part1("{{{},{},{{}}}}") == 16) // score of 1 + 2 + 3 + 3 + 3 + 4 = 16.
+        assert(Y2017Day9.Part1("{<a>,<a>,<a>,<a>}") == 1) // score of 1.
+        assert(Y2017Day9.Part1("{{<ab>},{<ab>},{<ab>},{<ab>}}") == 9) // score of 1 + 2 + 2 + 2 + 2 = 9.
+        assert(Y2017Day9.Part1("{{<!!>},{<!!>},{<!!>},{<!!>}}") == 9) // score of 1 + 2 + 2 + 2 + 2 = 9.
+        assert(Y2017Day9.Part1("{{<a!>},{<a!>},{<a!>},{<ab>}}") == 3) // score of 1 + 2 = 3.
+        
+        let answer = Y2017Day9.Part1(readInput(year: year, day: 9).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 12897)
+    }
+    
+    func testDay9Part2() {
+        let answer = Y2017Day9.Part2(readInput(year: year, day: 9).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 7031)
+    }
+
 }
 
 extension aoc2017Tests {

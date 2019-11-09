@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1714563623765916002DB276 /* 2017Day9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1714563523765916002DB276 /* 2017Day9.swift */; };
+		1714563823766538002DB276 /* 2017Day9.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1714563723766538002DB276 /* 2017Day9.txt */; };
 		171FBC9423710C5A00149618 /* aoc2017Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FBC9323710C5A00149618 /* aoc2017Tests.swift */; };
 		171FBC9723710C9000149618 /* 2017Day8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 171FBC9623710C9000149618 /* 2017Day8.txt */; };
 		171FBC9923710DDE00149618 /* 2017Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FBC9823710DDE00149618 /* 2017Day8.swift */; };
@@ -115,6 +117,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1714563523765916002DB276 /* 2017Day9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day9.swift; sourceTree = "<group>"; };
+		1714563723766538002DB276 /* 2017Day9.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day9.txt; sourceTree = "<group>"; };
 		171FBC9323710C5A00149618 /* aoc2017Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aoc2017Tests.swift; sourceTree = "<group>"; };
 		171FBC9623710C9000149618 /* 2017Day8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day8.txt; sourceTree = "<group>"; };
 		171FBC9823710DDE00149618 /* 2017Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day8.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				171FBC9623710C9000149618 /* 2017Day8.txt */,
+				1714563723766538002DB276 /* 2017Day9.txt */,
 			);
 			path = 2017;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				171FBC9823710DDE00149618 /* 2017Day8.swift */,
+				1714563523765916002DB276 /* 2017Day9.swift */,
 			);
 			path = 2017;
 			sourceTree = "<group>";
@@ -552,6 +558,7 @@
 				1749816A21D5737E00F5E334 /* 2018Day25.txt in Resources */,
 				17E36BF621B8E6810060025A /* 2018Day6.txt in Resources */,
 				1764013921CA070900046721 /* 2018Day19.txt in Resources */,
+				1714563823766538002DB276 /* 2017Day9.txt in Resources */,
 				171FBC9723710C9000149618 /* 2017Day8.txt in Resources */,
 				174F9ED721BCFA5C001C0EA6 /* 2018Day9.txt in Resources */,
 			);
@@ -580,6 +587,7 @@
 				17E36BD021B6DF530060025A /* Extensions.swift in Sources */,
 				174F9EDD21BD03DA001C0EA6 /* CircularList.swift in Sources */,
 				17FFBCDE21C16A14004CD1CC /* LinkedList.swift in Sources */,
+				1714563623765916002DB276 /* 2017Day9.swift in Sources */,
 				17E36BF021B809E00060025A /* PolymerUnit.swift in Sources */,
 				1749817221D7386900F5E334 /* Octree.swift in Sources */,
 				1764013D21CA0A6300046721 /* OpCodeProgram.swift in Sources */,
