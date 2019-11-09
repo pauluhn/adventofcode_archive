@@ -53,6 +53,7 @@ struct Y2017Day8 {
     }
     
     struct Cache {
+        private(set) var highest = 0
         private var cache: [String: Int] = [:]
         mutating func get(_ key: String) -> Int {
             guard let value = cache[key] else {
@@ -62,6 +63,9 @@ struct Y2017Day8 {
             return value
         }
         mutating func set(_ key: String, _ value: Int) {
+            if highest < value {
+                highest = value
+            }
             cache[key] = value
         }
         var result: Int {
@@ -70,6 +74,14 @@ struct Y2017Day8 {
     }
     
     static func Part1(_ data: [String]) -> Int {
+        return compute(data).0
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        return compute(data).1
+    }
+
+    private static func compute(_ data: [String]) -> (Int, Int) {
         let instructions = data.compactMap(Instruction.init)
         var cache = Cache()
         
@@ -85,7 +97,7 @@ struct Y2017Day8 {
                 cache.set(instruction.register1, register1Value)
             }
         }
-        return cache.result
+        return (cache.result, cache.highest)
     }
 }
 
