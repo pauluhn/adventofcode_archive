@@ -58,6 +58,17 @@ class aoc2017Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 9656)
     }
+
+    func testDay10Part2() {
+        assert(Y2017Day10.Part2(256, "") == "a2582a3a0e66e6e86e3812dcb672a272")
+        assert(Y2017Day10.Part2(256, "AoC 2017") == "33efeb34ea91902bb2f59c9920caa6cd")
+        assert(Y2017Day10.Part2(256, "1,2,3") == "3efbe78a8d82f29979031a4aa0b16a9d")
+        assert(Y2017Day10.Part2(256, "1,2,4") == "63960835bcdc130f0b66d7ff4f6a5a8e")
+
+        let answer = Y2017Day10.Part2(256, readInput(year: year, day: 10).first!)
+        print("\(#function):\(answer)")
+        assert(answer == "20b7b54c92bf73cf3e5631458a715149")
+    }
 }
 
 extension aoc2017Tests {
