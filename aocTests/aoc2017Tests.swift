@@ -86,6 +86,15 @@ class aoc2017Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 1548)
     }
+    
+    func testDay12Part1() {
+        let testData1 = testDataDay12()
+        assert(Y2017Day12.Part1(testData1.newlineSplit()) == 6)
+        
+        let answer = Y2017Day12.Part1(readInput(year: year, day: 12))
+        print("\(#function):\(answer)")
+        assert(answer == 169)
+    }
 }
 
 extension aoc2017Tests {
@@ -95,6 +104,17 @@ extension aoc2017Tests {
         a inc 1 if b < 5
         c dec -10 if a >= 1
         c inc -20 if c == 10
+        """
+    }
+    func testDataDay12() -> String {
+        return """
+        0 <-> 2
+        1 <-> 1
+        2 <-> 0, 3, 4
+        3 <-> 2, 4
+        4 <-> 2, 3, 6
+        5 <-> 6
+        6 <-> 4, 5
         """
     }
 }
