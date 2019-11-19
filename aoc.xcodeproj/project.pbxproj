@@ -11,6 +11,9 @@
 		1714563823766538002DB276 /* 2017Day9.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1714563723766538002DB276 /* 2017Day9.txt */; };
 		1714563A23766B1C002DB276 /* 2017Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1714563923766B1C002DB276 /* 2017Day10.swift */; };
 		1714563C23767008002DB276 /* 2017Day10.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1714563B23767007002DB276 /* 2017Day10.txt */; };
+		1714563E2379E8C8002DB276 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1714563D2379E8C8002DB276 /* HexGrid.swift */; };
+		17145640237A095D002DB276 /* 2017Day11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1714563F237A095D002DB276 /* 2017Day11.swift */; };
+		17145642237A10F0002DB276 /* 2017Day11.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17145641237A10F0002DB276 /* 2017Day11.txt */; };
 		171FBC9423710C5A00149618 /* aoc2017Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FBC9323710C5A00149618 /* aoc2017Tests.swift */; };
 		171FBC9723710C9000149618 /* 2017Day8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 171FBC9623710C9000149618 /* 2017Day8.txt */; };
 		171FBC9923710DDE00149618 /* 2017Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FBC9823710DDE00149618 /* 2017Day8.swift */; };
@@ -123,6 +126,9 @@
 		1714563723766538002DB276 /* 2017Day9.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day9.txt; sourceTree = "<group>"; };
 		1714563923766B1C002DB276 /* 2017Day10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day10.swift; sourceTree = "<group>"; };
 		1714563B23767007002DB276 /* 2017Day10.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day10.txt; sourceTree = "<group>"; };
+		1714563D2379E8C8002DB276 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
+		1714563F237A095D002DB276 /* 2017Day11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day11.swift; sourceTree = "<group>"; };
+		17145641237A10F0002DB276 /* 2017Day11.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day11.txt; sourceTree = "<group>"; };
 		171FBC9323710C5A00149618 /* aoc2017Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aoc2017Tests.swift; sourceTree = "<group>"; };
 		171FBC9623710C9000149618 /* 2017Day8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day8.txt; sourceTree = "<group>"; };
 		171FBC9823710DDE00149618 /* 2017Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day8.swift; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 				171FBC9623710C9000149618 /* 2017Day8.txt */,
 				1714563723766538002DB276 /* 2017Day9.txt */,
 				1714563B23767007002DB276 /* 2017Day10.txt */,
+				17145641237A10F0002DB276 /* 2017Day11.txt */,
 			);
 			path = 2017;
 			sourceTree = "<group>";
@@ -371,6 +378,7 @@
 				17E36BE021B7279E0060025A /* Timestamp.swift */,
 				17E36BE421B731900060025A /* Tracker.swift */,
 				174F9ED021BB65AE001C0EA6 /* Worker.swift */,
+				1714563D2379E8C8002DB276 /* HexGrid.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -445,6 +453,7 @@
 				171FBC9823710DDE00149618 /* 2017Day8.swift */,
 				1714563523765916002DB276 /* 2017Day9.swift */,
 				1714563923766B1C002DB276 /* 2017Day10.swift */,
+				1714563F237A095D002DB276 /* 2017Day11.swift */,
 			);
 			path = 2017;
 			sourceTree = "<group>";
@@ -545,6 +554,7 @@
 				17E36BDD21B726440060025A /* 2018Day4.txt in Resources */,
 				17FFBCDA21C13966004CD1CC /* 2018Day12.txt in Resources */,
 				1764013121C93DCE00046721 /* 2018Day18.txt in Resources */,
+				17145642237A10F0002DB276 /* 2017Day11.txt in Resources */,
 				172D6DF721C29B110061862E /* 2018Day130.txt in Resources */,
 				174F9EE021BE8067001C0EA6 /* 2018Day10.txt in Resources */,
 				17E36BCB21B6DD550060025A /* 2018Day2.txt in Resources */,
@@ -584,6 +594,7 @@
 				174F9EDB21BCFD00001C0EA6 /* MarbleMania.swift in Sources */,
 				174F9EE221BE821A001C0EA6 /* StarAlign.swift in Sources */,
 				1764012521C74AEA00046721 /* OpCode.swift in Sources */,
+				1714563E2379E8C8002DB276 /* HexGrid.swift in Sources */,
 				17E36BD721B706E10060025A /* Rect.swift in Sources */,
 				172D6E0321C46E220061862E /* Queue.swift in Sources */,
 				17E36BE521B731900060025A /* Tracker.swift in Sources */,
@@ -611,6 +622,7 @@
 				174F9ED121BB65AE001C0EA6 /* Worker.swift in Sources */,
 				172D6DFB21C2B1AD0061862E /* Cart.swift in Sources */,
 				17E36BEE21B8098E0060025A /* 2018Day5.swift in Sources */,
+				17145640237A095D002DB276 /* 2017Day11.swift in Sources */,
 				174F9EE421BE8457001C0EA6 /* 2018Day10.swift in Sources */,
 				17E36BF821B8E7070060025A /* 2018Day6.swift in Sources */,
 				1764012F21C76A4300046721 /* 2018Day17.swift in Sources */,
