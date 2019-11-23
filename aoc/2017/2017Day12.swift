@@ -12,7 +12,7 @@ struct Y2017Day12 {
     
     struct Pipe {
         let input: Int
-        let outputs: [Int]
+        private(set) var outputs: [Int]
         
         init?(_ data: String) {
             let regex = try! NSRegularExpression(pattern: "^(\\d+) <-> ([\\d, ]+)")
@@ -25,12 +25,33 @@ struct Y2017Day12 {
                 .map { $0.trimmingCharacters(in: .whitespaces) }
                 .map { $0.int }
         }
+        
+        mutating func reset() {
+            outputs = []
+        }
     }
     
     static func Part1(_ data: [String]) -> Int {
         let pipes = data.compactMap(Pipe.init)
+        return group(pipes, with: 0).count
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        var pipes = data.compactMap(Pipe.init)
+        var groups = 0
         
-        var nodes = [0]
+        for i in 0..<pipes.count where !pipes[i].outputs.isEmpty {
+            let g = group(pipes, with: pipes[i].input)
+            g.forEach {
+                pipes[$0].reset()
+            }
+            groups += 1
+        }
+        return groups
+    }
+    
+    private static func group(_ pipes: [Pipe], with programID: Int) -> Set<Int> {
+        var nodes = [programID]
         var set = Set<Int>()
         
         while !nodes.isEmpty {
@@ -42,7 +63,6 @@ struct Y2017Day12 {
             
             nodes.append(contentsOf: pipes[node].outputs)
         }
-        
-        return set.count
+        return set
     }
 }
