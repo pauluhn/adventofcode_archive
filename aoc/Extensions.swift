@@ -48,6 +48,12 @@ extension String {
     }
 }
 
+extension Character {
+    var int: Int {
+        return String(self).int
+    }
+}
+
 extension DateFormatter {
     static var timestampType: DateFormatter {
         let formatter = DateFormatter()
@@ -65,5 +71,14 @@ extension Date {
 extension Int {
     var hexString: String {
         return String(format: "%02X", self)
+    }
+    var binaryString: String {
+        return String(self, radix: 2)
+    }
+    func binaryString(length: Int) -> String {
+        let binary = binaryString
+        let padding = length - binary.count
+        guard padding > 0 else { return binary }
+        return String(repeating: "0", count: padding) + binary
     }
 }

@@ -81,6 +81,7 @@
 		1792A40A2384B6B6000C5556 /* 2017Day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1792A4092384B6B6000C5556 /* 2017Day12.txt */; };
 		17D60FF32389FD8600E82C5D /* 2017Day13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D60FF22389FD8600E82C5D /* 2017Day13.swift */; };
 		17D60FF5238A01E600E82C5D /* 2017Day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17D60FF4238A01E600E82C5D /* 2017Day13.txt */; };
+		17D60FF7238B129500E82C5D /* 2017Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D60FF6238B129500E82C5D /* 2017Day14.swift */; };
 		17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36B9521B6C56D0060025A /* AppDelegate.swift */; };
 		17E36B9821B6C56D0060025A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36B9721B6C56D0060025A /* ViewController.swift */; };
 		17E36B9B21B6C56D0060025A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17E36B9921B6C56D0060025A /* Main.storyboard */; };
@@ -201,6 +202,7 @@
 		1792A4092384B6B6000C5556 /* 2017Day12.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day12.txt; sourceTree = "<group>"; };
 		17D60FF22389FD8600E82C5D /* 2017Day13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day13.swift; sourceTree = "<group>"; };
 		17D60FF4238A01E600E82C5D /* 2017Day13.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2017Day13.txt; sourceTree = "<group>"; };
+		17D60FF6238B129500E82C5D /* 2017Day14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day14.swift; sourceTree = "<group>"; };
 		17E36B9221B6C56D0060025A /* aoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17E36B9521B6C56D0060025A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17E36B9721B6C56D0060025A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				1714563F237A095D002DB276 /* 2017Day11.swift */,
 				1792A4072384B0EC000C5556 /* 2017Day12.swift */,
 				17D60FF22389FD8600E82C5D /* 2017Day13.swift */,
+				17D60FF6238B129500E82C5D /* 2017Day14.swift */,
 			);
 			path = 2017;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17D60FF7238B129500E82C5D /* 2017Day14.swift in Sources */,
 				1749816C21D5740100F5E334 /* Point4D.swift in Sources */,
 				172D6E0921C4C4FA0061862E /* BattleUnit.swift in Sources */,
 				172D6DF321C18DBF0061862E /* BinaryTree.swift in Sources */,
