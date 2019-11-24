@@ -55,15 +55,30 @@ struct Y2017Day13 {
         assert(Scanner("0: 4")!.position(at: 7) == 1)
         
         let scanners = data.compactMap(Scanner.init)
-        
-        var severity = 0
+        return severityLog(scanners)
+            .reduce(0, { $0 + $1.0 * $1.1 })
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        let scanners = data.compactMap(Scanner.init)
+        var delay = 0
+        repeat {
+            delay += 1
+            let log = severityLog(scanners, delay: delay)
+        } while !severityLog(scanners, delay: delay).isEmpty
+        return delay
+    }
+
+    private static func severityLog(_ scanners: [Scanner], delay: Int = 0) -> [(Int, Int)] {
+        var log = [(Int, Int)]()
         for scanner in scanners {
-            let depth = scanner.depth
-            let caught = scanner.position(at: depth) == 0
+            let picosecond = scanner.depth + delay
+            let caught = scanner.position(at: picosecond) == 0
             if caught {
-                severity += depth * scanner.range
+                log.append((scanner.depth, scanner.range))
             }
         }
-        return severity
+        return log
+
     }
 }

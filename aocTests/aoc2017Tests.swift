@@ -113,6 +113,15 @@ class aoc2017Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 748)
     }
+
+    func testDay13Part2() { // ~105s
+        let testData1 = testDataDay13()
+        assert(Y2017Day13.Part2(testData1.newlineSplit()) == 10)
+        
+        let answer = Y2017Day13.Part2(readInput(year: year, day: 13))
+        print("\(#function):\(answer)")
+        assert(answer == 3873662)
+    }
 }
 
 extension aoc2017Tests {
