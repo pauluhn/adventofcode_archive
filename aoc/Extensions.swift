@@ -54,6 +54,15 @@ extension Character {
     }
 }
 
+extension Substring {
+    var int: Int {
+        return String(self).int
+    }
+    var str: String {
+        return String(self)
+    }
+}
+
 extension DateFormatter {
     static var timestampType: DateFormatter {
         let formatter = DateFormatter()
