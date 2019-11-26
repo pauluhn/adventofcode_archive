@@ -114,6 +114,7 @@
 		17E36BF221B80A120060025A /* Polarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BF121B80A120060025A /* Polarity.swift */; };
 		17E36BF621B8E6810060025A /* 2018Day6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17E36BF521B8E6810060025A /* 2018Day6.txt */; };
 		17E36BF821B8E7070060025A /* 2018Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E36BF721B8E7070060025A /* 2018Day6.swift */; };
+		17EABC35238CCE26003FF2C3 /* 2017Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EABC34238CCE26003FF2C3 /* 2017Day17.swift */; };
 		17FFBCDA21C13966004CD1CC /* 2018Day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17FFBCD921C13966004CD1CC /* 2018Day12.txt */; };
 		17FFBCDC21C13A04004CD1CC /* 2018Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */; };
 		17FFBCDE21C16A14004CD1CC /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FFBCDD21C16A14004CD1CC /* LinkedList.swift */; };
@@ -242,6 +243,7 @@
 		17E36BF121B80A120060025A /* Polarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polarity.swift; sourceTree = "<group>"; };
 		17E36BF521B8E6810060025A /* 2018Day6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day6.txt; sourceTree = "<group>"; };
 		17E36BF721B8E7070060025A /* 2018Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day6.swift; sourceTree = "<group>"; };
+		17EABC34238CCE26003FF2C3 /* 2017Day17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2017Day17.swift; sourceTree = "<group>"; };
 		17FFBCD921C13966004CD1CC /* 2018Day12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day12.txt; sourceTree = "<group>"; };
 		17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day12.swift; sourceTree = "<group>"; };
 		17FFBCDD21C16A14004CD1CC /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				17D60FF6238B129500E82C5D /* 2017Day14.swift */,
 				17D60FF8238BA6D500E82C5D /* 2017Day15.swift */,
 				17D60FFA238BAF9500E82C5D /* 2017Day16.swift */,
+				17EABC34238CCE26003FF2C3 /* 2017Day17.swift */,
 			);
 			path = 2017;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				1714563A23766B1C002DB276 /* 2017Day10.swift in Sources */,
 				17E36BF221B80A120060025A /* Polarity.swift in Sources */,
 				17E36BD421B706480060025A /* 2018Day3.swift in Sources */,
+				17EABC35238CCE26003FF2C3 /* 2017Day17.swift in Sources */,
 				1792A4082384B0EC000C5556 /* 2017Day12.swift in Sources */,
 				17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */,
 				17D60FF32389FD8600E82C5D /* 2017Day13.swift in Sources */,

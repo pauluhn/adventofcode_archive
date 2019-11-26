@@ -168,6 +168,14 @@ class aoc2017Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == "gnflbkojhicpmead")
     }
+    
+    func testDay17Part1() {
+        assert(Y2017Day17.Part1(3) == 638)
+        
+        let answer = Y2017Day17.Part1(363)
+        print("\(#function):\(answer)")
+        assert(answer == 136)
+    }
 }
 
 extension aoc2017Tests {
