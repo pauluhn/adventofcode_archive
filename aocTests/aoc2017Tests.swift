@@ -162,6 +162,12 @@ class aoc2017Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == "ociedpjbmfnkhlga")
     }
+    
+    func testDay16Part2() {
+        let answer = Y2017Day16.Part2("abcdefghijklmnop", readInput(year: year, day: 16).first!)
+        print("\(#function):\(answer)")
+        assert(answer == "gnflbkojhicpmead")
+    }
 }
 
 extension aoc2017Tests {

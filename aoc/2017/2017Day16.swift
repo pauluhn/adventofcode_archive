@@ -17,11 +17,39 @@ struct Y2017Day16 {
     }
 
     static func Part1(_ programs: String, _ data: String) -> String {
-        var programs = programs.map(String.init)
-        let moves = data.split(separator: ",")
+        return dance(programs, moves(data))
+    }
+    
+    static func Part2(_ programs: String, _ data: String) -> String {
+        let m = moves(data)
+        var programs = programs
+        
+        var pattern = [programs]
+        var unique = Set(pattern)
+        
+        for i in 0 ..< 1_000_000_000 {
+            programs = dance(programs, m)
+            if unique.contains(programs) {
+                print("detected pattern at \(i)")
+                let offset = 1_000_000_000 % pattern.count
+                return pattern[offset]
+            } else {
+                pattern.append(programs)
+                unique.insert(programs)
+            }
+        }
+        return programs
+    }
+    
+    private static func moves(_ data: String) -> [Move] {
+        return data
+            .split(separator: ",")
             .map(String.init)
             .map { move($0) }
-        
+    }
+    
+    private static func dance(_ programs: String, _ moves: [Move]) -> String {
+        var programs = programs.map(String.init)
         moves.forEach {
             programs.apply($0)
         }
