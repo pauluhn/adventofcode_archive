@@ -23,4 +23,25 @@ struct Y2017Day17 {
         }
         return spinlock.get(currentPosition, offset: 1).value
     }
+
+    static func Part2(_ steps: Int) -> Int {
+        let spinlock = CircularList<Int>()
+        spinlock.append(0)
+        var currentPosition = spinlock.head!
+        
+        while spinlock.count <= 50_000_000 {
+            currentPosition = spinlock.get(currentPosition, offset: steps)
+            let next = spinlock.count
+            spinlock.insert(after: currentPosition, next)
+            currentPosition = spinlock.get(currentPosition, offset: 1)
+        }
+        
+        while true {
+            if currentPosition.value == 0 {
+                return spinlock.get(currentPosition, offset: 1).value
+            }
+            currentPosition = spinlock.get(currentPosition, offset: 1)
+        }
+        fatalError()
+    }
 }
