@@ -200,6 +200,36 @@ class aoc2017Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 6858)
     }
+    
+    func testDay19Part1() {
+        let testData1 = testDataDay19()
+        assert(Y2017Day19.Part1(testData1.newlineSplit()) == "ABCDEF")
+        
+        typealias Decision = Y2017Day19.Decision
+/*
+ 88,197, left or right - right
+ 152,197, up or down - down
+ 134,197, left or right - right
+         
+         
+         
+ 152,191, left or right - bad
+ 176,191, up or down - bad
+ 188,191, left or right - bad
+ 144,191, down or up - bad
+ 144,195, right or left - bad
+ 56,195, left or right - bad
+ 48,195, down or up - bad
+*/
+        let answer = Y2017Day19.Part1(readInput(year: year, day: 19), [
+            Decision(point: Point(x: 88, y: 197), direction: .right),
+            Decision(point: Point(x: 152, y: 197), direction: .down),
+            Decision(point: Point(x: 134, y: 197), direction: .right),
+//            Decision(point: Point(x: 188, y: 191), direction: .right),
+        ])
+        print("\(#function):\(answer)")
+//        assert(answer == 4601)
+    }
 }
 
 extension aoc2017Tests {
@@ -254,5 +284,16 @@ extension aoc2017Tests {
         rcv c
         rcv d
         """
+    }
+    func testDataDay19() -> String {
+        return
+"""
+     |
+     |  +--+
+     A  |  C
+ F---|----E|--+
+     |  |  |  D
+     +B-+  +--+
+"""
     }
 }
