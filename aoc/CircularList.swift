@@ -67,6 +67,11 @@ class CircularList<T> {
         count += 1
     }
     
+    func insert(after node: Node, _ element: T) {
+        let next = node.next!
+        insert(before: next, element)
+    }
+    
     @discardableResult
     func remove(_ node: Node) -> T {
         let value = node.value

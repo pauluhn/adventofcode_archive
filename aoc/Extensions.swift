@@ -42,6 +42,25 @@ extension String {
     var int: Int {
         return Int(self) ?? 0
     }
+    
+    var ascii: [Int] {
+        return self.compactMap { $0.asciiValue }.map(Int.init)
+    }
+}
+
+extension Character {
+    var int: Int {
+        return String(self).int
+    }
+}
+
+extension Substring {
+    var int: Int {
+        return String(self).int
+    }
+    var str: String {
+        return String(self)
+    }
 }
 
 extension DateFormatter {
@@ -55,5 +74,20 @@ extension DateFormatter {
 extension Date {
     var minute: Int {
         return DateFormatter.timestampType.string(from: self).split(separator: ":").last.map(String.init)!.int
+    }
+}
+
+extension Int {
+    var hexString: String {
+        return String(format: "%02X", self)
+    }
+    var binaryString: String {
+        return String(self, radix: 2)
+    }
+    func binaryString(length: Int) -> String {
+        let binary = binaryString
+        let padding = length - binary.count
+        guard padding > 0 else { return binary }
+        return String(repeating: "0", count: padding) + binary
     }
 }
