@@ -22,4 +22,14 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 3390830)
     }
+
+    func testDay1Part2() {
+        assert(Y2019Day1.Part2(["14"]) == 2)
+        assert(Y2019Day1.Part2(["1969"]) == 966)
+        assert(Y2019Day1.Part2(["100756"]) == 50346)
+        
+        let answer = Y2019Day1.Part2(readInput(year: year, day: 1))
+        print("\(#function):\(answer)")
+        assert(answer == 5083370)
+    }
 }
