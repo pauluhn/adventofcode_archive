@@ -32,4 +32,17 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 5083370)
     }
+    
+    func testDay2Part1() {
+        assert(Y2019Day2.Part1("1,9,10,3,2,3,11,0,99,30,40,50") == [3500,9,10,70,2,3,11,0,99,30,40,50])
+        assert(Y2019Day2.Part1("1,0,0,0,99") == [2,0,0,0,99])
+        assert(Y2019Day2.Part1("2,3,0,3,99") == [2,3,0,6,99])
+        assert(Y2019Day2.Part1("2,4,4,5,99,0") == [2,4,4,5,99,9801])
+        assert(Y2019Day2.Part1("1,1,1,4,99,5,6,0,99") == [30,1,1,4,2,5,6,0,99])
+
+        let answer = Y2019Day2.Part1(readInput(year: year, day: 2).first!, true)
+        print("\(#function):\(answer)")
+        assert(answer.first! == 3058646)
+    }
+
 }
