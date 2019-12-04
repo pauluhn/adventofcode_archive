@@ -23,6 +23,17 @@ struct Y2019Day4 {
             .count
     }
     
+    static func Part2(_ lower: Int, _ upper: Int) -> Int {
+        assert(valid2(112233) == true)
+        assert(valid2(123444) == false)
+        assert(valid2(111122) == true)
+        
+        return (lower...upper)
+            .map { valid2($0) }
+            .filter { $0 }
+            .count
+    }
+
     private static func valid(_ password: Int) -> Bool {
         let password = String(password)
         
@@ -42,5 +53,14 @@ struct Y2019Day4 {
         }
         
         return true
+    }
+    
+    private static func valid2(_ password: Int) -> Bool {
+        guard valid(password) else { return false }
+        let password = String(password)
+
+        // adjacent not part of larger group
+        let same = Dictionary(grouping: password) { $0 }
+        return !same.filter { $1.count == 2 }.isEmpty
     }
 }
