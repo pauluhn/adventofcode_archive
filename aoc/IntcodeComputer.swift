@@ -19,6 +19,10 @@ class IntcodeComputer {
         case multiply(PM, PM)
         case input
         case output
+        case jumpIfTrue(PM, PM)
+        case jumpIfFalse(PM, PM)
+        case lessThan(PM, PM)
+        case equals(PM, PM)
         case done
     }
     
@@ -62,6 +66,10 @@ private extension IntcodeComputer {
         case 2: return .multiply(pm1, pm2)
         case 3: return .input
         case 4: return .output
+        case 5: return .jumpIfTrue(pm1, pm2)
+        case 6: return .jumpIfFalse(pm1, pm2)
+        case 7: return .lessThan(pm1, pm2)
+        case 8: return .equals(pm1, pm2)
         case 99: return .done
         default: fatalError()
         }
@@ -73,6 +81,10 @@ private extension IntcodeComputer {
         case let .multiply(pm1, pm2): return multiply(pm1, pm2)
         case .input: return input()
         case .output: return output()
+        case let .jumpIfTrue(pm1, pm2): return jumpIfTrue(pm1, pm2)
+        case let .jumpIfFalse(pm1, pm2): return jumpIfFalse(pm1, pm2)
+        case let .lessThan(pm1, pm2): return lessThan(pm1, pm2)
+        case let .equals(pm1, pm2): return equals(pm1, pm2)
         case .done: return .done
         }
     }
@@ -107,6 +119,44 @@ private extension IntcodeComputer {
         outputs.append(first)
         print("output:", first)
         pointer += 2
+        return .success
+    }
+    
+    func jumpIfTrue(_ pm1: PM, _ pm2: PM) -> StepResult {
+        guard inbounds(pm1, pm2) else { return .failure }
+        let (first, second) = parameters(pm1, pm2)
+        if first != 0 {
+            pointer = second
+        } else {
+            pointer += 3
+        }
+        return .success
+    }
+    
+    func jumpIfFalse(_ pm1: PM, _ pm2: PM) -> StepResult {
+        guard inbounds(pm1, pm2) else { return .failure }
+        let (first, second) = parameters(pm1, pm2)
+        if first == 0 {
+            pointer = second
+        } else {
+            pointer += 3
+        }
+        return .success
+    }
+    
+    func lessThan(_ pm1: PM, _ pm2: PM) -> StepResult {
+        guard inbounds(pm1, pm2, .position) else { return .failure }
+        let (first, second) = parameters(pm1, pm2)
+        program[program[pointer + 3]] = first < second ? 1 : 0
+        pointer += 4
+        return .success
+    }
+    
+    func equals(_ pm1: PM, _ pm2: PM) -> StepResult {
+        guard inbounds(pm1, pm2, .position) else { return .failure }
+        let (first, second) = parameters(pm1, pm2)
+        program[program[pointer + 3]] = first == second ? 1 : 0
+        pointer += 4
         return .success
     }
     

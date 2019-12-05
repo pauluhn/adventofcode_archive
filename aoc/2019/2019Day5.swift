@@ -37,4 +37,14 @@ struct Y2019Day5 {
 
         return intcode.outputs.last ?? 0
     }
+
+    static func Part2(_ data: String, _ input: Int) -> Int {
+        let program = data.split(separator: ",")
+            .map(String.init)
+            .compactMap(Int.init)
+        let intcode = IntcodeComputer(program: program, inputs: [input])
+        _ = intcode.run()
+        
+        return intcode.outputs.last ?? 0
+    }
 }
