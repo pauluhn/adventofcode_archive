@@ -11,7 +11,7 @@ import Foundation
 class IntcodeComputer {
     private var program: [Int]
     private var pointer = 0
-    private let inputs: [Int]
+    private(set) var inputs: [Int]
     private(set) var outputs: [Int] = []
     
     enum Opcode {
@@ -107,7 +107,8 @@ private extension IntcodeComputer {
     
     func input() -> StepResult {
         guard inbounds(.position),
-            let first = inputs.first else { return .failure }
+            !inputs.isEmpty else { return .failure }
+        let first = inputs.removeFirst()
         program[program[pointer + 1]] = first
         pointer += 2
         return .success
