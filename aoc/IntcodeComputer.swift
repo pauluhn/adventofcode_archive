@@ -14,6 +14,9 @@ class IntcodeComputer {
     private(set) var inputs: [Int]
     private(set) var outputs: [Int] = []
     
+    typealias OutputHandler = (Int) -> Void
+    private let outputHandler: OutputHandler?
+    
     enum Opcode {
         case add(PM, PM)
         case multiply(PM, PM)
@@ -38,9 +41,13 @@ class IntcodeComputer {
         case done
     }
     
-    init(program: [Int], inputs: [Int] = []) {
+    init(program: [Int],
+         inputs: [Int] = [],
+         outputHandler: OutputHandler? = nil) {
+        
         self.program = program
         self.inputs = inputs
+        self.outputHandler = outputHandler
     }
     
     func run() -> [Int] {
@@ -50,6 +57,18 @@ class IntcodeComputer {
             case .failure: return []
             case .done: return program
             }
+        }
+    }
+    
+    func appendInput(_ input: Int) {
+        inputs.append(input)
+    }
+    
+    func tick() -> Bool { // keep going?
+        switch step() {
+        case .success: return true
+        case .failure: return false
+        case .done: return false
         }
     }
 }
@@ -106,8 +125,8 @@ private extension IntcodeComputer {
     }
     
     func input() -> StepResult {
-        guard inbounds(.position),
-            !inputs.isEmpty else { return .failure }
+        guard inbounds(.position) else { return .failure }
+        guard !inputs.isEmpty else { return .success } // waiting
         let first = inputs.removeFirst()
         program[program[pointer + 1]] = first
         pointer += 2
@@ -119,6 +138,7 @@ private extension IntcodeComputer {
         let first = program[program[pointer + 1]]
         outputs.append(first)
         print("output:", first)
+        outputHandler?(first)
         pointer += 2
         return .success
     }

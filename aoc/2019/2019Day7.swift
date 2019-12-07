@@ -28,7 +28,7 @@ struct Y2019Day7 {
         var maxOutput = 0
         var maxPSS: PSS!
         
-        for pss in allPSS {
+        for pss in allPSS(for: [0, 1, 2, 3, 4]) {
             let a = IntcodeComputer(program: program,
                                     inputs: [pss[0], 0])
             _ = a.run()
@@ -58,14 +58,65 @@ struct Y2019Day7 {
         print("pss is", maxPSS.sequence)
         return maxOutput
     }
+
+    static func Part2(_ data: String) -> Int {
+        let program = data.split(separator: ",")
+            .map(String.init)
+            .compactMap(Int.init)
+        
+        var maxOutput = 0
+        var maxPSS: PSS!
+        
+        for pss in allPSS(for: [5, 6, 7, 8, 9]) {
+            var a: IntcodeComputer!
+            var b: IntcodeComputer!
+            var c: IntcodeComputer!
+            var d: IntcodeComputer!
+            var e: IntcodeComputer!
+
+            a = IntcodeComputer(program: program,
+                                inputs: [pss[0]]) { b.appendInput($0) }
+            b = IntcodeComputer(program: program,
+                                inputs: [pss[1]]) { c.appendInput($0) }
+            c = IntcodeComputer(program: program,
+                                inputs: [pss[2]]) { d.appendInput($0) }
+            d = IntcodeComputer(program: program,
+                                inputs: [pss[3]]) { e.appendInput($0) }
+            e = IntcodeComputer(program: program,
+                                inputs: [pss[4]]) { a.appendInput($0) }
+            
+            // send 0 to `a` exactly once
+            a.appendInput(0)
+            
+            var aa = false
+            var bb = false
+            var cc = false
+            var dd = false
+            var ee = false
+            repeat {
+                aa = a.tick()
+                bb = b.tick()
+                cc = c.tick()
+                dd = d.tick()
+                ee = e.tick()
+            } while aa || bb || cc || dd || ee
+            
+            let output = e.outputs.last!
+            if output > maxOutput {
+                maxOutput = output
+                maxPSS = pss
+            }
+        }
+        print("pss is", maxPSS.sequence)
+        return maxOutput
+    }
 }
 
 private extension Y2019Day7 {
-    static var initialPSS = [0, 1, 2, 3, 4]
-    static var allPSS: [PSS] { // all permutations
-        var pss = initialPSS.compactMap { PSS([$0]) }
-        while pss.first!.count < initialPSS.count {
-            pss = pss.flatMap { $0.clone(initialPSS) }
+    static func allPSS(for sequence: [Int]) -> [PSS] { // all permutations
+        var pss = sequence.compactMap { PSS([$0]) }
+        while pss.first!.count < sequence.count {
+            pss = pss.flatMap { $0.clone(sequence) }
         }
         return pss
     }
