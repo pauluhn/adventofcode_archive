@@ -128,6 +128,14 @@ class aoc2019Tests: XCTestCase {
         assert(answer == 12077198)
     }
 
+    func testDay6Part1() {
+        let testData1 = testDataDay6().newlineSplit()
+        assert(Y2019Day6.Part1(testData1) == 42)
+
+        let answer = Y2019Day6.Part1(readInput(year: year, day: 6))
+        print("\(#function):\(answer)")
+        assert(answer == 315757)
+    }
 }
 
 extension aoc2019Tests {
@@ -139,5 +147,20 @@ extension aoc2019Tests {
     }
     func testDataDay5c() -> String {
         return "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99"
+    }
+    func testDataDay6() -> String {
+        return """
+        COM)B
+        B)C
+        C)D
+        D)E
+        E)F
+        B)G
+        G)H
+        D)I
+        E)J
+        J)K
+        K)L
+        """
     }
 }
