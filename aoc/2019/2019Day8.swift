@@ -30,6 +30,21 @@ struct Y2019Day8 {
                 layers[layers.count - 1].image.append(c.int)
             }
         }
+        
+        func finalLayer() -> Layer {
+            var final = Layer(id: layers.count, image: [])
+            for i in 0..<width * height {
+                final.image.append(finalPixel(at: i))
+            }
+            return final
+        }
+        
+        private func finalPixel(at index: Int) -> Int {
+            for layer in layers where layer.image[index] != 2 {
+                return layer.image[index]
+            }
+            return 2
+        }
     }
     
     static func Part1(_ data: String) -> Int {
@@ -46,5 +61,20 @@ struct Y2019Day8 {
         let ones = image.layers[layer].image.filter { $0 == 1 }.count
         let twos = image.layers[layer].image.filter { $0 == 2 }.count
         return ones * twos
+    }
+    
+    static func Part2(_ data: String, _ width: Int, _ height: Int) -> String {
+        let image = Image(width, height, data)
+        let layer = image.finalLayer()
+        // display
+        for h in 0..<height {
+            var row = ""
+            for w in 0..<width {
+                let pixel = layer.image[h * width + w] == 0 ? "." : "#"
+                row += pixel
+            }
+            print(row)
+        }
+        return layer.image.map(String.init).joined()
     }
 }
