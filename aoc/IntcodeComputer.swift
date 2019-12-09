@@ -13,19 +13,22 @@ class IntcodeComputer {
     private var pointer = 0
     private(set) var inputs: [Int]
     private(set) var outputs: [Int] = []
+    private var relativeBase = 0
+    private let limitedMemory: Bool
     
     typealias OutputHandler = (Int) -> Void
     private let outputHandler: OutputHandler?
     
     enum Opcode {
-        case add(PM, PM)
-        case multiply(PM, PM)
-        case input
-        case output
+        case add(PM, PM, PM)
+        case multiply(PM, PM, PM)
+        case input(PM)
+        case output(PM)
         case jumpIfTrue(PM, PM)
         case jumpIfFalse(PM, PM)
-        case lessThan(PM, PM)
-        case equals(PM, PM)
+        case lessThan(PM, PM, PM)
+        case equals(PM, PM, PM)
+        case adjustRelativeBase(PM)
         case done
     }
     
@@ -33,6 +36,7 @@ class IntcodeComputer {
     enum ParameterMode: Int {
         case position   = 0
         case immediate  = 1
+        case relative   = 2
     }
     
     enum StepResult {
@@ -48,6 +52,17 @@ class IntcodeComputer {
         self.program = program
         self.inputs = inputs
         self.outputHandler = outputHandler
+        self.limitedMemory = true
+    }
+    
+    init(program: [Int],
+         inputs: [Int] = [],
+         limitedMemory: Bool) {
+        
+        self.program = program
+        self.inputs = inputs
+        self.outputHandler = nil
+        self.limitedMemory = limitedMemory
     }
     
     func run() -> [Int] {
@@ -79,16 +94,18 @@ private extension IntcodeComputer {
         let opcode = value % 100
         let pm1 = PM(rawValue: (value / 100) % 10)!
         let pm2 = PM(rawValue: (value / 1000) % 10)!
-        
+        let pm3 = PM(rawValue: (value / 10000) % 10)!
+
         switch opcode {
-        case 1: return .add(pm1, pm2)
-        case 2: return .multiply(pm1, pm2)
-        case 3: return .input
-        case 4: return .output
+        case 1: return .add(pm1, pm2, pm3)
+        case 2: return .multiply(pm1, pm2, pm3)
+        case 3: return .input(pm1)
+        case 4: return .output(pm1)
         case 5: return .jumpIfTrue(pm1, pm2)
         case 6: return .jumpIfFalse(pm1, pm2)
-        case 7: return .lessThan(pm1, pm2)
-        case 8: return .equals(pm1, pm2)
+        case 7: return .lessThan(pm1, pm2, pm3)
+        case 8: return .equals(pm1, pm2, pm3)
+        case 9: return .adjustRelativeBase(pm1)
         case 99: return .done
         default: fatalError()
         }
@@ -96,46 +113,47 @@ private extension IntcodeComputer {
     
     func step() -> StepResult {
         switch opcode {
-        case let .add(pm1, pm2): return add(pm1, pm2)
-        case let .multiply(pm1, pm2): return multiply(pm1, pm2)
-        case .input: return input()
-        case .output: return output()
+        case let .add(pm1, pm2, pm3): return add(pm1, pm2, pm3)
+        case let .multiply(pm1, pm2, pm3): return multiply(pm1, pm2, pm3)
+        case .input(let pm1): return input(pm1)
+        case .output(let pm1): return output(pm1)
         case let .jumpIfTrue(pm1, pm2): return jumpIfTrue(pm1, pm2)
         case let .jumpIfFalse(pm1, pm2): return jumpIfFalse(pm1, pm2)
-        case let .lessThan(pm1, pm2): return lessThan(pm1, pm2)
-        case let .equals(pm1, pm2): return equals(pm1, pm2)
+        case let .lessThan(pm1, pm2, pm3): return lessThan(pm1, pm2, pm3)
+        case let .equals(pm1, pm2, pm3): return equals(pm1, pm2, pm3)
+        case .adjustRelativeBase(let pm1): return adjustRelativeBase(pm1)
         case .done: return .done
         }
     }
     
-    func add(_ pm1: PM, _ pm2: PM) -> StepResult {
+    func add(_ pm1: PM, _ pm2: PM, _ pm3: PM) -> StepResult {
         guard inbounds(pm1, pm2, .position) else { return .failure }
         let (first, second) = parameters(pm1, pm2)
-        program[program[pointer + 3]] = first + second
+        parameter(3, pm3, first + second)
         pointer += 4
         return .success
     }
     
-    func multiply(_ pm1: PM, _ pm2: PM) -> StepResult {
+    func multiply(_ pm1: PM, _ pm2: PM, _ pm3: PM) -> StepResult {
         guard inbounds(pm1, pm2, .position) else { return .failure }
         let (first, second) = parameters(pm1, pm2)
-        program[program[pointer + 3]] = first * second
+        parameter(3, pm3, first * second)
         pointer += 4
         return .success
     }
     
-    func input() -> StepResult {
-        guard inbounds(.position) else { return .failure }
+    func input(_ pm1: PM) -> StepResult {
+        guard inbounds(pm1) else { return .failure }
         guard !inputs.isEmpty else { return .success } // waiting
         let first = inputs.removeFirst()
-        program[program[pointer + 1]] = first
+        parameter(1, pm1, first)
         pointer += 2
         return .success
     }
     
-    func output() -> StepResult {
-        guard inbounds(.position) else { return .failure }
-        let first = program[program[pointer + 1]]
+    func output(_ pm1: PM) -> StepResult {
+        guard inbounds(pm1) else { return .failure }
+        let first = parameter(1, pm1)
         outputs.append(first)
         print("output:", first)
         outputHandler?(first)
@@ -165,23 +183,32 @@ private extension IntcodeComputer {
         return .success
     }
     
-    func lessThan(_ pm1: PM, _ pm2: PM) -> StepResult {
+    func lessThan(_ pm1: PM, _ pm2: PM, _ pm3: PM) -> StepResult {
         guard inbounds(pm1, pm2, .position) else { return .failure }
         let (first, second) = parameters(pm1, pm2)
-        program[program[pointer + 3]] = first < second ? 1 : 0
+        parameter(3, pm3, first < second ? 1 : 0)
         pointer += 4
         return .success
     }
     
-    func equals(_ pm1: PM, _ pm2: PM) -> StepResult {
+    func equals(_ pm1: PM, _ pm2: PM, _ pm3: PM) -> StepResult {
         guard inbounds(pm1, pm2, .position) else { return .failure }
         let (first, second) = parameters(pm1, pm2)
-        program[program[pointer + 3]] = first == second ? 1 : 0
+        parameter(3, pm3, first == second ? 1 : 0)
         pointer += 4
+        return .success
+    }
+    
+    func adjustRelativeBase(_ pm1: PM) -> StepResult {
+        guard inbounds(pm1) else { return .failure }
+        let first = parameter(1, pm1)
+        relativeBase += first
+        pointer += 2
         return .success
     }
     
     private func inbounds(_ parameters: PM...) -> Bool {
+        guard limitedMemory else { return true }
         for (i, pm) in parameters.enumerated() where pm == .position {
             if program[pointer + i + 1] >= program.count {
                 return false
@@ -195,9 +222,51 @@ private extension IntcodeComputer {
     }
     
     private func parameter(_ offset: Int, _ pm: PM) -> Int {
+        if !limitedMemory {
+            padMemory(offset, pm)
+        }
         switch pm {
         case .position: return program[program[pointer + offset]]
         case .immediate: return program[pointer + offset]
+        case .relative: return program[relativeBase + program[pointer + offset]]
         }
+    }
+    
+    private func parameter(_ offset: Int, _ pm: PM, _ value: Int) {
+        if !limitedMemory {
+            padMemory(offset, pm)
+        }
+        switch pm {
+        case .position: program[program[pointer + offset]] = value
+        case .immediate: program[pointer + offset] = value
+        case .relative: program[relativeBase + program[pointer + offset]] = value
+        }
+    }
+    
+    private func padMemory(_ offset: Int, _ pm: PM) {
+        switch pm {
+        case .immediate:
+            if pointer + offset >= program.count {
+                padMemory(pointer + offset - program.count + 1)
+            }
+        case .position:
+            if pointer + offset >= program.count {
+                padMemory(pointer + offset - program.count + 1)
+            }
+            if program[pointer + offset] >= program.count {
+                padMemory(program[pointer + offset] - program.count + 1)
+            }
+        case .relative:
+            if pointer + offset >= program.count {
+                padMemory(pointer + offset - program.count + 1)
+            }
+            if program[relativeBase + program[pointer + offset]] >= program.count {
+                padMemory(program[relativeBase + program[pointer + offset]] - program.count + 1)
+            }
+        }
+    }
+    
+    private func padMemory(_ count: Int) {
+        program.append(contentsOf: Array(repeating: 0, count: count))
     }
 }

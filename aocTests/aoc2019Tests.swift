@@ -118,10 +118,10 @@ class aoc2019Tests: XCTestCase {
         assert(Y2019Day5.Part2(testData2, 0) == 0)
         assert(Y2019Day5.Part2(testData2, 1) == 1)
 
-//        let testData3 = testDataDay5c().newlineSplit().first!
-//        assert(Y2019Day5.Part2(testData3, 7) == 999)
-//        assert(Y2019Day5.Part2(testData3, 8) == 1000)
-//        assert(Y2019Day5.Part2(testData3, 9) == 1001)
+        let testData3 = testDataDay5c().newlineSplit().first!
+        assert(Y2019Day5.Part2(testData3, 7) == 999)
+        assert(Y2019Day5.Part2(testData3, 8) == 1000)
+        assert(Y2019Day5.Part2(testData3, 9) == 1001)
 
         let answer = Y2019Day5.Part2(readInput(year: year, day: 5).first!, 5)
         print("\(#function):\(answer)")
@@ -186,6 +186,21 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == "111101001011100100101111010000100101001010010100001110011110100101001011100100001001011100100101000010000100101010010010100001111010010100100110011110")
     }
+    
+    func testDay9Part1() {
+        let testData1 = testDataDay9a().newlineSplit().first!
+        assert(Y2019Day9.Part1(testData1) == 99)
+        
+        let testData2 = testDataDay9b().newlineSplit().first!
+        assert(String(Y2019Day9.Part1(testData2)).count == 16)
+        
+        let testData3 = testDataDay9c().newlineSplit().first!
+        assert(Y2019Day9.Part1(testData3) == 1125899906842624)
+        
+        let answer = Y2019Day9.Part1(readInput(year: year, day: 9).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 3235019597)
+    }
 }
 
 extension aoc2019Tests {
@@ -244,5 +259,14 @@ extension aoc2019Tests {
     }
     func testDataDay7e() -> String {
         return "3,52,1001,52,-5,52,3,53,1,52,56,54,1007,54,5,55,1005,55,26,1001,54,-5,54,1105,1,12,1,53,54,53,1008,54,0,55,1001,55,1,55,2,53,55,53,4,53,1001,56,-1,56,1005,56,6,99,0,0,0,0,10"
+    }
+    func testDataDay9a() -> String {
+        return "109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99"
+    }
+    func testDataDay9b() -> String {
+        return "1102,34915192,34915192,7,4,7,99,0"
+    }
+    func testDataDay9c() -> String {
+        return "104,1125899906842624,99"
     }
 }
