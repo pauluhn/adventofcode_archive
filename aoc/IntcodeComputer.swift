@@ -260,6 +260,9 @@ private extension IntcodeComputer {
             if pointer + offset >= program.count {
                 padMemory(pointer + offset - program.count + 1)
             }
+            if relativeBase + program[pointer + offset] >= program.count {
+                padMemory(relativeBase + program[pointer + offset] - program.count + 1)
+            }
             if program[relativeBase + program[pointer + offset]] >= program.count {
                 padMemory(program[relativeBase + program[pointer + offset]] - program.count + 1)
             }

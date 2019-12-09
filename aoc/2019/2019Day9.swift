@@ -21,4 +21,16 @@ struct Y2019Day9 {
         let _ = intcode.run()
         return intcode.outputs.last!
     }
+
+    static func Part2(_ data: String) -> Int {
+        let program = data.split(separator: ",")
+            .map(String.init)
+            .compactMap(Int.init)
+        
+        let intcode = IntcodeComputer(program: program,
+                                      inputs: [2],
+                                      limitedMemory: false)
+        let _ = intcode.run()
+        return intcode.outputs.last!
+    }
 }
