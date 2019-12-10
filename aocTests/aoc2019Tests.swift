@@ -207,6 +207,28 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 80274)
     }
+    
+    func testDay10Part1() {
+        let testData1 = testDataDay10a().newlineSplit()
+        assert(Y2019Day10.Part1(testData1) == 8)
+        
+        let testData2 = testDataDay10b().newlineSplit()
+        assert(Y2019Day10.Part1(testData2) == 33)
+
+        let testData3 = testDataDay10c().newlineSplit()
+        assert(Y2019Day10.Part1(testData3) == 35)
+
+        let testData4 = testDataDay10d().newlineSplit()
+        assert(Y2019Day10.Part1(testData4) == 41)
+
+        let testData5 = testDataDay10e().newlineSplit()
+        assert(Y2019Day10.Part1(testData5) == 210)
+
+        let answer = Y2019Day10.Part1(readInput(year: year, day: 10))
+        print("\(#function):\(answer)")
+        assert(answer == 292)
+    }
+
 }
 
 extension aoc2019Tests {
@@ -274,5 +296,80 @@ extension aoc2019Tests {
     }
     func testDataDay9c() -> String {
         return "104,1125899906842624,99"
+    }
+    func testDataDay10a() -> String {
+        return """
+.#..#
+.....
+#####
+....#
+...##
+"""
+    }
+    func testDataDay10b() -> String {
+        return """
+......#.#.
+#..#.#....
+..#######.
+.#.#.###..
+.#..#.....
+..#....#.#
+#..#....#.
+.##.#..###
+##...#..#.
+.#....####
+"""
+    }
+    func testDataDay10c() -> String {
+        return """
+#.#...#.#.
+.###....#.
+.#....#...
+##.#.#.#.#
+....#.#.#.
+.##..###.#
+..#...##..
+..##....##
+......#...
+.####.###.
+"""
+    }
+    func testDataDay10d() -> String {
+        return """
+.#..#..###
+####.###.#
+....###.#.
+..###.##.#
+##.##.#.#.
+....###..#
+..#.#..#.#
+#..#.#.###
+.##...##.#
+.....#.#..
+"""
+    }
+    func testDataDay10e() -> String {
+        return """
+.#..##.###...#######
+##.############..##.
+.#.######.########.#
+.###.#######.####.#.
+#####.##.#.##.###.##
+..#####..#.#########
+####################
+#.####....###.#.#.##
+##.#################
+#####.##.###..####..
+..######..##.#######
+####.##.####...##..#
+.#####..#.######.###
+##...#.##########...
+#.##########.#######
+.####.#.###.###.#.##
+....##.##.###..#####
+.#.#.###########.###
+#.#.#.#####.####.###
+###.##.####.##.#..##
+"""
     }
 }
