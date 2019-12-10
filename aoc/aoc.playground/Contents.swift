@@ -1,20 +1,26 @@
 import UIKit
 
-//For example, if a defending group contains 10 units with 10 hit points each and receives 75 damage, it loses exactly 7 units and is left with 3 units at full health.
+func GCD(_ m: Int, _ n: Int) -> Int {
+    var a = 0
+    var b = max(m, n)
+    var r = min(m, n)
+    
+    while r != 0 {
+        a = b
+        b = r
+        r = a % b
+    }
+    return b
+}
 
-let units = 10
-let hp = 10
-let totalHP = units * hp
-let damage = 75
-
-let remainingHP = totalHP - damage
-
-
-let addBack = remainingHP % units != 0
-
-
-remainingHP / units + (addBack ? 1 : 0)
-
+GCD(2, 2)
+GCD(1, 2)
+GCD(2, 1)
+GCD(3, 2)
+GCD(0, 2)
+GCD(-2, -4)
+GCD(2, -4)
+GCD(-2, 4)
 
 
 

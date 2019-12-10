@@ -43,11 +43,7 @@ struct Y2019Day3 {
         let second = wires[1].points
         
         let intersects = first.intersection(second)
-        let closest = intersects
-            .map { ($0, $0.manhattanDistance(from: .zero)) }
-            .sorted { $0.1 < $1.1 }
-            .map { $0.0 }
-            .first!
+        let closest = intersects.sort(manhattanFrom: .zero).first!
         
         return abs(closest.x) + abs(closest.y)
     }

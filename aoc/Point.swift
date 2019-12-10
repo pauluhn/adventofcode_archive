@@ -36,6 +36,15 @@ struct Point {
     func offset(by other: Point) -> Point {
         return Point(x: x + other.x, y: y + other.y)
     }
+    static func + (lhs: Point, rhs: Point) -> Point {
+        return Point(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+    static func - (lhs: Point, rhs: Point) -> Point {
+        return Point(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    }
+    static func / (lhs: Point, rhs: Int) -> Point {
+        return Point(x: lhs.x / rhs, y: lhs.y / rhs)
+    }
 }
 extension Point: Hashable {}
 extension Point: CustomStringConvertible {
@@ -72,5 +81,14 @@ extension Point {
             points.append(Point(x: x, y: y))
         }
         return points
+    }
+}
+
+extension Collection where Element == Point {
+    func sort(manhattanFrom origin: Point) -> [Point] {
+        return self
+            .map { ($0, $0.manhattanDistance(from: origin)) }
+            .sorted { $0.1 < $1.1 }
+            .map { $0.0 }
     }
 }

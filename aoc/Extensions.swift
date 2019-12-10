@@ -91,3 +91,29 @@ extension Int {
         return String(repeating: "0", count: padding) + binary
     }
 }
+
+extension Set {
+    /// Returns a new set with element removed
+    func removing(_ element: Element) -> Set {
+        var copy = self
+        _ = copy.remove(element)
+        return copy
+    }
+}
+
+// MARK: - global function
+
+// https://github.com/raywenderlich/swift-algorithm-club/tree/master/GCD
+func GCD(_ m: Int, _ n: Int) -> Int {
+    var a = 0
+    var b = max(m, n)
+    var r = min(m, n)
+    
+    while r != 0 {
+        a = b
+        b = r
+        r = a % b
+    }
+    return b
+}
+
