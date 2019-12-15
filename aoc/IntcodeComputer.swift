@@ -57,11 +57,12 @@ class IntcodeComputer {
     
     init(program: [Int],
          inputs: [Int] = [],
-         limitedMemory: Bool) {
+         limitedMemory: Bool,
+         outputHandler: OutputHandler? = nil) {
         
         self.program = program
         self.inputs = inputs
-        self.outputHandler = nil
+        self.outputHandler = outputHandler
         self.limitedMemory = limitedMemory
     }
     
