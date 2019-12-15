@@ -9,12 +9,42 @@
 import Foundation
 
 class IntcodeComputer {
-    private var program: [Int]
+    struct Memory {
+        private var memory = [Int: Int]()
+        private(set) var count = 0
+        init(_ program: [Int]) {
+            for (n, i) in program.enumerated() {
+                memory[n] = i
+            }
+            count = program.count
+        }
+        subscript(index: Int) -> Int {
+            get {
+                guard let value = memory[index] else { return 0 }
+                return value
+            }
+            set(value) {
+                memory[index] = value
+                if count < index + 1 {
+                    count = index + 1
+                }
+            }
+        }
+        var program: [Int] {
+            var program = Array(repeating: 0, count: count)
+            for i in 0..<count {
+                program[i] = self[i]
+            }
+            return program
+        }
+    }
+    
     private var pointer = 0
     private(set) var inputs: [Int]
     private(set) var outputs: [Int] = []
     private var relativeBase = 0
     private let limitedMemory: Bool
+    private var memory: Memory
     
     typealias OutputHandler = (Int) -> Void
     private let outputHandler: OutputHandler?
@@ -49,7 +79,7 @@ class IntcodeComputer {
          inputs: [Int] = [],
          outputHandler: OutputHandler? = nil) {
         
-        self.program = program
+        memory = Memory(program)
         self.inputs = inputs
         self.outputHandler = outputHandler
         self.limitedMemory = true
@@ -60,18 +90,18 @@ class IntcodeComputer {
          limitedMemory: Bool,
          outputHandler: OutputHandler? = nil) {
         
-        self.program = program
+        memory = Memory(program)
         self.inputs = inputs
         self.outputHandler = outputHandler
         self.limitedMemory = limitedMemory
     }
     
-    func run() -> [Int] {
+    func run() -> Memory? {
         while true {
             switch step() {
             case .success: break
-            case .failure: return []
-            case .done: return program
+            case .failure: return nil
+            case .done: return memory
             }
         }
     }
@@ -91,7 +121,7 @@ class IntcodeComputer {
 
 private extension IntcodeComputer {
     var opcode: Opcode {
-        let value = program[pointer]
+        let value = memory[pointer]
         let opcode = value % 100
         let pm1 = PM(rawValue: (value / 100) % 10)!
         let pm2 = PM(rawValue: (value / 1000) % 10)!
@@ -211,7 +241,7 @@ private extension IntcodeComputer {
     private func inbounds(_ parameters: PM...) -> Bool {
         guard limitedMemory else { return true }
         for (i, pm) in parameters.enumerated() where pm == .position {
-            if program[pointer + i + 1] >= program.count {
+            if memory[pointer + i + 1] >= memory.count {
                 return false
             }
         }
@@ -223,54 +253,18 @@ private extension IntcodeComputer {
     }
     
     private func parameter(_ offset: Int, _ pm: PM) -> Int {
-        if !limitedMemory {
-            padMemory(offset, pm)
-        }
         switch pm {
-        case .position: return program[program[pointer + offset]]
-        case .immediate: return program[pointer + offset]
-        case .relative: return program[relativeBase + program[pointer + offset]]
+        case .position: return memory[memory[pointer + offset]]
+        case .immediate: return memory[pointer + offset]
+        case .relative: return memory[relativeBase + memory[pointer + offset]]
         }
     }
     
     private func parameter(_ offset: Int, _ pm: PM, _ value: Int) {
-        if !limitedMemory {
-            padMemory(offset, pm)
-        }
         switch pm {
-        case .position: program[program[pointer + offset]] = value
-        case .immediate: program[pointer + offset] = value
-        case .relative: program[relativeBase + program[pointer + offset]] = value
+        case .position: memory[memory[pointer + offset]] = value
+        case .immediate: memory[pointer + offset] = value
+        case .relative: memory[relativeBase + memory[pointer + offset]] = value
         }
-    }
-    
-    private func padMemory(_ offset: Int, _ pm: PM) {
-        switch pm {
-        case .immediate:
-            if pointer + offset >= program.count {
-                padMemory(pointer + offset - program.count + 1)
-            }
-        case .position:
-            if pointer + offset >= program.count {
-                padMemory(pointer + offset - program.count + 1)
-            }
-            if program[pointer + offset] >= program.count {
-                padMemory(program[pointer + offset] - program.count + 1)
-            }
-        case .relative:
-            if pointer + offset >= program.count {
-                padMemory(pointer + offset - program.count + 1)
-            }
-            if relativeBase + program[pointer + offset] >= program.count {
-                padMemory(relativeBase + program[pointer + offset] - program.count + 1)
-            }
-            if program[relativeBase + program[pointer + offset]] >= program.count {
-                padMemory(program[relativeBase + program[pointer + offset]] - program.count + 1)
-            }
-        }
-    }
-    
-    private func padMemory(_ count: Int) {
-        program.append(contentsOf: Array(repeating: 0, count: count))
     }
 }

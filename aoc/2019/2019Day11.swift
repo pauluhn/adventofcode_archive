@@ -24,6 +24,13 @@ struct Y2019Day11 {
             return color
         }
         
+        init(starting color: Color = .black) {
+            if self.color != color {
+                print("map.count is off by one")
+                map[current] = color
+            }
+        }
+        
         mutating func process(input value: Int) -> Color? {
             switch input {
             case .paint:
@@ -63,6 +70,42 @@ struct Y2019Day11 {
         var tick = false
         repeat { tick = intcode.tick() } while tick
         
+        return robot.map.count
+    }
+    
+    static func Part2(_ data: String) -> Int {
+        let program = data.split(separator: ",")
+            .map(String.init)
+            .compactMap(Int.init)
+        
+        var robot = Robot(starting: .white)
+        var intcode: IntcodeComputer!
+        intcode = IntcodeComputer(
+            program: program,
+            inputs: [robot.color.rawValue],
+            limitedMemory: false) {
+                if let color = robot.process(input: $0) {
+                    intcode.appendInput(color.rawValue)
+                }
+        }
+        var tick = false
+        repeat { tick = intcode.tick() } while tick
+        
+        // map
+        let x = robot.map.map { $0.key.x }.sorted()
+        let y = robot.map.map { $0.key.y }.sorted()
+        // no negatives
+        print("start at", x.first!, ",", y.first!)
+        
+        let row = Array(repeating: ".", count: x.last! + 1)
+        var map = Array(repeating: row, count: y.last! + 1)
+        for data in robot.map {
+            map[data.key.y][data.key.x] = data.value == .white ? "#" : "."
+        }
+        for row in map {
+            print(row.joined())
+        }
+
         return robot.map.count
     }
 }

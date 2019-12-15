@@ -21,7 +21,7 @@ struct Y2019Day2 {
         }
         
         let intcode = IntcodeComputer(program: program)
-        return intcode.run()
+        return intcode.run()!.program
     }
     
     static func Part2(_ data: String) -> Int {
@@ -36,7 +36,7 @@ struct Y2019Day2 {
                 program[1] = i
                 program[2] = j
                 let intcode = IntcodeComputer(program: program)
-                if let first = intcode.run().first,
+                if let first = intcode.run()!.program.first,
                     first == answer {
                         return 100 * i + j
                 }
