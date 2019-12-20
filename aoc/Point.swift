@@ -45,6 +45,9 @@ struct Point {
     static func / (lhs: Point, rhs: Int) -> Point {
         return Point(x: lhs.x / rhs, y: lhs.y / rhs)
     }
+    static func += (lhs: inout Point, rhs: Point) {
+        lhs = lhs + rhs
+    }
 }
 extension Point: Hashable {}
 extension Point: CustomStringConvertible {

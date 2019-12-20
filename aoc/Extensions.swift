@@ -101,6 +101,16 @@ extension Set {
     }
 }
 
+extension Array where Element: Equatable {
+    /// Returns a new array with element removed
+    func removing(_ element: Element) -> Array {
+        var copy = self
+        guard let index = firstIndex(of: element) else { return copy }
+        copy.remove(at: index)
+        return copy
+    }
+}
+
 // MARK: - global function
 
 // https://github.com/raywenderlich/swift-algorithm-club/tree/master/GCD

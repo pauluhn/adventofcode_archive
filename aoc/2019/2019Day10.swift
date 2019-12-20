@@ -26,7 +26,7 @@ struct Y2019Day10 {
                     && remove.x >= 0
                     && remove.y >= 0 {
                         removed.insert(remove)
-                        remove = remove + diff // TODO: add +=
+                        remove += diff
                 }
             }
             let detect = remaining
