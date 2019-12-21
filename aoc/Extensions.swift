@@ -127,3 +127,18 @@ func GCD(_ m: Int, _ n: Int) -> Int {
     return b
 }
 
+func Factors(_ n: Int) -> [Int] {
+    var n = n
+    var a = [Int]()
+    var f = 2 // first factor
+    
+    while n > 1 {
+        if n % f == 0 {
+            a.append(f)
+            n /= f
+        } else {
+            f += 1
+        }
+    }
+    return a
+}
