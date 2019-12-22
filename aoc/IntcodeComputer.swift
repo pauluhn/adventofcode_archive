@@ -41,6 +41,7 @@ class IntcodeComputer {
     
     private var pointer = 0
     private(set) var inputs: [Int]
+    private var inputCount = 0
     private(set) var outputs: [Int] = []
     private var relativeBase = 0
     private let limitedMemory: Bool
@@ -177,6 +178,8 @@ private extension IntcodeComputer {
         guard inbounds(pm1) else { return .failure }
         guard !inputs.isEmpty else { return .success } // waiting
         let first = inputs.removeFirst()
+        print("input:", first, "(\(inputCount))")
+        inputCount += 1
         parameter(1, pm1, first)
         pointer += 2
         return .success
