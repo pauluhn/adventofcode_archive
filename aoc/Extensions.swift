@@ -46,6 +46,10 @@ extension String {
     var ascii: [Int] {
         return self.compactMap { $0.asciiValue }.map(Int.init)
     }
+    
+    func commaSplit() -> [String] {
+        return split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
+    }
 }
 
 extension Character {
