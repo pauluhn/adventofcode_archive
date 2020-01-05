@@ -310,6 +310,20 @@ class aoc2019Tests: XCTestCase {
         assert(answer == 168046)
     }
 
+    func testDay14Part2() {
+        let testData3 = testDataDay14c().newlineSplit()
+        assert(Y2019Day14.Part2(testData3) == 82892753)
+        
+        let testData4 = testDataDay14d().newlineSplit()
+        assert(Y2019Day14.Part2(testData4) == 5586022)
+        
+        let testData5 = testDataDay14e().newlineSplit()
+        assert(Y2019Day14.Part2(testData5) == 460664)
+        
+        let answer = Y2019Day14.Part2(readInput(year: year, day: 14))
+        print("\(#function):\(answer)")
+        assert(answer == 6972986)
+    }
 }
 
 extension aoc2019Tests {

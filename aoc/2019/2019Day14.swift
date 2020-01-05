@@ -44,7 +44,33 @@ struct Y2019Day14 {
     
     static func Part1(_ data: [String]) -> Int {
         let reactions = data.compactMap(Reaction.init)
+        return nanofactory(reactions, 1)
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        let ORE = 1000000000000
+        let reactions = data.compactMap(Reaction.init)
+
+        var min = 1
+        var max = ORE
+        while true {
+            let middle = (max + min) / 2
+            if middle == min {
+                return middle
+            }
+            
+            let ore = nanofactory(reactions, middle)
+            if ore < ORE {
+                min = middle
+            } else {
+                max = middle
+            }
+        }
+    }
+    
+    private static func nanofactory(_ reactions: [Reaction], _ fuelAmount: Int) -> Int {
         var fuel = reactions.first { $0.output == .FUEL }!
+        fuel.inputs[.FUEL] = fuelAmount - 1
         var updated = false
         
         repeat {
@@ -75,10 +101,8 @@ struct Y2019Day14 {
     }
     
     private static func multiply(_ input: Int, _ output: Int) -> Int {
-        var store = input
-        var multiples = 1
-        while store < output {
-            store += input
+        var multiples = output / input
+        if output % input != 0 {
             multiples += 1
         }
         return multiples
