@@ -46,6 +46,7 @@ class IntcodeComputer {
     private var relativeBase = 0
     private let limitedMemory: Bool
     private var memory: Memory
+    private var halt = false
     
     typealias OutputHandler = (Int) -> Void
     private let outputHandler: OutputHandler?
@@ -112,11 +113,16 @@ class IntcodeComputer {
     }
     
     func tick() -> Bool { // keep going?
+        guard !halt else { return false }
         switch step() {
         case .success: return true
         case .failure: return false
         case .done: return false
         }
+    }
+    
+    func kill() {
+        halt = true
     }
 }
 

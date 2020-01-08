@@ -77,10 +77,10 @@ struct Y2018Day22 {
         var node = node
         var path = [node]
         while let next = previous[node] {
-            path.append(next)
+            path.prepend(next)
             node = next
         }
-        return path.reversed()
+        return path
     }
     private static func walk(path: [Node], _ graph: GraphCap<PointTool>) -> Double {
         var path = path

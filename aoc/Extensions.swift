@@ -115,6 +115,12 @@ extension Array where Element: Equatable {
     }
 }
 
+extension Array {
+    mutating func prepend(_ element: Element) {
+        insert(element, at: 0)
+    }
+}
+
 // MARK: - global function
 
 // https://github.com/raywenderlich/swift-algorithm-club/tree/master/GCD

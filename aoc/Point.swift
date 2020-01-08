@@ -95,3 +95,13 @@ extension Collection where Element == Point {
             .map { $0.0 }
     }
 }
+
+extension Point {
+    func direction(to next: Point) -> Direction {
+        if x < next.x { return .right }
+        if x > next.x { return .left }
+        if y < next.y { return .down }
+        if y > next.y { return .up }
+        return .none
+    }
+}

@@ -14,6 +14,8 @@ enum Direction {
     case left
     case right
     case none
+    
+    static var valid: [Direction] = [.up, .down, .left, .right]
 }
 extension Direction {
     var offset: Point {
