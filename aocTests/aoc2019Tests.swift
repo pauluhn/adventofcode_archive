@@ -339,6 +339,17 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 286)
     }
+    
+    func testDay16Part1() { // 47s
+        assert(Y2019Day16.Part1("12345678", 4) == "01029498")
+        assert(Y2019Day16.Part1("80871224585914546619083218645595", 100) == "24176176")
+        assert(Y2019Day16.Part1("19617804207202209144916044189917", 100) == "73745418")
+        assert(Y2019Day16.Part1("69317163492948606335995924319873", 100) == "52432133")
+
+        let answer = Y2019Day16.Part1(readInput(year: year, day: 16).first!, 100)
+        print("\(#function):\(answer)")
+        assert(answer == "25131128")
+    }
 }
 
 extension aoc2019Tests {
