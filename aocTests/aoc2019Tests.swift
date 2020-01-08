@@ -330,6 +330,15 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 282)
     }
+
+    func testDay15Part2() {
+        let testData1 = testDataDay15().newlineSplit()
+        assert(Y2019Day15.Part2(testData1) == 4)
+
+        let answer = Y2019Day15.Part2()
+        print("\(#function):\(answer)")
+        assert(answer == 286)
+    }
 }
 
 extension aoc2019Tests {
@@ -568,5 +577,14 @@ extension aoc2019Tests {
         7 XCVML => 6 RJRHP
         5 BHXH, 4 VRPVC => 5 LTCX
         """
+    }
+    func testDataDay15() -> String {
+        return """
+ ##
+#..##
+#.#..#
+#.O.#
+ ###
+"""
     }
 }

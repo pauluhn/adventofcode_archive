@@ -102,6 +102,29 @@ struct Y2019Day15 {
         return a_star(graph, .zero, oxygen).count - 1
     }
 
+    static func Part2(_ data: [String] = finalMapFromPart1ForPart2) -> Int {
+        let data = data.map { $0.map { $0 } }
+        var map = [Point: Tile]()
+        for (y, row) in data.enumerated() {
+            for (x, tile) in row.enumerated() {
+                map[Point(x: x, y: y)] = tile.tile
+            }
+        }
+        var count = 0
+        while map.first(where: { $0.value == .empty }) != nil {
+            count += 1
+            map.filter { $0.value == .oxygen }
+                .map { $0.key }
+                .flatMap { point in Direction.valid.map { point.offset(by: $0.offset) }}
+                .map { ($0, map[$0]) }
+                .filter { $0.1 == .empty }
+                .map { $0.0 }
+                .forEach { map[$0] = .oxygen }
+            draw(map)
+        }
+        return count
+    }
+    
     private static func nextMove(_ map: [Point: Tile], _ droid: inout Droid) -> Move? {
         for _ in 0..<3 {
             droid.facing = droid.facing.rotate
@@ -177,9 +200,11 @@ struct Y2019Day15 {
         return path
     }
     
-    private static func draw(_ map: [Point: Tile], _ droid: Droid) {
+    private static func draw(_ map: [Point: Tile], _ droid: Droid? = nil) {
         var map = map
-        map[droid.position] = .droid
+        if let droid = droid {
+            map[droid.position] = .droid
+        }
         
         let points = map.map { $0.key }
         let x = points.map { $0.x }.sorted()
@@ -189,11 +214,11 @@ struct Y2019Day15 {
             var string = ""
             for col in x.first!...x.last! {
                 switch map[Point(x: col, y: row)] {
-                case .wall?: string.append("#")
-                case .empty?: string.append(".")
-                case .oxygen?: string.append("o")
-                case .droid?: string.append(droid.facing.draw)
-                case .unexplored?: string.append("?")
+                case .wall?: string.append(Tile.wall.draw)
+                case .empty?: string.append(Tile.empty.draw)
+                case .oxygen?: string.append(Tile.oxygen.draw)
+                case .droid?: string.append(droid?.facing.draw ?? Tile.droid.draw)
+                case .unexplored?: string.append(Tile.unexplored.draw)
                 case nil: string.append(" ")
                 }
             }
@@ -233,6 +258,52 @@ struct Y2019Day15 {
         graph.unlink(d, to: w)
         graph.unlink(w, to: d)
     }
+    
+    private static var finalMapFromPart1ForPart2: [String] {
+        return """
+ # ##### ############# # ######### #####
+#.#.....#.............#.#.........#O....#
+#.#.#.###.#####.#####.#.#.#####.#.#####.#
+#.#.#.......#...#.#...#.....#...#...#...#
+#.#.#########.###.#.#########.#####.#.##
+#.#.#.#.......#.....#.......#.#.....#...#
+#.#.#.#.#########.#####.###.#.#.#####.#.#
+#.#.#.#.........#.#.....#.....#.#.#...#.#
+#.#.#.#########.#.#.#.#########.#.#.###.#
+#.#.....#...#...#...#.#...#.....#...#...#
+#.#####.#.#.#.#####.###.#.#####.#####.#.#
+#.#...#.#.#.#.....#.#...#.....#.......#.#
+#.#.#.#.###.#####.#.#.#######.##########
+#...#.#.......#...#.#.#.....#.#.........#
+#.###.#######.#.###.#.###.#.#.#.#######.#
+#.#.....#.....#...#.#...#.#.#.....#.....#
+#.#.###.#.#######.#####.###.#######.###.#
+#.#...#.#...#...#.......#...#...#...#...#
+#.###.#####.###.#########.#.#.#.#.###.##
+#.#.#.....#...#.........#.#.#.#.#.#.....#
+#.#.###.#####.#.#######.#.#.###.#.#####.#
+#...#...#...#.#.#.....#...#.....#...#...#
+ ####.#.#.#.#.#.#.######## ####.###.###.#
+#.....#.#.#...#.#...#.....#.......#...#.#
+#.###.###.#####.###.#.###.#.#########.#.#
+#.#...#...#.......#.#.#.#.#.#.......#.#.#
+#.#####.## ####.###.#.#.#.###.#####.#.#.#
+#.....#...#.....#...#.#.#.....#.#...#.#.#
+ ####.###.#.###.#.###.#.#######.#.###.##
+#...#...#...#...#.#...#.......#...#.....#
+#.#.###.#####.###.###.#.#####.#.#####.#.#
+#.#...#...#...#.#.....#.#...#.#.#...#.#.#
+#.###.#.#.#.###.#######.#.###.#.#.#.###.#
+#...#...#.#.....#.........#...#...#...#.#
+ ##.###### ####.#.#########.#.#### ##.#.#
+#...#.....#.....#.......#...#.....#.#...#
+#.###.###.#.#############.#######.#.####
+#.....#.#...#.............#.....#.#.....#
+#.#####.#####.#############.###.#.#####.#
+#.............#...............#.........#
+ ############# ############### #########
+""".newlineSplit()
+    }
 }
 
 private extension Y2019Day15.Move {
@@ -259,6 +330,31 @@ private extension Y2019Day15.Move {
         case .east: return ">"
         case .south: return "v"
         case .west: return "<"
+        }
+    }
+}
+
+private extension Y2019Day15.Tile {
+    typealias Tile = Y2019Day15.Tile
+    var draw: String {
+        switch self {
+        case .wall: return "#"
+        case .empty: return "."
+        case .oxygen: return "O"
+        case .droid: return "@"
+        case .unexplored: return "?"
+        }
+    }
+}
+
+private extension Character {
+    typealias Tile = Y2019Day15.Tile
+    var tile: Tile {
+        switch self {
+        case "#": return .wall
+        case ".": return .empty
+        case "O": return .oxygen
+        default: return .wall
         }
     }
 }

@@ -50,6 +50,10 @@ extension String {
     func commaSplit() -> [String] {
         return split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
     }
+
+    func newlineSplit() -> [String] {
+        return components(separatedBy: .newlines)
+    }
 }
 
 extension Character {
