@@ -360,6 +360,12 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == "53201602")
     }
+    
+    func testDay17Part1() {
+        let answer = Y2019Day17.Part1(readInput(year: year, day: 17).first!)
+        print("\(#function):\(answer)")
+        assert(answer == 9876)
+    }
 }
 
 extension aoc2019Tests {
