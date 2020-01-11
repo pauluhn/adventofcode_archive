@@ -33,8 +33,35 @@ struct Y2019Day16 {
             }
             input = output
         }
-        return output
-            .prefix(8)
+        return output.prefixToString(8)
+    }
+
+    static func Part2(_ data: String) -> String {
+        let repeating = data.map { $0.int }
+        var input = Array(repeating: repeating, count: 10_000).flatMap { $0 }
+        let offset = repeating.prefixToString(7).int
+        var output = [Int]()
+        
+        for _ in 0..<100 {
+            output = []
+            var sum = 0
+            for index in (offset..<input.count).reversed() {
+                // compute
+                sum += input[index]
+                output.append(sum % 10)
+            }
+            output.append(contentsOf: Array(repeating: 0, count: offset))
+            input = output.reversed()
+        }
+        return input[offset..<offset + 8]
+            .map(String.init)
+            .joined()
+    }
+}
+
+private extension Array where Element == Int {
+    func prefixToString(_ prefix: Int) -> String {
+        return self.prefix(prefix)
             .map(String.init)
             .joined()
     }
