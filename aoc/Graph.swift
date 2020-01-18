@@ -82,3 +82,10 @@ extension Graph: CustomStringConvertible {
         return list.reduce("") { $0 + "\($1.node) -> \($1.edges)\n" }
     }
 }
+extension Graph where T == Point { // for a_star
+    func data(initial: Int) -> [Point: Int] {
+        return nodes.reduce(into: [Point: Int]()) {
+            $0[$1.value] = initial
+        }
+    }
+}

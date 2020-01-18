@@ -109,24 +109,3 @@ struct Y2019Day11 {
         return robot.map.count
     }
 }
-
-private extension Direction {
-    var turnLeft: Direction {
-        switch self {
-        case .up: return .left
-        case .left: return .down
-        case .down: return .right
-        case .right: return .up
-        case .none: return .none
-        }
-    }
-    var turnRight: Direction {
-        switch self {
-        case .up: return .right
-        case .right: return .down
-        case .down: return .left
-        case .left: return .up
-        case .none: return .none
-        }
-    }
-}

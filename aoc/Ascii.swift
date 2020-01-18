@@ -10,10 +10,18 @@ import Foundation
 
 struct Ascii {
     let value: String
+    let int: Int
     
     init(_ int: Int) {
-        let uint8 = UInt8(int)
+        let uint8 = int < UInt8.max ? UInt8(int) : .max
         let unicode = UnicodeScalar(uint8)
         value = String(unicode)
+        self.int = int
+    }
+
+    init(_ uint8: UInt8) {
+        let unicode = UnicodeScalar(uint8)
+        value = String(unicode)
+        int = Int(uint8)
     }
 }

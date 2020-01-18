@@ -365,14 +365,6 @@ private extension Y2019Day15.Droid {
     }
 }
 
-private extension Graph where T == Point {
-    func data(initial: Int) -> [Point: Int] {
-        return nodes.reduce(into: [Point: Int]()) {
-            $0[$1.value] = initial
-        }
-    }
-}
-
 private extension Direction {
     var move: Y2019Day15.Move {
         switch self {

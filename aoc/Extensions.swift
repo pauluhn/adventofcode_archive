@@ -60,6 +60,9 @@ extension Character {
     var int: Int {
         return String(self).int
     }
+    var ascii: [Int] {
+        return String(self).ascii
+    }
 }
 
 extension Substring {
