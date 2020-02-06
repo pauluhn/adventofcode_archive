@@ -292,15 +292,7 @@ struct Y2019Day17 {
                     
                 case .scaffold?:
                     let node = graph.create(Point(x: x, y: y))
-                    [Direction.up, .left]
-                        .map { node.value.offset(by: $0.offset) }
-                        .compactMap { offset in
-                            graph.nodes.first { $0.value == offset }
-                        }
-                        .forEach {
-                            graph.link(node, to: $0)
-                            graph.link($0, to: node)
-                        }
+                    graph.link(node, in: .up, .left)
                     
                 default: break
                 }
@@ -383,49 +375,6 @@ struct Y2019Day17 {
             }
         }
         return nil
-    }
-    
-    private static func a_star(_ graph: Graph<Point>, _ start: Point, _ goal: Point) -> [Point] {
-        var open = Set([start])
-        var previous = [Point: Point]()
-        // g = from start
-        var g = graph.data(initial: Int.max)
-        g[start] = 0
-        // f = known + h
-        var f = graph.data(initial: Int.max)
-        f[start] = start.manhattanDistance(from: goal)
-        
-        var current = Point.zero
-        while !open.isEmpty {
-            current = open
-                .map { ($0, f[$0]!) }
-                .sorted { $0.1 < $1.1 }
-                .first!.0
-            if current == goal {
-                break
-            }
-            open.remove(current)
-            
-            let node = graph.nodes.first { $0.value == current }!
-            let neighbors = graph.links(node).map { $0.to.value }
-            for neighbor in neighbors {
-                if g[current]! < g[neighbor]! {
-                    previous[neighbor] = current
-                    g[neighbor] = g[current]
-                    f[neighbor] = g[neighbor]! + neighbor.manhattanDistance(from: goal)
-                    if !open.contains(neighbor) {
-                        open.insert(neighbor)
-                    }
-                }
-            }
-        }
-        // reconstruct
-        var path = [current]
-        while let next = previous[current] {
-            current = next
-            path.prepend(current)
-        }
-        return path
     }
 }
 

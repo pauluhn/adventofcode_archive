@@ -89,7 +89,7 @@ struct Y2019Day15 {
                     droid.goal = unexplored
                 }
                 
-                let next = a_star(graph, droid.position, droid.goal)[1] // second item = next
+                let next = graph.a_star(start: droid.position, goal: droid.goal)[1] // second item = next
                 droid.facing = droid.position.direction(to: next).move
                 intcode.appendInput(droid.facing.rawValue)
                 
@@ -99,7 +99,7 @@ struct Y2019Day15 {
         var tick = false
         repeat { tick = intcode.tick() } while tick
         
-        return a_star(graph, .zero, oxygen).count - 1
+        return graph.a_star(start: .zero, goal: oxygen).count - 1
     }
 
     static func Part2(_ data: [String] = finalMapFromPart1ForPart2) -> Int {
@@ -155,49 +155,6 @@ struct Y2019Day15 {
             }
         }
         return nil
-    }
-    
-    private static func a_star(_ graph: Graph<Point>, _ start: Point, _ goal: Point) -> [Point] {
-        var open = Set([start])
-        var previous = [Point: Point]()
-        // g = from start
-        var g = graph.data(initial: Int.max)
-        g[start] = 0
-        // f = known + h
-        var f = graph.data(initial: Int.max)
-        f[start] = start.manhattanDistance(from: goal)
-        
-        var current = Point.zero
-        while !open.isEmpty {
-            current = open
-                .map { ($0, f[$0]!) }
-                .sorted { $0.1 < $1.1 }
-                .first!.0
-            if current == goal {
-                break
-            }
-            open.remove(current)
-            
-            let node = graph.nodes.first { $0.value == current }!
-            let neighbors = graph.links(node).map { $0.to.value }
-            for neighbor in neighbors {
-                if g[current]! < g[neighbor]! {
-                    previous[neighbor] = current
-                    g[neighbor] = g[current]
-                    f[neighbor] = g[neighbor]! + neighbor.manhattanDistance(from: goal)
-                    if !open.contains(neighbor) {
-                        open.insert(neighbor)
-                    }
-                }
-            }
-        }
-        // reconstruct
-        var path = [current]
-        while let next = previous[current] {
-            current = next
-            path.prepend(current)
-        }
-        return path
     }
     
     private static func draw(_ map: [Point: Tile], _ droid: Droid? = nil) {

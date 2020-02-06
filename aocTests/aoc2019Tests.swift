@@ -372,6 +372,27 @@ class aoc2019Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 1234055)
     }
+    
+    func testDay18Part1() {
+        let testData1 = testDataDay18a().newlineSplit()
+        assert(Y2019Day18.Part1(testData1) == 8)
+
+        let testData2 = testDataDay18b().newlineSplit()
+        assert(Y2019Day18.Part1(testData2) == 86)
+
+        let testData3 = testDataDay18c().newlineSplit()
+        assert(Y2019Day18.Part1(testData3) == 132)
+        
+        let testData4 = testDataDay18d().newlineSplit()
+        assert(Y2019Day18.Part1(testData4) == 136)
+        
+        let testData5 = testDataDay18e().newlineSplit()
+        assert(Y2019Day18.Part1(testData5) == 81)
+        
+        let answer = Y2019Day18.Part1(readInput(year: year, day: 18))
+        print("\(#function):\(answer)")
+//        assert(answer == 168046)
+    }
 }
 
 extension aoc2019Tests {
@@ -618,6 +639,54 @@ extension aoc2019Tests {
 #.#..#
 #.O.#
  ###
+"""
+    }
+    func testDataDay18a() -> String {
+        return """
+#########
+#b.A.@.a#
+#########
+"""
+    }
+    func testDataDay18b() -> String {
+        return """
+########################
+#f.D.E.e.C.b.A.@.a.B.c.#
+######################.#
+#d.....................#
+########################
+"""
+    }
+    func testDataDay18c() -> String {
+        return """
+########################
+#...............b.C.D.f#
+#.######################
+#.....@.a.B.c.d.A.e.F.g#
+########################
+"""
+    }
+    func testDataDay18d() -> String {
+        return """
+#################
+#i.G..c...e..H.p#
+########.########
+#j.A..b...f..D.o#
+########@########
+#k.E..a...g..B.n#
+########.########
+#l.F..d...h..C.m#
+#################
+"""
+    }
+    func testDataDay18e() -> String {
+        return """
+########################
+#@..............ac.GI.b#
+###d#e#f################
+###A#B#C################
+###g#h#i################
+########################
 """
     }
 }

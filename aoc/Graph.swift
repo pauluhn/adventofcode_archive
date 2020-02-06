@@ -82,8 +82,61 @@ extension Graph: CustomStringConvertible {
         return list.reduce("") { $0 + "\($1.node) -> \($1.edges)\n" }
     }
 }
-extension Graph where T == Point { // for a_star
-    func data(initial: Int) -> [Point: Int] {
+extension Graph where T == Point {
+    func link(_ node: Node, in directions: Direction...) {
+        directions
+            .map { node.value.offset(by: $0.offset) }
+            .compactMap { offset in
+                nodes.first { $0.value == offset }
+            }
+            .forEach {
+                link(node, to: $0)
+                link($0, to: node)
+            }
+    }
+    func a_star(start: Point, goal: Point) -> [Point] {
+        var open = Set([start])
+        var previous = [Point: Point]()
+        // g = from start
+        var g = data(initial: Int.max)
+        g[start] = 0
+        // f = known + h
+        var f = data(initial: Int.max)
+        f[start] = start.manhattanDistance(from: goal)
+        
+        var current = Point.zero
+        while !open.isEmpty {
+            current = open
+                .map { ($0, f[$0]!) }
+                .sorted { $0.1 < $1.1 }
+                .first!.0
+            if current == goal {
+                break
+            }
+            open.remove(current)
+            
+            let node = nodes.first { $0.value == current }!
+            let neighbors = links(node).map { $0.to.value }
+            for neighbor in neighbors {
+                if g[current]! < g[neighbor]! {
+                    previous[neighbor] = current
+                    g[neighbor] = g[current]
+                    f[neighbor] = g[neighbor]! + neighbor.manhattanDistance(from: goal)
+                    if !open.contains(neighbor) {
+                        open.insert(neighbor)
+                    }
+                }
+            }
+        }
+        // reconstruct
+        var path = [current]
+        while let next = previous[current] {
+            current = next
+            path.prepend(current)
+        }
+        return path
+    }
+    private func data(initial: Int) -> [Point: Int] {
         return nodes.reduce(into: [Point: Int]()) {
             $0[$1.value] = initial
         }
