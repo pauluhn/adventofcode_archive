@@ -47,6 +47,8 @@ class IntcodeComputer {
     private let limitedMemory: Bool
     private var memory: Memory
     private var halt = false
+    private var displayInput = true
+    private var displayOutput = true
     
     typealias OutputHandler = (Int) -> Void
     private let outputHandler: OutputHandler?
@@ -79,23 +81,17 @@ class IntcodeComputer {
     
     init(program: [Int],
          inputs: [Int] = [],
-         outputHandler: OutputHandler? = nil) {
-        
-        memory = Memory(program)
-        self.inputs = inputs
-        self.outputHandler = outputHandler
-        self.limitedMemory = true
-    }
-    
-    init(program: [Int],
-         inputs: [Int] = [],
-         limitedMemory: Bool,
+         limitedMemory: Bool = true,
+         displayInput: Bool = true,
+         displayOutput: Bool = true,
          outputHandler: OutputHandler? = nil) {
         
         memory = Memory(program)
         self.inputs = inputs
         self.outputHandler = outputHandler
         self.limitedMemory = limitedMemory
+        self.displayInput = displayInput
+        self.displayOutput = displayOutput
     }
     
     func run() -> Memory? {
@@ -184,7 +180,9 @@ private extension IntcodeComputer {
         guard inbounds(pm1) else { return .failure }
         guard !inputs.isEmpty else { return .success } // waiting
         let first = inputs.removeFirst()
-        print("input:", first, "(\(inputCount))")
+        if displayInput {
+            print("input:", first, "(\(inputCount))")
+        }
         inputCount += 1
         parameter(1, pm1, first)
         pointer += 2
@@ -195,7 +193,9 @@ private extension IntcodeComputer {
         guard inbounds(pm1) else { return .failure }
         let first = parameter(1, pm1)
         outputs.append(first)
-        print("output:", first)
+        if displayOutput {
+            print("output:", first)
+        }
         outputHandler?(first)
         pointer += 2
         return .success
