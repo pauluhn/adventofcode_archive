@@ -8,7 +8,7 @@
 
 import XCTest
 
-class VersionControl {
+private class VersionControl {
     let firstBadVersion: Int
     init(firstBadVersion: Int) {
         self.firstBadVersion = firstBadVersion
@@ -18,7 +18,7 @@ class VersionControl {
     }
 }
 
-class Solution : VersionControl {
+private class Solution : VersionControl {
     func firstBadVersion(_ n: Int) -> Int {
         guard n > 1 else { return n }
         return firstBadVersion(1, n)
