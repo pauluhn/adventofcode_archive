@@ -46,22 +46,11 @@ extension String {
     var ascii: [Int] {
         return self.compactMap { $0.asciiValue }.map(Int.init)
     }
-    
-    func commaSplit() -> [String] {
-        return split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
-    }
-
-    func newlineSplit() -> [String] {
-        return components(separatedBy: .newlines)
-    }
 }
 
 extension Character {
     var int: Int {
         return String(self).int
-    }
-    var ascii: [Int] {
-        return String(self).ascii
     }
 }
 
@@ -112,26 +101,10 @@ extension Set {
     }
 }
 
-extension Array where Element: Equatable {
-    /// Returns a new array with element removed
-    func removing(_ element: Element) -> Array {
-        var copy = self
-        guard let index = firstIndex(of: element) else { return copy }
-        copy.remove(at: index)
-        return copy
-    }
-}
-
-extension Array {
-    mutating func prepend(_ element: Element) {
-        insert(element, at: 0)
-    }
-}
-
 // MARK: - global function
 
 // https://github.com/raywenderlich/swift-algorithm-club/tree/master/GCD
-func GCD(_ m: Int, _ n: Int) -> Int {
+public func GCD(_ m: Int, _ n: Int) -> Int {
     var a = 0
     var b = max(m, n)
     var r = min(m, n)
@@ -144,18 +117,3 @@ func GCD(_ m: Int, _ n: Int) -> Int {
     return b
 }
 
-func Factors(_ n: Int) -> [Int] {
-    var n = n
-    var a = [Int]()
-    var f = 2 // first factor
-    
-    while n > 1 {
-        if n % f == 0 {
-            a.append(f)
-            n /= f
-        } else {
-            f += 1
-        }
-    }
-    return a
-}

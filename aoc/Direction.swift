@@ -14,6 +14,8 @@ enum Direction {
     case left
     case right
     case none
+    
+    static var valid: [Direction] = [.up, .down, .left, .right]
 }
 extension Direction {
     var offset: Point {
@@ -23,6 +25,24 @@ extension Direction {
         case .right: return Point(x: 1, y: 0)
         case .down: return Point(x: 0, y: 1)
         case .none: return Point(x: 0, y: 0)
+        }
+    }
+    var turnLeft: Direction {
+        switch self {
+        case .up: return .left
+        case .left: return .down
+        case .down: return .right
+        case .right: return .up
+        case .none: return .none
+        }
+    }
+    var turnRight: Direction {
+        switch self {
+        case .up: return .right
+        case .right: return .down
+        case .down: return .left
+        case .left: return .up
+        case .none: return .none
         }
     }
 }

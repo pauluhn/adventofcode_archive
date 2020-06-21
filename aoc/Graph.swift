@@ -61,6 +61,11 @@ class Graph<T: Hashable> {
     func links(_ from: Node) -> [GraphLink] {
         return list[from.index].edges
     }
+    
+    func unlink(_ from: Node, to: Node) {
+        guard let index = list[from.index].edges.firstIndex(where: { $0.to == to }) else { return }
+        list[from.index].edges.remove(at: index)
+    }
 }
 extension Graph.GraphNode: CustomStringConvertible {
     var description: String {
@@ -75,5 +80,12 @@ extension Graph.GraphLink: CustomStringConvertible {
 extension Graph: CustomStringConvertible {
     var description: String {
         return list.reduce("") { $0 + "\($1.node) -> \($1.edges)\n" }
+    }
+}
+extension Graph where T == Point { // for a_star
+    func data(initial: Int) -> [Point: Int] {
+        return nodes.reduce(into: [Point: Int]()) {
+            $0[$1.value] = initial
+        }
     }
 }
