@@ -53,6 +53,9 @@ struct Point3D {
     static func / (lhs: Point3D, rhs: Int) -> Point3D {
         return Point3D(x: lhs.x / rhs, y: lhs.y / rhs, z: lhs.z / rhs)
     }
+    static func += (lhs: inout Point3D, rhs: Point3D) {
+        lhs = lhs + rhs
+    }
 }
 extension Point3D: Hashable {}
 extension Point3D: CustomStringConvertible {

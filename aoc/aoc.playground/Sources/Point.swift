@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct Point {
-    let x: Int
-    let y: Int
+public struct Point {
+    public let x: Int
+    public let y: Int
     
-    init(x: Int, y: Int) {
+    public init(x: Int, y: Int) {
         self.x = x
         self.y = y
     }
@@ -24,7 +24,7 @@ struct Point {
         y = data.match(match, at: 2).int
     }
     
-    static let zero = Point(x: 0, y: 0)
+    public static let zero = Point(x: 0, y: 0)
     
     func manhattanDistance(from other: Point) -> Int {
         return abs(x - other.x) + abs(y - other.y)
@@ -36,22 +36,19 @@ struct Point {
     func offset(by other: Point) -> Point {
         return Point(x: x + other.x, y: y + other.y)
     }
-    static func + (lhs: Point, rhs: Point) -> Point {
+    public static func + (lhs: Point, rhs: Point) -> Point {
         return Point(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }
-    static func - (lhs: Point, rhs: Point) -> Point {
+    public static func - (lhs: Point, rhs: Point) -> Point {
         return Point(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
     }
-    static func / (lhs: Point, rhs: Int) -> Point {
+    public static func / (lhs: Point, rhs: Int) -> Point {
         return Point(x: lhs.x / rhs, y: lhs.y / rhs)
-    }
-    static func += (lhs: inout Point, rhs: Point) {
-        lhs = lhs + rhs
     }
 }
 extension Point: Hashable {}
 extension Point: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         return "\(x),\(y)"
     }
 }
@@ -93,15 +90,5 @@ extension Collection where Element == Point {
             .map { ($0, $0.manhattanDistance(from: origin)) }
             .sorted { $0.1 < $1.1 }
             .map { $0.0 }
-    }
-}
-
-extension Point {
-    func direction(to next: Point) -> Direction {
-        if x < next.x { return .right }
-        if x > next.x { return .left }
-        if y < next.y { return .down }
-        if y > next.y { return .up }
-        return .none
     }
 }
