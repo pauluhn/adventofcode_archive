@@ -33,7 +33,7 @@ struct Guard {
     }
 }
 extension Guard: Hashable {
-    var hashValue: Int {
-        return id
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

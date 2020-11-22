@@ -177,7 +177,7 @@ struct Y2017Day18 {
         assert(Instruction("rcv a")!.mode == Instruction.Mode.receive("a".value))
         assert(Instruction("jgz a -1")!.mode == Instruction.Mode.jumps("a".value, "-1".value))
         
-        var instructions = data.compactMap(Instruction.init)
+        let instructions = data.compactMap(Instruction.init)
         var program = Program(id: 0)
         var message = 0
         var done = false

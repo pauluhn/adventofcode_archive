@@ -52,7 +52,7 @@ struct Worker {
 private extension String {
     var baseTime: Int {
         guard self.count == 1 else { fatalError() }
-        let starting = Int(Unicode.Scalar("A")!.value)
+        let starting = Int(Unicode.Scalar("A").value)
         let current = Int(Unicode.Scalar(self)!.value)
         return current - starting + 1
     }
