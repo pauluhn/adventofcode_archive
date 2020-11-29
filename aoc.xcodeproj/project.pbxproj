@@ -158,6 +158,8 @@
 		17FFBCDA21C13966004CD1CC /* 2018Day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17FFBCD921C13966004CD1CC /* 2018Day12.txt */; };
 		17FFBCDC21C13A04004CD1CC /* 2018Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */; };
 		17FFBCDE21C16A14004CD1CC /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FFBCDD21C16A14004CD1CC /* LinkedList.swift */; };
+		9B02A17B2569ED4200528D1B /* 2019Day20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02A17A2569ED4200528D1B /* 2019Day20.swift */; };
+		9B02A6E7257313D100528D1B /* 2019Day20.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02A6E6257313D100528D1B /* 2019Day20.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,6 +329,8 @@
 		17FFBCD921C13966004CD1CC /* 2018Day12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2018Day12.txt; sourceTree = "<group>"; };
 		17FFBCDB21C13A04004CD1CC /* 2018Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2018Day12.swift; sourceTree = "<group>"; };
 		17FFBCDD21C16A14004CD1CC /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		9B02A17A2569ED4200528D1B /* 2019Day20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2019Day20.swift; sourceTree = "<group>"; };
+		9B02A6E6257313D100528D1B /* 2019Day20.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2019Day20.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +387,7 @@
 				17A8C1C323C58510007DF7B7 /* 2019Day16.swift */,
 				17A8C1C823CA63A8007DF7B7 /* 2019Day17.swift */,
 				1723455023EDEB83009B29AE /* 2019Day19.swift */,
+				9B02A17A2569ED4200528D1B /* 2019Day20.swift */,
 			);
 			path = 2019;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				17A8C1C523C5853D007DF7B7 /* 2019Day16.txt */,
 				17A8C1CA23CA63CF007DF7B7 /* 2019Day17.txt */,
 				1723455223EDEBBA009B29AE /* 2019Day19.txt */,
+				9B02A6E6257313D100528D1B /* 2019Day20.txt */,
 			);
 			path = 2019;
 			sourceTree = "<group>";
@@ -667,7 +673,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1220;
-				ORGANIZATIONNAME = Rightpoint;
+				ORGANIZATIONNAME = Mojio;
 				TargetAttributes = {
 					17E36B9121B6C56D0060025A = {
 						CreatedOnToolsVersion = 10.1;
@@ -749,6 +755,7 @@
 				1749816621D4587A00F5E334 /* 2018Day24.txt in Resources */,
 				174F9EC921BAAE0F001C0EA6 /* 2018Day7.txt in Resources */,
 				1792A40A2384B6B6000C5556 /* 2017Day12.txt in Resources */,
+				9B02A6E7257313D100528D1B /* 2019Day20.txt in Resources */,
 				17E36BD221B705B40060025A /* 2018Day3.txt in Resources */,
 				1749816A21D5737E00F5E334 /* 2018Day25.txt in Resources */,
 				17A8C1CB23CA63CF007DF7B7 /* 2019Day17.txt in Resources */,
@@ -812,6 +819,7 @@
 				171D473523A075EB00B2AA67 /* Point.swift in Sources */,
 				17441DAB21CD3E9500878A08 /* 2018Day21.swift in Sources */,
 				172D6E0721C4C1680061862E /* 2018Day15.swift in Sources */,
+				9B02A17B2569ED4200528D1B /* 2019Day20.swift in Sources */,
 				174F9ED521BB89DF001C0EA6 /* 2018Day8.swift in Sources */,
 				17E36B9821B6C56D0060025A /* ViewController.swift in Sources */,
 				1723455123EDEB83009B29AE /* 2019Day19.swift in Sources */,
