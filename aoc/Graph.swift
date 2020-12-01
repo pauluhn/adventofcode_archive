@@ -13,7 +13,9 @@ class Graph<T: Hashable> {
         let value: T
         let index: Int
         init(_ v: T, _ i: Int) { value = v; index = i }
-        var hashValue: Int { return value.hashValue }
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(value)
+        }
         static func == (lhs: GraphNode, rhs: GraphNode) -> Bool {
             return lhs.value == rhs.value
         }

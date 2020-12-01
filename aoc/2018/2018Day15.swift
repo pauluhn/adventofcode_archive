@@ -160,7 +160,7 @@ struct Y2018Day15 {
         
         var round = 0
         gameLoop: while continueGame(round, rounds) {
-            unitLoop: for (i, unit) in units.sortedByReadingOrder().enumerated() {
+            unitLoop: for (_, unit) in units.sortedByReadingOrder().enumerated() {
                 guard let _ = units.first(where: { $0.id == unit.id }) else {
                     continue unitLoop  // skip dead unit
                 }

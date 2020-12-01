@@ -31,8 +31,8 @@ extension Node: Hashable {
     static func == (lhs: Node, rhs: Node) -> Bool {
         return lhs.value == rhs.value
     }
-    var hashValue: Int {
-        return value.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(value)
     }
 }
 extension Node: CustomStringConvertible where T: CustomStringConvertible {

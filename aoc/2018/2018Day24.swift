@@ -269,8 +269,9 @@ extension Unit: CustomStringConvertible {
 
 // MARK: - Hashable
 extension Group: Hashable {
-    var hashValue: Int {
-        return army.hashValue ^ unit.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(army)
+        hasher.combine(unit)
     }
     static func == (lhs: Group, rhs: Group) -> Bool {
         return lhs.army == rhs.army && lhs.unit == rhs.unit

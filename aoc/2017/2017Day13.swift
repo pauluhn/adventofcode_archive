@@ -64,7 +64,7 @@ struct Y2017Day13 {
         var delay = 0
         repeat {
             delay += 1
-            let log = severityLog(scanners, delay: delay)
+            _ = severityLog(scanners, delay: delay)
         } while !severityLog(scanners, delay: delay).isEmpty
         return delay
     }
