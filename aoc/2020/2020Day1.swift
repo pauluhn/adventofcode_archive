@@ -20,4 +20,19 @@ struct Y2020Day1 {
             .map { $0.0 * $0.1 }
         return answer!
     }
+
+    static func Part2(_ data: [String]) -> Int {
+        let expenses = data.compactMap(Int.init)
+        
+        for i in 0 ..< expenses.count - 2 {
+            for j in i + 1 ..< expenses.count - 1 {
+                for k in i + 2 ..< expenses.count {
+                    if expenses[i] + expenses[j] + expenses[k] == 2020 {
+                        return expenses[i] * expenses[j] * expenses[k]
+                    }
+                }
+            }
+        }
+        return 0
+    }
 }

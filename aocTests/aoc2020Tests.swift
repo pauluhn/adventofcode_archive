@@ -18,9 +18,16 @@ class aoc2020Tests: XCTestCase {
         
         let answer = Y2020Day1.Part1(readInput(year: year, day: 1))
         print("\(#function):\(answer)")
-//        assert(answer == 47064)
+        assert(answer == 840324)
     }
-
+    func testDay1Part2() {
+        let testData1 = testDataDay1().newlineSplit()
+        assert(Y2020Day1.Part2(testData1) == 241861950)
+        
+        let answer = Y2020Day1.Part2(readInput(year: year, day: 1))
+        print("\(#function):\(answer)")
+        assert(answer == 170098110)
+    }
 }
 
 extension aoc2020Tests {
