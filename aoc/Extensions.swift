@@ -43,6 +43,10 @@ extension String {
         return Int(self) ?? 0
     }
     
+    var char: Character {
+        return Character(self)
+    }
+    
     var ascii: [Int] {
         return self.compactMap { $0.asciiValue }.map(Int.init)
     }
