@@ -37,10 +37,7 @@ struct Y2020Day3 {
         }
     }
     
-    static func Part1(_ data: [String]) -> Int {
-        let map = Map(data)
-        let slope = Point(x: 3, y: 1)
-
+    static func trees(map: Map, slope: Point) -> Int {
         var position = Point.zero
         var count = 0
         while position.y < map.height {
@@ -52,5 +49,26 @@ struct Y2020Day3 {
             position += slope
         }
         return count
+    }
+    
+    static func Part1(_ data: [String]) -> Int {
+        let map = Map(data)
+        let slope = Point(x: 3, y: 1)
+        return trees(map: map, slope: slope)
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        let map = Map(data)
+        let slopes = [
+            Point(x: 1, y: 1),
+            Point(x: 3, y: 1),
+            Point(x: 5, y: 1),
+            Point(x: 7, y: 1),
+            Point(x: 1, y: 2)
+        ]
+        let product = slopes
+            .map { trees(map: map, slope: $0) }
+            .reduce(1, *)
+        return product
     }
 }
