@@ -58,7 +58,15 @@ class aoc2020Tests: XCTestCase {
         
         let answer = Y2020Day3.Part2(readInput(year: year, day: 3))
         print("\(#function):\(answer)")
-//        assert(answer == 191)
+        assert(answer == 1478615040)
+    }
+    func testDay4Part1() {
+        let testData1 = testDataDay4().newlineSplit()
+        assert(Y2020Day4.Part1(testData1) == 2)
+        
+        let answer = Y2020Day4.Part1(readInput(year: year, day: 4))
+        print("\(#function):\(answer)")
+        assert(answer == 226)
     }
 }
 
@@ -93,6 +101,24 @@ extension aoc2020Tests {
 #.##...#...
 #...##....#
 .#..#...#.#
+"""
+    }
+    func testDataDay4() -> String {
+        return """
+ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2017 cid:147 hgt:183cm
+
+iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+hcl:#cfa07d byr:1929
+
+hcl:#ae17e1 iyr:2013
+eyr:2024
+ecl:brn pid:760753108 byr:1931
+hgt:179cm
+
+hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in
+
 """
     }
 }

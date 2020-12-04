@@ -167,6 +167,8 @@
 		9B02A9B62577DF3300528D1B /* 2020Day2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02A9B52577DF3300528D1B /* 2020Day2.txt */; };
 		9B02AB0625792B7F00528D1B /* 2020Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AB0525792B7F00528D1B /* 2020Day3.swift */; };
 		9B02AB0A25792EEE00528D1B /* 2020Day3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02AB0925792EEE00528D1B /* 2020Day3.txt */; };
+		9B02ABC7257A7D6D00528D1B /* 2020Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02ABC6257A7D6D00528D1B /* 2020Day4.swift */; };
+		9B02ABCB257A834200528D1B /* 2020Day4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02ABCA257A834100528D1B /* 2020Day4.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +347,8 @@
 		9B02A9B52577DF3300528D1B /* 2020Day2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day2.txt; sourceTree = "<group>"; };
 		9B02AB0525792B7F00528D1B /* 2020Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day3.swift; sourceTree = "<group>"; };
 		9B02AB0925792EEE00528D1B /* 2020Day3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day3.txt; sourceTree = "<group>"; };
+		9B02ABC6257A7D6D00528D1B /* 2020Day4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day4.swift; sourceTree = "<group>"; };
+		9B02ABCA257A834100528D1B /* 2020Day4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day4.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -650,6 +654,7 @@
 				9B02A8C125768C8E00528D1B /* 2020Day1.swift */,
 				9B02A9B12577DC7700528D1B /* 2020Day2.swift */,
 				9B02AB0525792B7F00528D1B /* 2020Day3.swift */,
+				9B02ABC6257A7D6D00528D1B /* 2020Day4.swift */,
 			);
 			path = 2020;
 			sourceTree = "<group>";
@@ -660,6 +665,7 @@
 				9B02A8CC25768F8400528D1B /* 2020Day1.txt */,
 				9B02A9B52577DF3300528D1B /* 2020Day2.txt */,
 				9B02AB0925792EEE00528D1B /* 2020Day3.txt */,
+				9B02ABCA257A834100528D1B /* 2020Day4.txt */,
 			);
 			path = 2020;
 			sourceTree = "<group>";
@@ -787,6 +793,7 @@
 				17A8C1C023C16C3E007DF7B7 /* 2019Day15.txt in Resources */,
 				17E36BC721B6CF730060025A /* 2018Day1.txt in Resources */,
 				1709D83E23A5939200790A52 /* 2019Day11.txt in Resources */,
+				9B02ABCB257A834200528D1B /* 2020Day4.txt in Resources */,
 				17441DA921CD3DF400878A08 /* 2018Day21.txt in Resources */,
 				9B02A9B62577DF3300528D1B /* 2020Day2.txt in Resources */,
 				1764012121C749E400046721 /* 2018Day16.txt in Resources */,
@@ -828,6 +835,7 @@
 				172D6DF321C18DBF0061862E /* BinaryTree.swift in Sources */,
 				17A8C1C923CA63A8007DF7B7 /* 2019Day17.swift in Sources */,
 				174F9EDB21BCFD00001C0EA6 /* MarbleMania.swift in Sources */,
+				9B02ABC7257A7D6D00528D1B /* 2020Day4.swift in Sources */,
 				174F9EE221BE821A001C0EA6 /* StarAlign.swift in Sources */,
 				1764012521C74AEA00046721 /* OpCode.swift in Sources */,
 				9B02AB0625792B7F00528D1B /* 2020Day3.swift in Sources */,
