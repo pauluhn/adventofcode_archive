@@ -80,12 +80,12 @@ class aoc2020Tests: XCTestCase {
         assert(answer == 160)
     }
     func testDay5Part1() {
-        assert(Y2020Day5.Part1(["FBFBBFFRLR"]) == 357)
-        assert(Y2020Day5.Part1(["BFFFBBFRRR"]) == 567)
-        assert(Y2020Day5.Part1(["FFFBBBFRRR"]) == 119)
-        assert(Y2020Day5.Part1(["BBFFBBFRLL"]) == 820)
+        assert(Y2020Day5.Part1(["FBFBBFFRLR"]).max()! == 357)
+        assert(Y2020Day5.Part1(["BFFFBBFRRR"]).max()! == 567)
+        assert(Y2020Day5.Part1(["FFFBBBFRRR"]).max()! == 119)
+        assert(Y2020Day5.Part1(["BBFFBBFRLL"]).max()! == 820)
 
-        let answer = Y2020Day5.Part1(readInput(year: year, day: 5))
+        let answer = Y2020Day5.Part1(readInput(year: year, day: 5)).max()!
         print("\(#function):\(answer)")
         assert(answer == 998)
     }

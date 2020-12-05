@@ -9,34 +9,14 @@
 import Foundation
 
 struct Y2020Day5 {
-
-    private static func seats(_ data: [String]) -> [Int] {
-        let rows = 0 ..< 128
-        let cols = 0 ..< 8
-
-        return data.map { seat -> (row: Int, col: Int) in
-            var r = rows
-            var c = cols
-            
-            for (n, char) in seat.enumerated() {
-                if n < 7 {
-                    r = char.range(r)
-                } else {
-                    c = char.range(c)
-                }
-            }
-            return (r.lowerBound, c.lowerBound)
-        }
-        .map { $0.row * 8 + $0.col }
-    }
     
-    static func Part1(_ data: [String]) -> Int {
-        return seats(data)
-            .max()!
+    static func Part1(_ data: [String]) -> [Int] {
+        return data
+            .map { $0.map { $0.binary }.string.binaryInt }
     }
     
     static func Part2(_ data: [String]) -> Int {
-        return seats(data)
+        return Part1(data)
             .sorted()
             .reduce((found: false, value: 0)) { (result, current) in
                 guard !result.found else { return result }
@@ -50,25 +30,11 @@ struct Y2020Day5 {
     }
 }
 
-private extension Range where Bound == Int {
-    private var mid: Int {
-        (lowerBound + upperBound) / 2
-    }
-    var lowerRange: Range {
-        guard !isEmpty else { return self }
-        return clamped(to: lowerBound ..< mid)
-    }
-    var upperRange: Range {
-        guard !isEmpty else { return self }
-        return clamped(to: mid ..< upperBound)
-    }
-}
-
 private extension Character {
-    func range(_ range: Range<Int>) -> Range<Int> {
+    var binary: Character {
         switch self {
-        case "F", "L": return range.lowerRange
-        case "B", "R": return range.upperRange
+        case "F", "L": return "0"
+        case "B", "R": return "1"
         default: fatalError()
         }
     }

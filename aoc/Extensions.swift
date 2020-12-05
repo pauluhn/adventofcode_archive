@@ -26,6 +26,12 @@ extension Collection {
     }
 }
 
+extension Collection where Element == Character {
+    var string: String {
+        return reduce("") { $0 + $1.str }
+    }
+}
+
 extension String {
     typealias TwoThreeCount = (two: Int, three: Int)
     func twoThreeCount() -> TwoThreeCount {
@@ -42,11 +48,12 @@ extension String {
     var int: Int {
         return Int(self) ?? 0
     }
-    
+    var binaryInt: Int {
+        return Int(self, radix: 2) ?? 0
+    }
     var char: Character {
         return Character(self)
     }
-    
     var ascii: [Int] {
         return self.compactMap { $0.asciiValue }.map(Int.init)
     }
@@ -61,20 +68,23 @@ extension String {
 }
 
 extension Character {
+    var str: String {
+        return String(self)
+    }
     var int: Int {
-        return String(self).int
+        return self.str.int
     }
     var ascii: [Int] {
-        return String(self).ascii
+        return self.str.ascii
     }
 }
 
 extension Substring {
-    var int: Int {
-        return String(self).int
-    }
     var str: String {
         return String(self)
+    }
+    var int: Int {
+        return self.str.int
     }
 }
 
