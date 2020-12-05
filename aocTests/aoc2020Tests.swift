@@ -61,7 +61,7 @@ class aoc2020Tests: XCTestCase {
         assert(answer == 1478615040)
     }
     func testDay4Part1() {
-        let testData1 = testDataDay4a().newlineSplit()
+        let testData1 = testDataDay4a()
         assert(Y2020Day4.Part1(testData1) == 2)
         
         let answer = Y2020Day4.Part1(readInput(year: year, day: 4))
@@ -69,10 +69,10 @@ class aoc2020Tests: XCTestCase {
         assert(answer == 226)
     }
     func testDay4Part2() {
-        let testData1 = testDataDay4b().newlineSplit()
+        let testData1 = testDataDay4b()
         assert(Y2020Day4.Part2(testData1) == 0)
         
-        let testData2 = testDataDay4c().newlineSplit()
+        let testData2 = testDataDay4c()
         assert(Y2020Day4.Part2(testData2) == 4)
         
         let answer = Y2020Day4.Part2(readInput(year: year, day: 4))
