@@ -10,7 +10,7 @@ import Foundation
 
 struct Y2020Day5 {
 
-    static func Part1(_ data: [String]) -> Int {
+    private static func seats(_ data: [String]) -> [Int] {
         let rows = 0 ..< 128
         let cols = 0 ..< 8
 
@@ -28,7 +28,25 @@ struct Y2020Day5 {
             return (r.lowerBound, c.lowerBound)
         }
         .map { $0.row * 8 + $0.col }
-        .max()!
+    }
+    
+    static func Part1(_ data: [String]) -> Int {
+        return seats(data)
+            .max()!
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        return seats(data)
+            .sorted()
+            .reduce((found: false, value: 0)) { (result, current) in
+                guard !result.found else { return result }
+                if current - result.value == 2 {
+                    return (true, current - 1)
+                } else {
+                    return (false, current)
+                }
+            }
+            .value
     }
 }
 
