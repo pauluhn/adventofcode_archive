@@ -34,9 +34,10 @@ struct Y2020Day4 {
                 .count == 7
         }
         
-        init(_ data: [String]) {
+        init(_ data: String) {
             self.data = data
-                .flatMap { $0.split(separator: " ") }
+                .components(separatedBy: .whitespacesAndNewlines)
+                .filter { !$0.isEmpty}
                 .map { $0.split(separator: ":").map(String.init) }
                 .map { (Field(rawValue: $0.first!)!, $0.last!) }
                 .reduce(into: [:], { $0[$1.0] = $1.1 })
@@ -86,28 +87,19 @@ struct Y2020Day4 {
         }
     }
 
-    private static func passports(_ data: [String]) -> [Passport] {
-        var passports = [Passport]()
-        
-        var cache = [String]()
-        for line in data {
-            if line.isEmpty && !cache.isEmpty {
-                passports += [Passport(cache)]
-                cache = []
-            } else {
-                cache += [line]
-            }
-        }
-        return passports
+    private static func passports(_ data: String) -> [Passport] {
+        return data
+            .components(separatedBy: "\n\n")
+            .map(Passport.init)
     }
     
-    static func Part1(_ data: [String]) -> Int {
+    static func Part1(_ data: String) -> Int {
         return passports(data)
             .filter { $0.hasRequiredFields }
             .count
     }
 
-    static func Part2(_ data: [String]) -> Int {
+    static func Part2(_ data: String) -> Int {
         return passports(data)
             .filter { $0.isValid }
             .count
