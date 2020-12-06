@@ -24,4 +24,19 @@ struct Y2020Day6 {
             }
             .reduce(0, +)
     }
+    
+    static func Part2(_ data: String) -> Int {
+        return data
+            .components(separatedBy: "\n\n")
+            .map { group -> Int in
+                let persons = group
+                    .components(separatedBy: .whitespacesAndNewlines)
+                    .filter { !$0.isEmpty }
+                let answers = persons.flatMap { $0 }
+                return NSCountedSet(array: answers)
+                    .count(of: persons.count)
+                    .count
+            }
+            .reduce(0, +)
+    }
 }
