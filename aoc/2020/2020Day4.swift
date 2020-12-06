@@ -37,7 +37,7 @@ struct Y2020Day4 {
         init(_ data: String) {
             self.data = data
                 .components(separatedBy: .whitespacesAndNewlines)
-                .filter { !$0.isEmpty}
+                .filter { !$0.isEmpty }
                 .map { $0.split(separator: ":").map(String.init) }
                 .map { (Field(rawValue: $0.first!)!, $0.last!) }
                 .reduce(into: [:], { $0[$1.0] = $1.1 })
