@@ -113,14 +113,23 @@ class aoc2020Tests: XCTestCase {
         assert(answer == 3473)
     }
     func testDay7Part1() {
-        let testData1 = testDataDay7().newlineSplit()
+        let testData1 = testDataDay7a().newlineSplit()
         assert(Y2020Day7.Part1(testData1) == 4)
 
         let answer = Y2020Day7.Part1(readInput(year: year, day: 7))
         print("\(#function):\(answer)")
         assert(answer == 226)
     }
+    func testDay7Part2() {
+        let testData1 = testDataDay7a().newlineSplit()
+        assert(Y2020Day7.Part2(testData1) == 32)
+        let testData2 = testDataDay7b().newlineSplit()
+        assert(Y2020Day7.Part2(testData2) == 126)
 
+        let answer = Y2020Day7.Part2(readInput(year: year, day: 7))
+        print("\(#function):\(answer)")
+        assert(answer == 9569)
+    }
 }
 
 extension aoc2020Tests {
@@ -237,7 +246,7 @@ b
 
 """
     }
-    func testDataDay7() -> String {
+    func testDataDay7a() -> String {
         return """
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
@@ -248,6 +257,17 @@ dark olive bags contain 3 faded blue bags, 4 dotted black bags.
 vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.
+"""
+    }
+    func testDataDay7b() -> String {
+        return """
+shiny gold bags contain 2 dark red bags.
+dark red bags contain 2 dark orange bags.
+dark orange bags contain 2 dark yellow bags.
+dark yellow bags contain 2 dark green bags.
+dark green bags contain 2 dark blue bags.
+dark blue bags contain 2 dark violet bags.
+dark violet bags contain no other bags.
 """
     }
 }

@@ -58,4 +58,21 @@ struct Y2020Day7 {
         }
         return seen.count - 1
     }
+    static func Part2(_ data: [String]) -> Int {
+        let rules = data.compactMap(Rule.init)
+        
+        var bags = ["shiny gold"]
+        var count = 0
+        
+        while !bags.isEmpty {
+            let bag = bags.removeFirst()
+            count += 1
+            
+            let next = rules
+                .first(where: { $0.bag == bag })
+                .flatMap { $0.contains.flatMap { Array(repeating: $0.key, count: $0.value) } }
+            bags += next!
+        }
+        return count - 1
+    }
 }
