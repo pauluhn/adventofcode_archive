@@ -15,9 +15,23 @@ struct Y2020Day8 {
             case accumulator = "acc"
             case jumps = "jmp"
             case noOperation = "nop"
+            
+            var flipped: Operation {
+                switch self {
+                case .accumulator: return .accumulator
+                case .jumps: return .noOperation
+                case .noOperation: return .jumps
+                }
+            }
         }
         let operation: Operation
         let value: Int
+        var isFlippable: Bool {
+            return operation != operation.flipped
+        }
+        var flipped: Instruction {
+            return Instruction(operation.flipped, value)
+        }
         
         init?(_ data: String) {
             let data = data.split(separator: " ")
@@ -26,20 +40,42 @@ struct Y2020Day8 {
             operation = op
             value = data[1].int
         }
+        private init(_ operation: Operation, _ value: Int) {
+            self.operation = operation
+            self.value = value
+        }
     }
 
     static func Part1(_ data: [String]) -> Int {
-        let instructions = data.map(Instruction.init)
-        
+        let instructions = data.compactMap(Instruction.init)
+        return run(instructions).0
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        let instructions = data.compactMap(Instruction.init)
+        for (index, instruction) in instructions.enumerated() where instruction.isFlippable {
+            var newList = instructions
+            newList[index] = instruction.flipped
+            let results = run(newList)
+            if !results.1 {
+                return results.0
+            }
+        }
+        return 0
+    }
+    
+    private static func run(_ instructions: [Instruction]) -> (Int, Bool) {
         var index = 0
         var value = 0
         var seen = Set<Int>()
+        var isInfiniteLoop = false
         
         while true {
-            guard !seen.contains(index) else { break }
+            guard index < instructions.count else { break }
+            guard !seen.contains(index) else { isInfiniteLoop = true; break }
             seen.insert(index)
             
-            let line = instructions[index]!
+            let line = instructions[index]
             switch line.operation {
             case .accumulator: value += line.value
             case .jumps: index += line.value; continue
@@ -47,6 +83,6 @@ struct Y2020Day8 {
             }
             index += 1
         }
-        return value
+        return (value, isInfiniteLoop)
     }
 }
