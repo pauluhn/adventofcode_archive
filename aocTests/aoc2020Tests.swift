@@ -130,6 +130,14 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 9569)
     }
+    func testDay8Part1() {
+        let testData1 = testDataDay8().newlineSplit()
+        assert(Y2020Day8.Part1(testData1) == 5)
+
+        let answer = Y2020Day8.Part1(readInput(year: year, day: 8))
+        print("\(#function):\(answer)")
+        assert(answer == 1548)
+    }
 }
 
 extension aoc2020Tests {
@@ -268,6 +276,19 @@ dark yellow bags contain 2 dark green bags.
 dark green bags contain 2 dark blue bags.
 dark blue bags contain 2 dark violet bags.
 dark violet bags contain no other bags.
+"""
+    }
+    func testDataDay8() -> String {
+        return """
+nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6
 """
     }
 }
