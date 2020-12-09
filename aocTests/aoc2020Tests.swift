@@ -146,6 +146,26 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 1375)
     }
+    func testDay9Part1() {
+        var preamble = (1...25).map { $0 }
+        assert(Y2020Day9.Part1(preamble + [26], 25) == 0)
+        assert(Y2020Day9.Part1(preamble + [49], 25) == 0)
+        assert(Y2020Day9.Part1(preamble + [100], 25) == 100)
+        assert(Y2020Day9.Part1(preamble + [50], 25) == 50)
+        
+        preamble = preamble.filter { $0 != 20 } + [45]
+        assert(Y2020Day9.Part1(preamble + [26], 25) == 0)
+        assert(Y2020Day9.Part1(preamble + [65], 25) == 65)
+        assert(Y2020Day9.Part1(preamble + [64], 25) == 0)
+        assert(Y2020Day9.Part1(preamble + [66], 25) == 0)
+
+        let testData1 = testDataDay9().newlineSplit()
+        assert(Y2020Day9.Part1(testData1, 5) == 127)
+
+        let answer = Y2020Day9.Part1(readInput(year: year, day: 9), 25)
+        print("\(#function):\(answer)")
+        assert(answer == 731031916)
+    }
 }
 
 extension aoc2020Tests {
@@ -297,6 +317,30 @@ acc -99
 acc +1
 jmp -4
 acc +6
+"""
+    }
+    func testDataDay9() -> String {
+        return """
+35
+20
+15
+25
+47
+40
+62
+55
+65
+95
+102
+117
+150
+182
+127
+219
+299
+277
+309
+576
 """
     }
 }
