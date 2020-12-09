@@ -48,5 +48,26 @@ struct Y2020Day9 {
         }
         return 0 // valid
     }
-     
+    
+    static func Part2(_ data: [String], _ preamble: Int) -> Int {
+        let data = data.map { $0.int }
+        let invalid = Part1(data, preamble)
+        guard invalid > 0 else { fatalError() } // oops
+        
+        for n in 1 ..< data.count { // start at second
+            for i in (0..<n).reversed() { // add backwards
+                let values = (i...n)
+                    .map { data[$0] }
+                let sum = values.reduce(0, +)
+                
+                if sum == invalid {
+                    return values.min()! + values.max()! // found
+                    
+                } else if sum > invalid {
+                    break // too high
+                }
+            }
+        }
+        fatalError() // oops
+    }
 }
