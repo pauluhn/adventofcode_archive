@@ -38,28 +38,45 @@ struct Y2020Day11 {
                 .filter { $0 == .occupied }
                 .count
         }
+        func los(at point: Point) -> Int {
+            return Direction.allCases
+                .compactMap { direction -> Bool? in
+                    var p = point
+                    repeat {
+                        p = p.offset(in: direction)
+                        guard let t = tile(at: p) else { return nil }
+                        if t == .occupied { return true }
+                        if t == .seat { return false }
+                    } while true
+                }
+                .filter { $0 }
+                .count
+        }
         mutating func update(map: [[Tile]]) {
             self.map = map
         }
     }
 
-    static func Part1(_ data: [String]) -> Int {
+    typealias Rule = (_ map: Map, _ x: Int, _ y: Int) -> Int
+    static func simulate(_ data: [String], rule1: Rule, rule2: Int, print: Bool = false) -> Int {
         var map = Map(data)
         var round = 0
         
         while true {
-            print("\nRound: \(round)")
-            map.print()
+            if print {
+                Swift.print("\nRound: \(round)")
+                map.print()
+            }
             
             var cache = map.map
             for (y, row) in map.map.enumerated() {
                 for (x, tile) in row.enumerated() where tile != .floor {
-                    let count = map.adjacent(to: Point(x: x, y: y))
+                    let count = rule1(map, x, y)//map.adjacent(to: Point(x: x, y: y))
                     
                     if tile == .seat && count == 0 {
                         cache[y][x] = .occupied
                     
-                    } else if tile == .occupied && count >= 4 {
+                    } else if tile == .occupied && count >= rule2 {
                         cache[y][x] = .seat
                     }
                 }
@@ -75,6 +92,25 @@ struct Y2020Day11 {
             .flatMap { $0 }
             .filter { $0 == .occupied }
             .count
+    }
+    
+    static func Part1(_ data: [String], print: Bool = false) -> Int {
+        return simulate(
+            data,
+            rule1: { (map, x, y) -> Int in
+                map.adjacent(to: Point(x: x, y: y))
+            },
+            rule2: 4,
+            print: print)
+    }
+    static func Part2(_ data: [String], print: Bool = false) -> Int {
+        return simulate(
+            data,
+            rule1: { (map, x, y) -> Int in
+                map.los(at: Point(x: x, y: y))
+            },
+            rule2: 5,
+            print: print)
     }
 }
 
