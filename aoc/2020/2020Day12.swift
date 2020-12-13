@@ -49,8 +49,8 @@ struct Y2020Day12 {
             switch action {
             case .north: ship.position += Point(x: 0, y: -instruction.value)
             case .south: ship.position += Point(x: 0, y: instruction.value)
-            case .east: ship.position += Point(x: -instruction.value, y: 0)
-            case .west: ship.position += Point(x: instruction.value, y: 0)
+            case .east: ship.position += Point(x: instruction.value, y: 0)
+            case .west: ship.position += Point(x: -instruction.value, y: 0)
             case .left: ship.facing = ship.facing.rotate(in: .left, by: instruction.value)
             case .right: ship.facing = ship.facing.rotate(in: .right, by: instruction.value)
             case .forward: fatalError()
