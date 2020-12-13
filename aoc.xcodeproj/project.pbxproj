@@ -187,6 +187,7 @@
 		9BED877C258511EC002104FF /* 2020Day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9BED877B258511EC002104FF /* 2020Day12.txt */; };
 		9BED87802585E70A002104FF /* 2020Day13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED877F2585E70A002104FF /* 2020Day13.swift */; };
 		9BED87842585E73C002104FF /* 2020Day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9BED87832585E73C002104FF /* 2020Day13.txt */; };
+		9BED87882586842C002104FF /* ChineseRemainderTheorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED87872586842B002104FF /* ChineseRemainderTheorem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -385,6 +386,7 @@
 		9BED877B258511EC002104FF /* 2020Day12.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day12.txt; sourceTree = "<group>"; };
 		9BED877F2585E70A002104FF /* 2020Day13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day13.swift; sourceTree = "<group>"; };
 		9BED87832585E73C002104FF /* 2020Day13.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day13.txt; sourceTree = "<group>"; };
+		9BED87872586842B002104FF /* ChineseRemainderTheorem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseRemainderTheorem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -598,6 +600,7 @@
 				17E36BE421B731900060025A /* Tracker.swift */,
 				174F9ED021BB65AE001C0EA6 /* Worker.swift */,
 				17A8C1CC23CA6CC0007DF7B7 /* Ascii.swift */,
+				9BED87872586842B002104FF /* ChineseRemainderTheorem.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -985,6 +988,7 @@
 				174F9EE621BFD2BF001C0EA6 /* 2018Day11.swift in Sources */,
 				9B02AD30257D396900528D1B /* 2002Day6.swift in Sources */,
 				172D6DFD21C2B1E70061862E /* Direction.swift in Sources */,
+				9BED87882586842C002104FF /* ChineseRemainderTheorem.swift in Sources */,
 				17441DAF21D1307A00878A08 /* 2018Day22.swift in Sources */,
 				17A8C1C223C16C7A007DF7B7 /* 2019Day15.swift in Sources */,
 				174F9ECD21BAAECC001C0EA6 /* Instruction.swift in Sources */,

@@ -234,6 +234,23 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 4938)
     }
+    func testDay13Part2() {
+        // 3 (mod 5), 1 (mod 7), 6 (mod 8)
+        let inputs = [(3, 5), (1, 7), (6, 8)]
+        assert(CRT(inputs: inputs).compute() == 78)
+        
+        let testData1 = testDataDay13().newlineSplit()
+        assert(Y2020Day13.Part2(testData1) == 1068781)
+        assert(Y2020Day13.Part2(["","17,x,13,19"]) == 3417)
+        assert(Y2020Day13.Part2(["","67,7,59,61"]) == 754018)
+        assert(Y2020Day13.Part2(["","67,x,7,59,61"]) == 779210)
+        assert(Y2020Day13.Part2(["","67,7,x,59,61"]) == 1261476)
+        assert(Y2020Day13.Part2(["","1789,37,47,1889"]) == 1202161486)
+
+        let answer = Y2020Day13.Part2(readInput(year: year, day: 13))
+        print("\(#function):\(answer)")
+        assert(answer == 230903629977901)
+    }
 }
 
 extension aoc2020Tests {
