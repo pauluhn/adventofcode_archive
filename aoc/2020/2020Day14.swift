@@ -14,7 +14,7 @@ struct Y2020Day14 {
         enum Delta: Character {
             case zero = "0"
             case one = "1"
-            case none = "X"
+            case cross = "X"
         }
         let bitmask: [Delta] // 36
         init?(_ data: String) {
@@ -29,7 +29,7 @@ struct Y2020Day14 {
             let value = value.binaryString(length: bitmask.count)
             return zip(value, bitmask)
                 .map { (c, delta) -> Character in
-                    if delta == .none {
+                    if delta == .cross {
                         return c
                     } else {
                         return delta.rawValue
@@ -37,6 +37,35 @@ struct Y2020Day14 {
                 }
                 .string
                 .binaryInt
+        }
+        func addresses(_ address: Int) -> [Int] {
+            let address = address.binaryString(length: bitmask.count)
+            let tuples = zip(address, bitmask)
+                .map { (c, delta) -> (Character, Bool) in
+                    switch delta {
+                    case .zero: return (c, false)
+                    case .one: return ("1", false)
+                    case .cross: return ("0", true)
+                    }
+                }
+            
+            let base = tuples
+                .map { $0.0 }
+                .string
+            
+            var addresses = [String]()
+            for (n, float) in tuples.enumerated() where float.1 {
+                if addresses.isEmpty {
+                    addresses += [base]
+                }
+                let updated = addresses.map { address -> String in
+                    var updated = address.map { $0 }
+                    updated[n] = "1"
+                    return updated.string
+                }
+                addresses += updated
+            }
+            return addresses.map { $0.binaryInt }
         }
     }
     
@@ -61,6 +90,23 @@ struct Y2020Day14 {
                 
             } else if let memory = Memory(line) {
                 store[memory.address] = cache?.write(memory.value)
+            }
+        }
+        return store.values.reduce(0, +)
+    }
+
+    static func Part2(_ data: [String]) -> Int {
+        var cache: Mask?
+        var store = [Int: Int]()
+        
+        for line in data {
+            if let mask = Mask(line) {
+                cache = mask
+                
+            } else if let memory = Memory(line) {
+                for address in cache!.addresses(memory.address) {
+                    store[address] = memory.value
+                }
             }
         }
         return store.values.reduce(0, +)

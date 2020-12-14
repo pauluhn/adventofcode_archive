@@ -252,12 +252,20 @@ class aoc2020Tests: XCTestCase {
         assert(answer == 230903629977901)
     }
     func testDay14Part1() {
-        let testData1 = testDataDay14().newlineSplit()
+        let testData1 = testDataDay14a().newlineSplit()
         assert(Y2020Day14.Part1(testData1) == 165)
 
         let answer = Y2020Day14.Part1(readInput(year: year, day: 14))
         print("\(#function):\(answer)")
         assert(answer == 9967721333886)
+    }
+    func testDay14Part2() {
+        let testData1 = testDataDay14b().newlineSplit()
+        assert(Y2020Day14.Part2(testData1) == 208)
+
+        let answer = Y2020Day14.Part2(readInput(year: year, day: 14))
+        print("\(#function):\(answer)")
+        assert(answer == 4355897790573)
     }
 }
 
@@ -516,12 +524,20 @@ F11
 
 """
     }
-    func testDataDay14() -> String {
+    func testDataDay14a() -> String {
         return """
 mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
 mem[8] = 11
 mem[7] = 101
 mem[8] = 0
+"""
+    }
+    func testDataDay14b() -> String {
+        return """
+mask = 000000000000000000000000000000X1001X
+mem[42] = 100
+mask = 00000000000000000000000000000000X0XX
+mem[26] = 1
 """
     }
 }
