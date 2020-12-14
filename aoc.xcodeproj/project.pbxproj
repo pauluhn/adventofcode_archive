@@ -171,7 +171,7 @@
 		9B02ABCB257A834200528D1B /* 2020Day4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02ABCA257A834100528D1B /* 2020Day4.txt */; };
 		9B02AD1C257BE28800528D1B /* 2020Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AD1B257BE28800528D1B /* 2020Day5.swift */; };
 		9B02AD20257BE81D00528D1B /* 2020Day5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02AD1F257BE81D00528D1B /* 2020Day5.txt */; };
-		9B02AD30257D396900528D1B /* 2002Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AD2F257D396900528D1B /* 2002Day6.swift */; };
+		9B02AD30257D396900528D1B /* 2020Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AD2F257D396900528D1B /* 2020Day6.swift */; };
 		9B02AD34257D3C0400528D1B /* 2020Day6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02AD33257D3C0400528D1B /* 2020Day6.txt */; };
 		9B02AD38257E768F00528D1B /* 2020Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02AD37257E768F00528D1B /* 2020Day7.swift */; };
 		9B02AD3C257E76CD00528D1B /* 2020Day7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B02AD3B257E76CD00528D1B /* 2020Day7.txt */; };
@@ -188,6 +188,8 @@
 		9BED87802585E70A002104FF /* 2020Day13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED877F2585E70A002104FF /* 2020Day13.swift */; };
 		9BED87842585E73C002104FF /* 2020Day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9BED87832585E73C002104FF /* 2020Day13.txt */; };
 		9BED87882586842C002104FF /* ChineseRemainderTheorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED87872586842B002104FF /* ChineseRemainderTheorem.swift */; };
+		9BED878C2587AD15002104FF /* 2020Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BED878B2587AD14002104FF /* 2020Day14.swift */; };
+		9BED87922587AD5A002104FF /* 2020Day14.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9BED87912587AD59002104FF /* 2020Day14.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,7 +372,7 @@
 		9B02ABCA257A834100528D1B /* 2020Day4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day4.txt; sourceTree = "<group>"; };
 		9B02AD1B257BE28800528D1B /* 2020Day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day5.swift; sourceTree = "<group>"; };
 		9B02AD1F257BE81D00528D1B /* 2020Day5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day5.txt; sourceTree = "<group>"; };
-		9B02AD2F257D396900528D1B /* 2002Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2002Day6.swift; sourceTree = "<group>"; };
+		9B02AD2F257D396900528D1B /* 2020Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day6.swift; sourceTree = "<group>"; };
 		9B02AD33257D3C0400528D1B /* 2020Day6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day6.txt; sourceTree = "<group>"; };
 		9B02AD37257E768F00528D1B /* 2020Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day7.swift; sourceTree = "<group>"; };
 		9B02AD3B257E76CD00528D1B /* 2020Day7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day7.txt; sourceTree = "<group>"; };
@@ -387,6 +389,8 @@
 		9BED877F2585E70A002104FF /* 2020Day13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day13.swift; sourceTree = "<group>"; };
 		9BED87832585E73C002104FF /* 2020Day13.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day13.txt; sourceTree = "<group>"; };
 		9BED87872586842B002104FF /* ChineseRemainderTheorem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseRemainderTheorem.swift; sourceTree = "<group>"; };
+		9BED878B2587AD14002104FF /* 2020Day14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2020Day14.swift; sourceTree = "<group>"; };
+		9BED87912587AD59002104FF /* 2020Day14.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2020Day14.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -695,7 +699,7 @@
 				9B02AB0525792B7F00528D1B /* 2020Day3.swift */,
 				9B02ABC6257A7D6D00528D1B /* 2020Day4.swift */,
 				9B02AD1B257BE28800528D1B /* 2020Day5.swift */,
-				9B02AD2F257D396900528D1B /* 2002Day6.swift */,
+				9B02AD2F257D396900528D1B /* 2020Day6.swift */,
 				9B02AD37257E768F00528D1B /* 2020Day7.swift */,
 				9B02AD3F257FC5B600528D1B /* 2020Day8.swift */,
 				9B02B3622581186400528D1B /* 2020Day9.swift */,
@@ -703,6 +707,7 @@
 				9BED876F2584FEAD002104FF /* 2020Day11.swift */,
 				9BED8777258511BC002104FF /* 2020Day12.swift */,
 				9BED877F2585E70A002104FF /* 2020Day13.swift */,
+				9BED878B2587AD14002104FF /* 2020Day14.swift */,
 			);
 			path = 2020;
 			sourceTree = "<group>";
@@ -723,6 +728,7 @@
 				9BED87732584FEDE002104FF /* 2020Day11.txt */,
 				9BED877B258511EC002104FF /* 2020Day12.txt */,
 				9BED87832585E73C002104FF /* 2020Day13.txt */,
+				9BED87912587AD59002104FF /* 2020Day14.txt */,
 			);
 			path = 2020;
 			sourceTree = "<group>";
@@ -838,6 +844,7 @@
 				17E36BCB21B6DD550060025A /* 2018Day2.txt in Resources */,
 				17D60FF5238A01E600E82C5D /* 2017Day13.txt in Resources */,
 				1775D46F2391BEFB005C9855 /* 2017Day18.txt in Resources */,
+				9BED87922587AD5A002104FF /* 2020Day14.txt in Resources */,
 				17D60FFD238BB53000E82C5D /* 2017Day16.txt in Resources */,
 				1764012D21C769C000046721 /* 2018Day17.txt in Resources */,
 				9B02AB0A25792EEE00528D1B /* 2020Day3.txt in Resources */,
@@ -904,6 +911,7 @@
 				174F9EDB21BCFD00001C0EA6 /* MarbleMania.swift in Sources */,
 				9B02ABC7257A7D6D00528D1B /* 2020Day4.swift in Sources */,
 				174F9EE221BE821A001C0EA6 /* StarAlign.swift in Sources */,
+				9BED878C2587AD15002104FF /* 2020Day14.swift in Sources */,
 				1764012521C74AEA00046721 /* OpCode.swift in Sources */,
 				9BED8778258511BC002104FF /* 2020Day12.swift in Sources */,
 				9B02AB0625792B7F00528D1B /* 2020Day3.swift in Sources */,
@@ -986,7 +994,7 @@
 				17E36B9621B6C56D0060025A /* AppDelegate.swift in Sources */,
 				17D60FF32389FD8600E82C5D /* 2017Day13.swift in Sources */,
 				174F9EE621BFD2BF001C0EA6 /* 2018Day11.swift in Sources */,
-				9B02AD30257D396900528D1B /* 2002Day6.swift in Sources */,
+				9B02AD30257D396900528D1B /* 2020Day6.swift in Sources */,
 				172D6DFD21C2B1E70061862E /* Direction.swift in Sources */,
 				9BED87882586842C002104FF /* ChineseRemainderTheorem.swift in Sources */,
 				17441DAF21D1307A00878A08 /* 2018Day22.swift in Sources */,

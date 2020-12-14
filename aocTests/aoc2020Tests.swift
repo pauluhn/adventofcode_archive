@@ -251,6 +251,14 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 230903629977901)
     }
+    func testDay14Part1() {
+        let testData1 = testDataDay14().newlineSplit()
+        assert(Y2020Day14.Part1(testData1) == 165)
+
+        let answer = Y2020Day14.Part1(readInput(year: year, day: 14))
+        print("\(#function):\(answer)")
+        assert(answer == 9967721333886)
+    }
 }
 
 extension aoc2020Tests {
@@ -506,6 +514,14 @@ F11
 939
 7,13,x,x,59,x,31,19
 
+"""
+    }
+    func testDataDay14() -> String {
+        return """
+mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
+mem[8] = 11
+mem[7] = 101
+mem[8] = 0
 """
     }
 }
