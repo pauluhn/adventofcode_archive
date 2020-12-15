@@ -280,6 +280,19 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 536)
     }
+    func testDay15Part2() { // all ~3m, final ~28s
+        assert(Y2020Day15.Part2([0,3,6]) == 175594)
+        assert(Y2020Day15.Part2([1,3,2]) == 2578)
+        assert(Y2020Day15.Part2([2,1,3]) == 3544142)
+        assert(Y2020Day15.Part2([1,2,3]) == 261214)
+        assert(Y2020Day15.Part2([2,3,1]) == 6895259)
+        assert(Y2020Day15.Part2([3,2,1]) == 18)
+        assert(Y2020Day15.Part2([3,1,2]) == 362)
+
+        let answer = Y2020Day15.Part2([1,2,16,19,18,0])
+        print("\(#function):\(answer)")
+        assert(answer == 24065124)
+    }
 }
 
 extension aoc2020Tests {
