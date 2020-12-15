@@ -16,56 +16,42 @@ struct Y2020Day14 {
             case one = "1"
             case cross = "X"
         }
-        let bitmask: [Delta] // 36
+        let orMask: Int // for 1
+        let andMask: Int // for 0
+        let xorMasks: [Int] // for floating
+        
         init?(_ data: String) {
             let regex = try! NSRegularExpression(pattern: "^mask = ([01X]+)$")
             guard let match = regex.firstMatch(in: data, options: [], range: NSRange(location: 0, length: data.count)) else { return nil }
-            bitmask = data
+            let bitmask = data
                 .match(match, at: 1)
                 .compactMap(Delta.init)
             guard bitmask.count == 36 else { fatalError() }
-        }
-        func write(_ value: Int) -> Int {
-            let value = value.binaryString(length: bitmask.count)
-            return zip(value, bitmask)
-                .map { (c, delta) -> Character in
-                    if delta == .cross {
-                        return c
-                    } else {
-                        return delta.rawValue
-                    }
-                }
+
+            orMask = bitmask
+                .map { $0 == .one ? "1" : "0" }
                 .string
                 .binaryInt
-        }
-        func addresses(_ address: Int) -> [Int] {
-            let address = address.binaryString(length: bitmask.count)
-            let tuples = zip(address, bitmask)
-                .map { (c, delta) -> (Character, Bool) in
-                    switch delta {
-                    case .zero: return (c, false)
-                    case .one: return ("1", false)
-                    case .cross: return ("0", true)
-                    }
-                }
-            
-            let base = tuples
-                .map { $0.0 }
+            andMask = bitmask
+                .map { $0 == .zero ? "0" : "1" }
                 .string
+                .binaryInt
             
-            var addresses = [String]()
-            for (n, float) in tuples.enumerated() where float.1 {
-                if addresses.isEmpty {
-                    addresses += [base]
-                }
-                let updated = addresses.map { address -> String in
-                    var updated = address.map { $0 }
-                    updated[n] = "1"
-                    return updated.string
-                }
-                addresses += updated
+            var xorMasks = [Int]()
+            for (n, b) in bitmask.reversed().enumerated() where b == .cross {
+                xorMasks += [Int(pow(2, Double(n)))]
             }
-            return addresses.map { $0.binaryInt }
+            self.xorMasks = xorMasks
+        }
+        func write(_ value: Int) -> Int {
+            return (value | orMask) & andMask
+        }
+        func write(_ address: Int) -> [Int] {
+            var addresses = [(address | orMask)]
+            for xorMask in xorMasks {
+                addresses += addresses.map { ($0 ^ xorMask) }
+            }
+            return addresses
         }
     }
     
@@ -104,7 +90,7 @@ struct Y2020Day14 {
                 cache = mask
                 
             } else if let memory = Memory(line) {
-                for address in cache!.addresses(memory.address) {
+                for address in cache!.write(memory.address) {
                     store[address] = memory.value
                 }
             }
