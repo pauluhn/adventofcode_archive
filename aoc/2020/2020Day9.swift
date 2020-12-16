@@ -54,20 +54,20 @@ struct Y2020Day9 {
         let invalid = Part1(data, preamble)
         guard invalid > 0 else { fatalError() } // oops
         
-        for n in 1 ..< data.count { // start at second
-            for i in (0..<n).reversed() { // add backwards
-                let values = (i...n)
-                    .map { data[$0] }
-                let sum = values.reduce(0, +)
+        var i = 0
+        var j = 1
+        var sum = data[0] + data[1]
+        while sum != invalid {
+            if sum < invalid {
+                j += 1
+                sum += data[j]
                 
-                if sum == invalid {
-                    return values.min()! + values.max()! // found
-                    
-                } else if sum > invalid {
-                    break // too high
-                }
+            } else {
+                sum -= data[i]
+                i += 1
             }
         }
-        fatalError() // oops
+        let values = (i...j).map { data[$0] }
+        return values.min()! + values.max()!
     }
 }
