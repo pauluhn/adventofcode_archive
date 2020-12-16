@@ -294,12 +294,22 @@ class aoc2020Tests: XCTestCase {
         assert(answer == 24065124)
     }
     func testDay16Part1() {
-        let testData1 = testDataDay16()
+        let testData1 = testDataDay16a()
         assert(Y2020Day16.Part1(testData1) == 71)
 
         let answer = Y2020Day16.Part1(readInput(year: year, day: 16))
         print("\(#function):\(answer)")
         assert(answer == 22000)
+    }
+    func testDay16Part2() {
+        let testData1 = testDataDay16b()
+        assert(Y2020Day16.Part2(testData1, "class") == 12)
+        assert(Y2020Day16.Part2(testData1, "row") == 11)
+        assert(Y2020Day16.Part2(testData1, "seat") == 13)
+
+        let answer = Y2020Day16.Part2(readInput(year: year, day: 16), "departure")
+        print("\(#function):\(answer)")
+        assert(answer == 410460648673)
     }
 }
 
@@ -574,7 +584,7 @@ mask = 00000000000000000000000000000000X0XX
 mem[26] = 1
 """
     }
-    func testDataDay16() -> String {
+    func testDataDay16a() -> String {
         return """
 class: 1-3 or 5-7
 row: 6-11 or 33-44
@@ -588,6 +598,21 @@ nearby tickets:
 40,4,50
 55,2,20
 38,6,12
+"""
+    }
+    func testDataDay16b() -> String {
+        return """
+class: 0-1 or 4-19
+row: 0-5 or 8-19
+seat: 0-13 or 16-19
+
+your ticket:
+11,12,13
+
+nearby tickets:
+3,9,18
+15,1,5
+5,14,9
 """
     }
 }
