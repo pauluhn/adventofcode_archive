@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Direction3D {
+enum Direction3D: CaseIterable {
     case top
     case bottom
     case left
