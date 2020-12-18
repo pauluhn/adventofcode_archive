@@ -339,7 +339,18 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 4940631886147)
     }
+    func testDay18Part2() {
+        assert(Y2020Day18.Part2(["1 + 2 * 3 + 4 * 5 + 6"]) == 231)
+        assert(Y2020Day18.Part2(["1 + (2 * 3) + (4 * (5 + 6))"]) == 51)
+        assert(Y2020Day18.Part2(["2 * 3 + (4 * 5)"]) == 46)
+        assert(Y2020Day18.Part2(["5 + (8 * 3 + 9 + 3 * 4 * 3)"]) == 1445)
+        assert(Y2020Day18.Part2(["5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))"]) == 669060)
+        assert(Y2020Day18.Part2(["((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2"]) == 23340)
 
+        let answer = Y2020Day18.Part2(readInput(year: year, day: 18))
+        print("\(#function):\(answer)")
+        assert(answer == 283582817678281)
+    }
 }
 
 extension aoc2020Tests {
