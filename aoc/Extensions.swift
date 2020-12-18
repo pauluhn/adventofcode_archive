@@ -103,6 +103,9 @@ extension Date {
 }
 
 extension Int {
+    var str: String {
+        return String(self)
+    }
     var hexString: String {
         return String(format: "%02X", self)
     }
