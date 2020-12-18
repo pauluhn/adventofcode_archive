@@ -16,10 +16,11 @@ struct Y2020Day17 {
     }
     
     static func Part1(_ data: [String]) -> Int {
+        // parse into tile
         let data = data
             .map { $0.compactMap(Tile.init) }
             .filter { !$0.isEmpty }
-        
+        // hashmap
         var map = [Point3D: Tile]()
         for (y, row) in data.enumerated() {
             for (x, tile) in row.enumerated() {
@@ -27,16 +28,18 @@ struct Y2020Day17 {
                 map[point] = tile
             }
         }
-        
+        // loop
         for _ in 0 ..< 6 {
-            let cache = expand(map)
+            // expand map
+            let cache = expand3D(map)
             map = cache.map { data -> (Point3D, Tile) in
+                // adjacent
                 let active = data.key
                     .adjacent
                     .map { cache[$0] }
                     .filter { $0 == .active }
                     .count
-                
+                // rules
                 if data.value == .active, 2...3 ~= active {
                     return (data.key, .active)
                 } else if data.value == .inactive, 3 == active {
@@ -44,6 +47,7 @@ struct Y2020Day17 {
                 }
                 return (data.key, .inactive)
             }
+            // update map
             .reduce(into: [Point3D: Tile]()) {
                 $0[$1.0] = $1.1
             }
@@ -53,7 +57,49 @@ struct Y2020Day17 {
             .count
     }
     
-    private static func expand(_ map: [Point3D: Tile]) -> [Point3D: Tile] {
+    static func Part2(_ data: [String]) -> Int {
+        // parse into tile
+        let data = data
+            .map { $0.compactMap(Tile.init) }
+            .filter { !$0.isEmpty }
+        // hashmap
+        var map = [Point4D: Tile]()
+        for (y, row) in data.enumerated() {
+            for (x, tile) in row.enumerated() {
+                let point = Point4D(x: x, y: y, z: 0, w: 0)
+                map[point] = tile
+            }
+        }
+        // loop
+        for _ in 0 ..< 6 {
+            // expand map
+            let cache = expand4D(map)
+            map = cache.map { data -> (Point4D, Tile) in
+                // adjacent
+                let active = data.key
+                    .adjacent
+                    .map { cache[$0] }
+                    .filter { $0 == .active }
+                    .count
+                // rules
+                if data.value == .active, 2...3 ~= active {
+                    return (data.key, .active)
+                } else if data.value == .inactive, 3 == active {
+                    return (data.key, .active)
+                }
+                return (data.key, .inactive)
+            }
+            // update map
+            .reduce(into: [Point4D: Tile]()) {
+                $0[$1.0] = $1.1
+            }
+        }
+        return map
+            .filter { $0.value == .active }
+            .count
+    }
+    
+    private static func expand3D(_ map: [Point3D: Tile]) -> [Point3D: Tile] {
         let x = map.map { $0.key.x }
         let y = map.map { $0.key.y }
         let z = map.map { $0.key.z }
@@ -69,12 +115,12 @@ struct Y2020Day17 {
         let yr = (ymin ... ymax).map { $0 }
         let zr = (zmin ... zmax).map { $0 }
         
-        var points = generate(xr, yr, [zmax])
-        points.formUnion(generate(xr, yr, [zmin]))
-        points.formUnion(generate(xr, [ymax], zr))
-        points.formUnion(generate(xr, [ymin], zr))
-        points.formUnion(generate([xmax], yr, zr))
-        points.formUnion(generate([xmin], yr, zr))
+        var points = generate3D(xr, yr, [zmax])
+        points.formUnion(generate3D(xr, yr, [zmin]))
+        points.formUnion(generate3D(xr, [ymax], zr))
+        points.formUnion(generate3D(xr, [ymin], zr))
+        points.formUnion(generate3D([xmax], yr, zr))
+        points.formUnion(generate3D([xmin], yr, zr))
 
         var map = map
         for point in points {
@@ -83,12 +129,62 @@ struct Y2020Day17 {
         return map
     }
     
-    private static func generate(_ xr: [Int], _ yr: [Int], _ zr: [Int]) -> Set<Point3D> {
+    private static func expand4D(_ map: [Point4D: Tile]) -> [Point4D: Tile] {
+        let x = map.map { $0.key.x }
+        let y = map.map { $0.key.y }
+        let z = map.map { $0.key.z }
+        let w = map.map { $0.key.w }
+
+        let xmin = x.min()! - 1
+        let xmax = x.max()! + 1
+        let ymin = y.min()! - 1
+        let ymax = y.max()! + 1
+        let zmin = z.min()! - 1
+        let zmax = z.max()! + 1
+        let wmin = w.min()! - 1
+        let wmax = w.max()! + 1
+
+        let xr = (xmin ... xmax).map { $0 }
+        let yr = (ymin ... ymax).map { $0 }
+        let zr = (zmin ... zmax).map { $0 }
+        let wr = (wmin ... wmax).map { $0 }
+
+        var points = generate4D(xr, yr, [zmax], wr)
+        points.formUnion(generate4D(xr, yr, [zmin], wr))
+        points.formUnion(generate4D(xr, [ymax], zr, wr))
+        points.formUnion(generate4D(xr, [ymin], zr, wr))
+        points.formUnion(generate4D([xmax], yr, zr, wr))
+        points.formUnion(generate4D([xmin], yr, zr, wr))
+        points.formUnion(generate4D(xr, yr, zr, [wmax]))
+        points.formUnion(generate4D(xr, yr, zr, [wmin]))
+
+        var map = map
+        for point in points {
+            map[point] = .inactive
+        }
+        return map
+    }
+    
+    private static func generate3D(_ xr: [Int], _ yr: [Int], _ zr: [Int]) -> Set<Point3D> {
         var points = Set<Point3D>()
         for x in xr {
             for y in yr {
                 for z in zr {
                     points.insert(Point3D(x: x, y: y, z: z))
+                }
+            }
+        }
+        return points
+    }
+
+    private static func generate4D(_ xr: [Int], _ yr: [Int], _ zr: [Int], _ wr: [Int]) -> Set<Point4D> {
+        var points = Set<Point4D>()
+        for x in xr {
+            for y in yr {
+                for z in zr {
+                    for w in wr {
+                        points.insert(Point4D(x: x, y: y, z: z, w: w))
+                    }
                 }
             }
         }
@@ -131,5 +227,21 @@ private extension Point3D {
         }
         
         return points
+    }
+}
+
+private extension Point4D {
+    var adjacent: Set<Point4D> {
+        var points = Set<Point4D>()
+        for x in (self.x - 1 ... self.x + 1) {
+            for y in (self.y - 1 ... self.y + 1) {
+                for z in (self.z - 1 ... self.z + 1) {
+                    for w in (self.w - 1 ... self.w + 1) {
+                        points.insert(Point4D(x: x, y: y, z: z, w: w))
+                    }
+                }
+            }
+        }
+        return points.removing(self)
     }
 }
