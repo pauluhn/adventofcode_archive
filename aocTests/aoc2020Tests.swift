@@ -351,6 +351,16 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 283582817678281)
     }
+    func testDay19Part1() {
+        let testData1 = testDataDay19a()
+        assert(Y2020Day19.Part1(testData1) == 2)
+        let testData2 = testDataDay19b()
+        assert(Y2020Day19.Part1(testData2) == 2)
+
+        let answer = Y2020Day19.Part1(readInput(year: year, day: 19))
+        print("\(#function):\(answer)")
+        assert(answer == 285)
+    }
 }
 
 extension aoc2020Tests {
@@ -661,6 +671,35 @@ nearby tickets:
 ..#
 ###
 
+"""
+    }
+    func testDataDay19a() -> String {
+        return """
+0: 1 2
+1: "a"
+2: 1 3 | 3 1
+3: "b"
+
+aab
+aba
+aaa
+bbb
+"""
+    }
+    func testDataDay19b() -> String {
+        return """
+0: 4 1 5
+1: 2 3 | 3 2
+2: 4 4 | 5 5
+3: 4 5 | 5 4
+4: "a"
+5: "b"
+
+ababbb
+bababa
+abbbab
+aaabbb
+aaaabbb
 """
     }
 }
