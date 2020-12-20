@@ -361,6 +361,23 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 285)
     }
+    func testDay19Part2() {
+        // Re-run Part 1
+        let testData1 = testDataDay19a()
+        assert(Y2020Day19.Part2(testData1) == 2)
+        let testData2 = testDataDay19b()
+        assert(Y2020Day19.Part2(testData2) == 2)
+        let testData3: String = readInput(year: year, day: 19)
+        assert(Y2020Day19.Part2(testData3) == 285)
+
+        let testData4 = testDataDay19c()
+        assert(Y2020Day19.Part2(testData4) == 3)
+        assert(Y2020Day19.Part2(testData4, with: true) == 12)
+
+        let answer = Y2020Day19.Part2(readInput(year: year, day: 19), with: true)
+        print("\(#function):\(answer)")
+        assert(answer == 412)
+    }
 }
 
 extension aoc2020Tests {
@@ -700,6 +717,57 @@ bababa
 abbbab
 aaabbb
 aaaabbb
+"""
+    }
+    func testDataDay19c() -> String {
+        return """
+42: 9 14 | 10 1
+9: 14 27 | 1 26
+10: 23 14 | 28 1
+1: "a"
+11: 42 31
+5: 1 14 | 15 1
+19: 14 1 | 14 14
+12: 24 14 | 19 1
+16: 15 1 | 14 14
+31: 14 17 | 1 13
+6: 14 14 | 1 14
+2: 1 24 | 14 4
+0: 8 11
+13: 14 3 | 1 12
+15: 1 | 14
+17: 14 2 | 1 7
+23: 25 1 | 22 14
+28: 16 1
+4: 1 1
+20: 14 14 | 1 15
+3: 5 14 | 16 1
+27: 1 6 | 14 18
+14: "b"
+21: 14 1 | 1 14
+25: 1 1 | 1 14
+22: 14 14
+8: 42
+26: 14 22 | 1 20
+18: 15 15
+7: 14 5 | 1 21
+24: 14 1
+
+abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa
+bbabbbbaabaabba
+babbbbaabbbbbabbbbbbaabaaabaaa
+aaabbbbbbaaaabaababaabababbabaaabbababababaaa
+bbbbbbbaaaabbbbaaabbabaaa
+bbbababbbbaaaaaaaabbababaaababaabab
+ababaaaaaabaaab
+ababaaaaabbbaba
+baabbaaaabbaaaababbaababb
+abbbbabbbbaaaababbbbbbaaaababb
+aaaaabbaabaaaaababaa
+aaaabbaaaabbaaa
+aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
+babaaabbbaaabaababbaabababaaab
+aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba
 """
     }
 }
