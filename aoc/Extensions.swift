@@ -103,21 +103,21 @@ extension Date {
 }
 
 extension Int {
-    var str: String {
-        return String(self)
-    }
-    var hexString: String {
-        return String(format: "%02X", self)
-    }
-    var binaryString: String {
-        return String(self, radix: 2)
-    }
+    var str: String { String(self) }
+    var hexString: String { String(format: "%02X", self) }
+    var binaryString: String { String(self, radix: 2) }
     func binaryString(length: Int) -> String {
         let binary = binaryString
         let padding = length - binary.count
         guard padding > 0 else { return binary }
         return String(repeating: "0", count: padding) + binary
     }
+    var double: Double { Double(self) }
+    var sqrt: Int { Darwin.sqrt(self.double).int }
+}
+
+extension Double {
+    var int: Int { Int(self) }
 }
 
 extension Set {
