@@ -22,29 +22,46 @@ struct Y2020Day21 {
         }
     }
     
-    static func Part1(_ data: [String]) -> Int {
+    private static func compute(_ data: [String]) -> ([Food], [String: String]) {
         let data = data.compactMap(Food.init)
-        var known = [String]()
+        var table = [String: String]()
         // allergens
         let allergens = data.flatMap { $0.allergens }
         let allergenSet = NSCountedSet(array: allergens)
-        let allergenSorted = allergenSet.sorted() as! [String]
-        
-        for allergen in allergenSorted {
+        var allergenSorted = allergenSet.sorted() as! [String]
+        while !allergenSorted.isEmpty {
+            let allergen = allergenSorted.removeFirst()
             let food = data.filter { $0.allergens.contains(allergen) }
             let ingredientSet = food.map { Set($0.ingredients) }
             var ingredient = ingredientSet.first!
             for set in ingredientSet {
                 ingredient = ingredient.intersection(set)
             }
-            ingredient.subtract(known)
-            known += ingredient.map { $0 }
+            ingredient.subtract(table.values)
+            guard ingredient.count == 1 else {
+                allergenSorted.append(allergen)
+                continue
+            }
+            table[allergen] = ingredient.first
         }
+        return (data, table)
+    }
+    
+    static func Part1(_ data: [String]) -> Int {
+        let (data, table) = compute(data)
         // ingredients
         let ingredients = data.flatMap { $0.ingredients }
         let count =  ingredients
-            .filter { !known.contains($0) }
+            .filter { !table.values.contains($0) }
             .count
         return count
+    }
+
+    static func Part2(_ data: [String]) -> String {
+        let (_, table) = compute(data)
+        return table.map { ($0.key, $0.value) }
+            .sorted { $0.0 < $1.0 }
+            .map { $0.1 }
+            .joined(separator: ",")
     }
 }
