@@ -402,6 +402,14 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == "phc,spnd,zmsdzh,pdt,fqqcnm,lsgqf,rjc,lzvh")
     }
+    func testDay22Part1() {
+        let testData1 = testDataDay22()
+        assert(Y2020Day22.Part1(testData1) == 306)
+
+        let answer = Y2020Day22.Part1(readInput(year: year, day: 22))
+        print("\(#function):\(answer)")
+        assert(answer == 32102)
+    }
 }
 
 extension aoc2020Tests {
@@ -912,6 +920,24 @@ mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
 trh fvjkl sbzzf mxmxvkd (contains dairy)
 sqjhc fvjkl (contains soy)
 sqjhc mxmxvkd sbzzf (contains fish)
+
+"""
+    }
+    func testDataDay22() -> String {
+        return """
+Player 1:
+9
+2
+6
+3
+1
+
+Player 2:
+5
+8
+4
+7
+10
 
 """
     }
