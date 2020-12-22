@@ -124,7 +124,7 @@ struct Y2020Day19 {
         }
     }
 
-    static func Part1(_ data: String) -> Int {
+    private static func parse(_ data: String) -> (NodeGraph, [String]) {
         let data = data.components(separatedBy: "\n\n")
         guard data.count == 2 else { fatalError() }
         // rules
@@ -146,12 +146,176 @@ struct Y2020Day19 {
                 graph.createOrUpdate(id: rule.id, type: rule.type)
             }
         }
+        // messages
+        let messages = data[1]
+            .components(separatedBy: .newlines)
+        return (graph, messages)
+    }
+    
+    static func Part1(_ data: String) -> Int {
+        let (graph, messages) = parse(data)
         let root = graph.node(id: "0")!
         let rule = MessageRule(root.description)
-        // messages
-        return data[1]
-            .components(separatedBy: .newlines)
+        return messages
             .filter { rule.isValid(message: $0) }
             .count
+    }
+    
+    private static var loop = false
+    static func Part2(_ data: String, with loop: Bool = false) -> Int {
+        self.loop = loop
+        let (graph, messages) = parse(data)
+        let root = graph.node(id: "0")!
+        
+        var count = 0
+        for var message in messages {
+            switch root.type {
+            case .tree: count += tree(root, &message) && message.isEmpty ? 1 : 0
+            case .orTree: count += orTree(root, &message) && message.isEmpty ? 1 : 0
+            case .leaf: count += leaf(root, &message) && message.isEmpty ? 1 : 0
+            }
+        }
+        return count
+    }
+    private static var eightCount = 0
+    
+    private static func tree(_ node: Node, _ message: inout String) -> Bool {
+        if loop {
+            if node.id == "8" { return eight(node, &message) }
+            if node.id == "11" { return eleven(node, &message) }
+        }
+
+        var copy = message
+        switch node.type {
+        case .tree(let nodes):
+            var isValid = true
+            for n in nodes {
+                switch n.type {
+                case .tree: isValid = tree(n, &copy)
+                case .orTree: isValid = orTree(n, &copy)
+                case .leaf: isValid = leaf(n, &copy)
+                }
+                if !isValid { return false }
+            }
+            message = copy
+            return true
+        default: fatalError()
+        }
+    }
+
+    private static func eight(_ node: Node, _ message: inout String) -> Bool {
+        var copy = message
+        var count = 0
+        switch node.type {
+        case .tree(let nodes):
+            guard nodes.count == 1 else { fatalError() }
+            var isValid = true
+            switch nodes.first!.type {
+            case .tree: isValid = tree(nodes.first!, &copy)
+            case .orTree: isValid = orTree(nodes.first!, &copy)
+            case .leaf: isValid = leaf(nodes.first!, &copy)
+            }
+            if !isValid { return false }
+            message = copy
+            count += 1
+            // n-loops
+            while isValid {
+                switch nodes.first!.type {
+                case .tree: isValid = tree(nodes.first!, &copy)
+                case .orTree: isValid = orTree(nodes.first!, &copy)
+                case .leaf: isValid = leaf(nodes.first!, &copy)
+                }
+                if !isValid { break }
+                if isValid {
+                    message = copy
+                    count += 1
+                }
+            }
+            eightCount = count
+            return true
+        default: fatalError()
+        }
+    }
+    
+    private static func eleven(_ node: Node, _ message: inout String) -> Bool {
+        guard eightCount > 1 else { return false }
+        
+        var copy = message
+        var count = 0
+        switch node.type {
+        case .tree(let nodes):
+            guard nodes.count == 2 else { fatalError() }
+            // rhs
+            var isValid = true
+            switch nodes.last!.type {
+            case .tree: isValid = tree(nodes.last!, &copy)
+            case .orTree: isValid = orTree(nodes.last!, &copy)
+            case .leaf: isValid = leaf(nodes.last!, &copy)
+            }
+            if !isValid { return false }
+            message = copy
+            count += 1
+            // n-loops
+            while isValid {
+                switch nodes.last!.type {
+                case .tree: isValid = tree(nodes.last!, &copy)
+                case .orTree: isValid = orTree(nodes.last!, &copy)
+                case .leaf: isValid = leaf(nodes.last!, &copy)
+                }
+                if !isValid { break }
+                if isValid {
+                    message = copy
+                    count += 1
+                }
+            }
+            return count < eightCount
+        default: fatalError()
+        }
+    }
+
+    private static func orTree(_ node: Node, _ message: inout String) -> Bool {
+        var copy = message
+        switch node.type {
+        case let .orTree(lhs, rhs):
+            // lhs
+            var isValid = true
+            for n in lhs {
+                switch n.type {
+                case .tree: isValid = tree(n, &copy)
+                case .orTree: isValid = orTree(n, &copy)
+                case .leaf: isValid = leaf(n, &copy)
+                }
+                if !isValid { break }
+            }
+            if isValid {
+                message = copy
+                return true
+            }
+            // rhs
+            copy = message
+            for n in rhs {
+                switch n.type {
+                case .tree: isValid = tree(n, &copy)
+                case .orTree: isValid = orTree(n, &copy)
+                case .leaf: isValid = leaf(n, &copy)
+                }
+                if !isValid { break }
+            }
+            if isValid {
+                message = copy
+                return true
+            }
+            return false
+        default: fatalError()
+        }
+    }
+
+    private static func leaf(_ node: Node, _ message: inout String) -> Bool {
+        guard !message.isEmpty else { return false }
+        let first = message.removeFirst()
+        switch node.type {
+        case .leaf(let v): return v == first.str
+        default: fatalError()
+        }
     }
 }
