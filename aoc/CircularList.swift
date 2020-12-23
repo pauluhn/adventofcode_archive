@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CircularList<T> {
+class CircularList<T: Equatable> {
     class CircularListNode<T> {
         var value: T
         var prev: Node?
@@ -80,6 +80,9 @@ class CircularList<T> {
         prev.next = next
         next.prev = prev
         count -= 1
+        if (node.value == head!.value) {
+            head = next
+        }
         return value
     }
 }
