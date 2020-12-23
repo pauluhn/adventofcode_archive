@@ -10,68 +10,91 @@ import Foundation
 
 struct Y2020Day23 {
 
-    static func Part1(_ data: String, _ moves: Int) -> String {
-        let cups = CircularList<Int>()
-        data.forEach { cups.append($0.int) }
-        
-        var current = cups.head!
-        
-        for m in 0 ..< moves {
+    private static func compute(_ data: String, _ moves: Int, _ total: Int = 9) -> [Int: Int] {
+        var cups = Dictionary<Int, Int>(minimumCapacity: total)
+        var current = 0
+        var previous = 0
+        for d in data {
+            if previous > 0 {
+                cups[previous] = d.int
+                previous = d.int
+            } else {
+                current = d.int
+                previous = d.int
+            }
+        }
+        cups[previous] = current
+        // add cups
+        if cups.count < total {
+            for i in 10 ... total {
+                cups[previous] = i
+                previous = i
+            }
+        }
+        cups[previous] = current
+        let max = cups.keys.max()!
 
+        for _ in 0 ..< moves {
             // pick up
-            let removed = (1 ... 3)
-                .map { cups.get(current, offset: $0) }
-                .map { cups.remove($0) }
+            let r = cups[current]!
+            let (rn, rr) = { r -> (Int, [Int]) in
+                var rn = r
+                var rr = [r]
+                for _ in 0 ..< 3 {
+                    rn = cups[rn]!
+                    rr += [rn]
+                }
+                return (rn, rr.dropLast())
+            }(r)
+            let rl = rr.last!
+            cups[current] = rn
 
             // select destination
             var destination = current
-            var n = current
             var found = false
-            if current.value > 1 {
-                for d in (1 ... current.value - 1).reversed() where !found {
-                    n = n.next!
-                    while n.value != current.value && !found {
-                        if n.value == d {
-                            found = true
-                            destination = n
-                        }
-                        n = n.next!
-                    }
+            if current > 1 {
+                for i in (1 ... current - 1).reversed() where !rr.contains(i) {
+                    destination = i
+                    found = true
+                    break
                 }
             }
             if !found {
-                for d in (current.value + 1 ..< 10).reversed() where !found{
-                    n = n.next!
-                    while n.value != current.value && !found {
-                        if n.value == d {
-                            found = true
-                            destination = n
-                        }
-                        n = n.next!
-                    }
+                for i in (current + 1 ... max).reversed() where !rr.contains(i) {
+                    destination = i
+                    break
                 }
             }
-            guard found else { fatalError() }
 
             // places
-            var d = destination
-            for r in removed {
-                cups.insert(after: d, r)
-                d = d.next!
-            }
+            let dn = cups[destination]
+            cups[destination] = r
+            cups[rl] = dn
 
             // select current
-            current = current.next!            
+            current = cups[current]!
         }
-
-        while current.value != 1 {
-            current = current.next!
-        }
-        current = current.next!
-        return (0 ..< 8)
-            .map { cups.get(current, offset: $0) }
-            .map { $0.value.str }
-            .joined()
+        return cups
+    }
+    
+    static func Part1(_ data: String, _ moves: Int) -> String {
+        let cups = compute(data, moves)
+        let a = { c -> ([Int]) in
+            var a = [c]
+            var r = c
+            for _ in 0 ..< 8 {
+                r = cups[r]!
+                a += [r]
+            }
+            return a.prefix(8).map({$0})
+        }(cups[1]!)
+        return a.map { $0.str }.joined()
+    }
+    
+    static func Part2(_ data: String) -> Int {
+        let cups = compute(data, 10_000_000, 1_000_000)
+        let a = cups[1]!
+        let b = cups[a]!
+        return a * b
     }
 }
-
