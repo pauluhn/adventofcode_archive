@@ -441,6 +441,14 @@ class aoc2020Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 18930983775)
     }
+    func testDay24Part1() {
+        let testData1 = testDataDay24().newlineSplit()
+        assert(Y2020Day24.Part1(testData1) == 10)
+
+        let answer = Y2020Day24.Part1(readInput(year: year, day: 24))
+        print("\(#function):\(answer)")
+        assert(answer == 263)
+    }
 }
 
 extension aoc2020Tests {
@@ -969,6 +977,31 @@ Player 2:
 4
 7
 10
+
+"""
+    }
+    func testDataDay24() -> String {
+        return """
+sesenwnenenewseeswwswswwnenewsewsw
+neeenesenwnwwswnenewnwwsewnenwseswesw
+seswneswswsenwwnwse
+nwnwneseeswswnenewneswwnewseswneseene
+swweswneswnenwsewnwneneseenw
+eesenwseswswnenwswnwnwsewwnwsene
+sewnenenenesenwsewnenwwwse
+wenwwweseeeweswwwnwwe
+wsweesenenewnwwnwsenewsenwwsesesenwne
+neeswseenwwswnwswswnw
+nenwswwsewswnenenewsenwsenwnesesenew
+enewnwewneswsewnwswenweswnenwsenwsw
+sweneswneswneneenwnewenewwneswswnese
+swwesenesewenwneswnwwneseswwne
+enesenwswwswneneswsenwnewswseenwsese
+wnwnesenesenenwwnenwsewesewsesesew
+nenewswnwewswnenesenwnesewesw
+eneswnwswnwsenenwnwnwwseeswneewsenese
+neswnwewnwnwseenwseesewsenwsweewe
+wseweeenwnesenwwwswnew
 
 """
     }
