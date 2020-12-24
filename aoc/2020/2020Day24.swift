@@ -10,7 +10,7 @@ import Foundation
 
 struct Y2020Day24 {
     
-    enum Direction: String {
+    enum Direction: String, CaseIterable {
         case e
         case se
         case sw
@@ -53,7 +53,7 @@ struct Y2020Day24 {
         }
     }
 
-    static func Part1(_ data: [String]) -> Int {
+    private static func parse(_ data: [String]) -> Set<Point> {
         let data = data.compactMap(TileDirections.init)
         
         var set = Set<Point>()
@@ -69,11 +69,43 @@ struct Y2020Day24 {
                 set.insert(point)
             }
         }
-        return set.count
+        return set
+    }
+
+    static func Part1(_ data: [String]) -> Int {
+        return parse(data).count
+    }
+    
+    static func Part2(_ data: [String]) -> Int {
+        var data = parse(data)
+        for i in 0 ..< 100 {
+            
+            var cache = data
+            
+            let toWhite = data
+                .filter {
+                    let count = data.intersection($0.adjacent).count
+                    return count == 0 || count > 2
+                }
+            
+            let toBlack = data
+                .flatMap { point -> [Point] in
+                    let a = point.adjacent
+                    return Set(a).subtracting(data).map { $0 }
+                }
+                .filter { data.intersection($0.adjacent).count == 2 }
+
+            data = data.subtracting(toWhite).union(toBlack)
+        }
+        return data.count
     }
 }
 
 private extension Point {
+    var adjacent: [Point] {
+        return Y2020Day24.Direction.allCases
+            .map { self.move(in: $0) }
+    }
     func move(in direction: Y2020Day24.Direction) -> Point {
         switch direction {
         case .e: return offset(by: 2, 0)
