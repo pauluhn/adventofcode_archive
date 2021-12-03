@@ -9,7 +9,9 @@
 import Foundation
 
 func readInput(year: Int, day: Int) -> [String] {
-    return input(year, day).newlineSplit()
+    let data = input(year, day).newlineSplit()
+    if data.last == "" { return data.dropLast() }
+    return data
 }
 func readInput(year: Int, day: Int) -> String {
     return input(year, day)

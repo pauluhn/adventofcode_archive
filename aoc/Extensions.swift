@@ -88,6 +88,12 @@ extension Substring {
     }
 }
 
+extension StringProtocol {
+    subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
+    }
+}
+
 extension DateFormatter {
     static var timestampType: DateFormatter {
         let formatter = DateFormatter()
