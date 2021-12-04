@@ -11,7 +11,7 @@ import Foundation
 struct TwoDimensionalArray<T> {
     let width: Int
     let height: Int
-    private var data: ContiguousArray<T>
+    private(set) var data: ContiguousArray<T>
     
     init(repeating value: T, width: Int, height: Int) {
         guard width > 0 && height > 0 else { fatalError() }
@@ -26,5 +26,16 @@ struct TwoDimensionalArray<T> {
     
     mutating func set(_ x: Int, _ y: Int, to value: T) {
         data[x * width + y] = value
+    }
+}
+
+extension TwoDimensionalArray where T: Equatable {
+    func find(_ value: T) -> (Int, Int)? {
+        guard let index = data.firstIndex(where: { $0 == value }) else {
+            return nil
+        }
+        let x = index / width
+        let y = index % width
+        return (x, y)
     }
 }
