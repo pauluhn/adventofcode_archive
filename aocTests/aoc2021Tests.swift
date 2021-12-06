@@ -92,6 +92,23 @@ class aoc2021Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 17193)
     }
+    func testDay6Part1() {
+        let testData1 = testDataDay6().commaSplit()
+        assert(Y2021Day6.Part1(testData1, days: 18) == 26)
+        assert(Y2021Day6.Part1(testData1) == 5934)
+
+        let answer = Y2021Day6.Part1(readInput(year: year, day: 6).commaSplit())
+        print("\(#function):\(answer)")
+        assert(answer == 388419)
+    }
+    func testDay6Part2() {
+        let testData1 = testDataDay6().commaSplit()
+        assert(Y2021Day6.Part2(testData1) == 26984457539)
+
+        let answer = Y2021Day6.Part2(readInput(year: year, day: 6).commaSplit())
+        print("\(#function):\(answer)")
+        assert(answer == 1740449478328)
+    }
 }
 
 extension aoc2021Tests {
@@ -171,5 +188,8 @@ forward 2
 0,0 -> 8,8
 5,5 -> 8,2
 """
+    }
+    func testDataDay6() -> String {
+        return "3,4,3,1,2"
     }
 }

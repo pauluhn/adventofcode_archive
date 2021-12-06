@@ -13,6 +13,6 @@ extension String {
         return components(separatedBy: .newlines)
     }
     func commaSplit() -> [String] {
-        return split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
+        return split(separator: ",").map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
     }
 }
