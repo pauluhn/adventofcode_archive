@@ -17,12 +17,12 @@ struct Vector2: Hashable {
         _x = Double(x)
         _y = Double(y)
     }
-    fileprivate init(x: Double, y: Double) {
+    private init(x: Double, y: Double) {
         _x = x
         _y = y
     }
-    fileprivate let _x: Double
-    fileprivate let _y: Double
+    private let _x: Double
+    private let _y: Double
 
     static let zero = Vector2(x: 0, y: 0)
     static let left = Vector2(x: -1, y: 0)

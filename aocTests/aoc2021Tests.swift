@@ -141,6 +141,22 @@ class aoc2021Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 996280)
     }
+    func testDay9Part1() {
+        let testData1 = testDataDay9().newlineSplit()
+        assert(Y2021Day9.Part1(testData1) == 15)
+
+        let answer = Y2021Day9.Part1(readInput(year: year, day: 9))
+        print("\(#function):\(answer)")
+        assert(answer == 425)
+    }
+    func testDay9Part2() {
+        let testData1 = testDataDay9().newlineSplit()
+        assert(Y2021Day9.Part2(testData1) == 1134)
+
+        let answer = Y2021Day9.Part2(readInput(year: year, day: 9))
+        print("\(#function):\(answer)")
+        assert(answer == 1135260)
+    }
 }
 
 extension aoc2021Tests {
@@ -239,6 +255,15 @@ dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbc
 bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
 egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
 gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
+"""
+    }
+    func testDataDay9() -> String {
+        return """
+2199943210
+3987894921
+9856789892
+8767896789
+9899965678
 """
     }
 }
