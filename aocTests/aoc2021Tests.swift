@@ -157,6 +157,22 @@ class aoc2021Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 1135260)
     }
+    func testDay10Part1() {
+        let testData1 = testDataDay10().newlineSplit()
+        assert(Y2021Day10.Part1(testData1) == 26397)
+
+        let answer = Y2021Day10.Part1(readInput(year: year, day: 10))
+        print("\(#function):\(answer)")
+        assert(answer == 388713)
+    }
+    func testDay10Part2() {
+        let testData1 = testDataDay10().newlineSplit()
+        assert(Y2021Day10.Part2(testData1) == 288957)
+
+        let answer = Y2021Day10.Part2(readInput(year: year, day: 10))
+        print("\(#function):\(answer)")
+        assert(answer == 3539961434)
+    }
 }
 
 extension aoc2021Tests {
@@ -264,6 +280,20 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 9856789892
 8767896789
 9899965678
+"""
+    }
+    func testDataDay10() -> String {
+        return """
+[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+{([(<{}[<>[]}>{[]{[(<()>
+(((({<>}<{<{<>}{[]{[]{}
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+{<[[]]>}<{[{[{[]{()[[[]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{
+<{([{{}}[<[[[<>{}]]]>[]]
 """
     }
 }
