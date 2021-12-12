@@ -26,10 +26,20 @@ struct Grid2<T> {
     private var maxY = 0
 }
 
+extension Grid2: Equatable where T: Equatable {
+    static func == (lhs: Grid2<T>, rhs: Grid2<T>) -> Bool {
+        guard lhs.minX == rhs.minX, lhs.maxX == rhs.maxX, lhs.minY == rhs.minY, lhs.maxY == rhs.maxY, lhs.keys.count == rhs.keys.count else { return false }
+        return lhs.keys.allSatisfy { key in
+            lhs.get(for: key) == rhs.get(for: key)
+        }
+    }
+}
+
 extension Grid2 {
 
     var keys: [Vector2] { grid.keys.map { $0 }}
     var values: [T] { grid.values.map { $0 }}
+    var tuples: [(key: Vector2, value: T)] { grid.map { $0 }}
 
     func get(for key: Vector2) -> T? { grid[key] }
 

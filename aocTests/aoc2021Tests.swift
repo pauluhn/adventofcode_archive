@@ -173,6 +173,23 @@ class aoc2021Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 3539961434)
     }
+    func testDay11Part1() {
+        Y2021Day11.Part0()
+        let testData1 = testDataDay11().newlineSplit()
+        assert(Y2021Day11.Part1(testData1) == 1656)
+
+        let answer = Y2021Day11.Part1(readInput(year: year, day: 11))
+        print("\(#function):\(answer)")
+        assert(answer == 1613)
+    }
+    func testDay11Part2() {
+        let testData1 = testDataDay11().newlineSplit()
+        assert(Y2021Day11.Part2(testData1) == 195)
+
+        let answer = Y2021Day11.Part2(readInput(year: year, day: 11))
+        print("\(#function):\(answer)")
+        assert(answer == 510)
+    }
 }
 
 extension aoc2021Tests {
@@ -294,6 +311,20 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 [<(<(<(<{}))><([]([]()
 <{([([[(<>()){}]>(<<{{
 <{([{{}}[<[[[<>{}]]]>[]]
+"""
+    }
+    func testDataDay11() -> String {
+        return """
+5483143223
+2745854711
+5264556173
+6141336146
+6357385478
+4167524645
+2176841721
+6882881134
+4846848554
+5283751526
 """
     }
 }

@@ -29,6 +29,15 @@ struct Vector2: Hashable {
     static let right = Vector2(x: 1, y: 0)
     static let up = Vector2(x: 0, y: 1)
     static let down = Vector2(x: 0, y: -1)
+
+    static let n = up
+    static let ne = up + right
+    static let e = right
+    static let se = down + right
+    static let s = down
+    static let sw = down + left
+    static let w = left
+    static let nw = up + left
 }
 
 extension Vector2 {
