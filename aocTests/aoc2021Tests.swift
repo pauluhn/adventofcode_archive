@@ -190,6 +190,30 @@ class aoc2021Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 510)
     }
+    func testDay12Part1() {
+        let testData1 = testDataDay12a().newlineSplit()
+        assert(Y2021Day12.Part1(testData1) == 10)
+        let testData2 = testDataDay12b().newlineSplit()
+        assert(Y2021Day12.Part1(testData2) == 19)
+        let testData3 = testDataDay12c().newlineSplit()
+        assert(Y2021Day12.Part1(testData3) == 226)
+
+        let answer = Y2021Day12.Part1(readInput(year: year, day: 12))
+        print("\(#function):\(answer)")
+        assert(answer == 4912)
+    }
+    func testDay12Part2() {
+        let testData1 = testDataDay12a().newlineSplit()
+        assert(Y2021Day12.Part2(testData1) == 36)
+        let testData2 = testDataDay12b().newlineSplit()
+        assert(Y2021Day12.Part2(testData2) == 103)
+        let testData3 = testDataDay12c().newlineSplit()
+        assert(Y2021Day12.Part2(testData3) == 3509)
+
+        let answer = Y2021Day12.Part2(readInput(year: year, day: 12))
+        print("\(#function):\(answer)")
+        assert(answer == 150004)
+    }
 }
 
 extension aoc2021Tests {
@@ -325,6 +349,53 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 6882881134
 4846848554
 5283751526
+"""
+    }
+    func testDataDay12a() -> String {
+        return """
+start-A
+start-b
+A-c
+A-b
+b-d
+A-end
+b-end
+"""
+    }
+    func testDataDay12b() -> String {
+        return """
+dc-end
+HN-start
+start-kj
+dc-start
+dc-HN
+LN-dc
+HN-end
+kj-sa
+kj-HN
+kj-dc
+"""
+    }
+    func testDataDay12c() -> String {
+        return """
+fs-end
+he-DX
+fs-he
+start-DX
+pj-DX
+end-zg
+zg-sl
+zg-pj
+pj-he
+RW-he
+fs-DX
+pj-RW
+zg-RW
+start-pj
+he-WI
+zg-he
+pj-fs
+start-RW
 """
     }
 }
