@@ -214,6 +214,19 @@ class aoc2021Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 150004)
     }
+    func testDay13Part1() {
+        let testData1 = testDataDay13().newlineSplit()
+        assert(Y2021Day13.Part1(testData1) == 17)
+
+        let answer = Y2021Day13.Part1(readInput(year: year, day: 13))
+        print("\(#function):\(answer)")
+        assert(answer == 807)
+    }
+    func testDay13Part2() {
+        let answer = Y2021Day13.Part2(readInput(year: year, day: 13))
+        print("\(#function):\(answer)")
+        assert(answer == "LGHEGUEJ")
+    }
 }
 
 extension aoc2021Tests {
@@ -396,6 +409,31 @@ he-WI
 zg-he
 pj-fs
 start-RW
+"""
+    }
+    func testDataDay13() -> String {
+        return """
+6,10
+0,14
+9,10
+0,3
+10,4
+4,11
+6,0
+6,12
+4,1
+0,13
+10,12
+3,4
+3,0
+8,4
+1,10
+2,14
+8,10
+9,0
+
+fold along y=7
+fold along x=5
 """
     }
 }

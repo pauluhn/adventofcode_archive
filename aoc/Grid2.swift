@@ -18,16 +18,30 @@ struct Grid2<T> {
             }
         }
     }
+    init(vectors: [Vector2], value: T) {
+        vectors.forEach {
+            set(for: $0, value: value)
+        }
+    }
+
+    var cleanCopy: Grid2 {
+        var copy = self
+        copy.clean()
+        return copy
+    }
 
     private var grid = [Vector2: T]()
     private var minX = 0
     private var maxX = 0
     private var minY = 0
     private var maxY = 0
+    private var isDirty = false
 }
 
 extension Grid2: Equatable where T: Equatable {
     static func == (lhs: Grid2<T>, rhs: Grid2<T>) -> Bool {
+        let lhs = lhs.isDirty ? lhs.cleanCopy : lhs
+        let rhs = rhs.isDirty ? rhs.cleanCopy : lhs
         guard lhs.minX == rhs.minX, lhs.maxX == rhs.maxX, lhs.minY == rhs.minY, lhs.maxY == rhs.maxY, lhs.keys.count == rhs.keys.count else { return false }
         return lhs.keys.allSatisfy { key in
             lhs.get(for: key) == rhs.get(for: key)
@@ -49,6 +63,20 @@ extension Grid2 {
         maxX = max(maxX, key.x)
         minY = min(minY, key.y)
         maxY = max(maxY, key.y)
+    }
+
+    mutating func reset(key: Vector2) {
+        grid[key] = nil
+        isDirty = true
+    }
+
+    mutating private func clean() {
+        guard isDirty else { return }
+        minX = keys.min { $0.x < $1.x }?.x ?? 0
+        maxX = keys.max { $0.x < $1.x }?.x ?? 0
+        minY = keys.min { $0.y < $1.y }?.y ?? 0
+        maxY = keys.max { $0.y < $1.y }?.y ?? 0
+        isDirty = false
     }
 }
 
