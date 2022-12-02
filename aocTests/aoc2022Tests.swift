@@ -29,6 +29,24 @@ final class aoc2022Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == 207968)
     }
+
+    func testDay2Part1() {
+        let testData1 = testDataDay2().newlineSplit()
+        assert(Y2022Day2.Part1(testData1) == 15)
+
+        let answer = Y2022Day2.Part1(readInput(year: year, day: 2))
+        print("\(#function):\(answer)")
+        assert(answer == 13675)
+    }
+
+    func testDay2Part2() {
+        let testData1 = testDataDay2().newlineSplit()
+        assert(Y2022Day2.Part2(testData1) == 12)
+
+        let answer = Y2022Day2.Part2(readInput(year: year, day: 2))
+        print("\(#function):\(answer)")
+        assert(answer == 14184)
+    }
 }
 
 extension aoc2022Tests {
@@ -48,6 +66,13 @@ extension aoc2022Tests {
 9000
 
 10000
+"""
+    }
+    func testDataDay2() -> String {
+        return """
+A Y
+B X
+C Z
 """
     }
 }
