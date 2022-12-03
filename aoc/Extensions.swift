@@ -68,24 +68,15 @@ extension String {
 }
 
 extension Character {
-    var str: String {
-        return String(self)
-    }
-    var int: Int {
-        return self.str.int
-    }
-    var ascii: [Int] {
-        return self.str.ascii
-    }
+    var str: String { String(self) }
+    var int: Int { str.int }
+    var ascii: Int { str.ascii.first! }
 }
 
 extension Substring {
-    var str: String {
-        return String(self)
-    }
-    var int: Int {
-        return self.str.int
-    }
+    var str: String { String(self) }
+    var int: Int { str.int }
+    var array: [Element] { self.map { $0 } }
 }
 
 extension StringProtocol {
@@ -133,6 +124,7 @@ extension Set {
         _ = copy.remove(element)
         return copy
     }
+    var array: [Element] { self.map { $0 } }
 }
 
 extension Array where Element: Equatable {

@@ -232,7 +232,7 @@ struct Y2019Day17 {
                         }
 
                     case "Continuous video feed?":
-                        "n\n".compactMap { $0.ascii.first }
+                        "n\n".map { $0.ascii }
                             .forEach { intcode.appendInput($0) }
 
                     default:
