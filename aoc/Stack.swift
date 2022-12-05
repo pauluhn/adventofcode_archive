@@ -22,6 +22,10 @@ struct Stack<T> {
         stack.append(element)
     }
 
+    mutating func push(_ elements: [T]) {
+        stack.append(contentsOf: elements.reversed())
+    }
+
     @discardableResult
     mutating func pop() -> T? {
         stack.popLast()
