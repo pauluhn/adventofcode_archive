@@ -23,7 +23,10 @@ class Queue<T> {
     
     var isEmpty: Bool { return count == 0 }
     
-    init() {}
+    init(_ list: [T] = []) {
+        guard !list.isEmpty else { return }
+        push(list)
+    }
     
     func push(_ list: [T]) {
         for item in list {

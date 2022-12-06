@@ -101,6 +101,40 @@ final class aoc2022Tests: XCTestCase {
         print("\(#function):\(answer)")
         assert(answer == "CJVLJQPHS")
     }
+
+    func testDay6Part1() {
+        let testData1 = testDataDay6a()
+        assert(Y2022Day6.Part1(testData1) == 7)
+        let testData2 = testDataDay6b()
+        assert(Y2022Day6.Part1(testData2) == 5)
+        let testData3 = testDataDay6c()
+        assert(Y2022Day6.Part1(testData3) == 6)
+        let testData4 = testDataDay6d()
+        assert(Y2022Day6.Part1(testData4) == 10)
+        let testData5 = testDataDay6e()
+        assert(Y2022Day6.Part1(testData5) == 11)
+
+        let answer = Y2022Day6.Part1(readInput(year: year, day: 6))
+        print("\(#function):\(answer)")
+        assert(answer == 1702)
+    }
+
+    func testDay6Part2() {
+        let testData1 = testDataDay6a()
+        assert(Y2022Day6.Part2(testData1) == 19)
+        let testData2 = testDataDay6b()
+        assert(Y2022Day6.Part2(testData2) == 23)
+        let testData3 = testDataDay6c()
+        assert(Y2022Day6.Part2(testData3) == 23)
+        let testData4 = testDataDay6d()
+        assert(Y2022Day6.Part2(testData4) == 29)
+        let testData5 = testDataDay6e()
+        assert(Y2022Day6.Part2(testData5) == 26)
+
+        let answer = Y2022Day6.Part2(readInput(year: year, day: 6))
+        print("\(#function):\(answer)")
+        assert(answer == 3559)
+    }
 }
 
 extension aoc2022Tests {
@@ -161,5 +195,20 @@ move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2
 """
+    }
+    func testDataDay6a() -> String {
+        return "mjqjpqmgbljsphdztnvjfqwrcgsmlb"
+    }
+    func testDataDay6b() -> String {
+        return "bvwbjplbgvbhsrlpgdmjqwftvncz"
+    }
+    func testDataDay6c() -> String {
+        return "nppdvjthqldpwncqszvftbrmjlhg"
+    }
+    func testDataDay6d() -> String {
+        return "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"
+    }
+    func testDataDay6e() -> String {
+        return "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"
     }
 }
