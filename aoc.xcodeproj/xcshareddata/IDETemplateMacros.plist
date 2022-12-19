@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FILEHEADER</key>
+	<string>
+// Copyright © ___YEAR___ Paul Uhn. All rights reserved.
+//
+
+import Foundation
+
+struct Y___FILEBASENAME___ {
+
+    static func Part1(_ data: [String]) -> Int {
+        let result = parse(data)
+        return 0
+    }
+}
+
+private extension Y___FILEBASENAME___ {
+
+    static func parse(_ data: [String]) -> Int {
+        for line in data {
+            let result = parse(line)
+        }
+        return 0
+    }
+
+    private static func parse(_ data: String) -> (Int, String)? {
+        let regex = /^([0-9]+) ([a-z]+)$/
+        guard let results = try? regex.wholeMatch(in: data) else { return nil }
+
+        let int = results.1.int
+        let str = results.2.str
+        return (int, str)
+    }
+}
+	</string>
+</dict>
+</plist>
