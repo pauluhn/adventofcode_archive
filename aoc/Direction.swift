@@ -27,6 +27,15 @@ extension Direction {
         case .none: return Point(x: 0, y: 0)
         }
     }
+    var vector: Vector2 {
+        switch self {
+        case .up: return Vector2.up
+        case .left: return Vector2.left
+        case .right: return Vector2.right
+        case .down: return Vector2.down
+        case .none: return Vector2.zero
+        }
+    }
     var turnLeft: Direction {
         switch self {
         case .up: return .left
