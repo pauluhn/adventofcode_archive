@@ -209,6 +209,16 @@ final class aoc2022Tests: XCTestCase {
 
         Y2022Day10.Part2(readInput(year: year, day: 10))
     }
+
+    func testDay11Part1() {
+        let testData1 = testDataDay11()
+        Y2022Day11.Part0(testData1)
+        assert(Y2022Day11.Part1(testData1) == 10605)
+
+        let answer = Y2022Day11.Part1(readInput(year: year, day: 11))
+        print("\(#function):\(answer)")
+        assert(answer == 61503)
+    }
 }
 
 extension aoc2022Tests {
@@ -500,6 +510,37 @@ addx -11
 noop
 noop
 noop
+"""
+    }
+    func testDataDay11() -> String {
+        return """
+Monkey 0:
+  Starting items: 79, 98
+  Operation: new = old * 19
+  Test: divisible by 23
+    If true: throw to monkey 2
+    If false: throw to monkey 3
+
+Monkey 1:
+  Starting items: 54, 65, 75, 74
+  Operation: new = old + 6
+  Test: divisible by 19
+    If true: throw to monkey 2
+    If false: throw to monkey 0
+
+Monkey 2:
+  Starting items: 79, 60, 97
+  Operation: new = old * old
+  Test: divisible by 13
+    If true: throw to monkey 1
+    If false: throw to monkey 3
+
+Monkey 3:
+  Starting items: 74
+  Operation: new = old + 3
+  Test: divisible by 17
+    If true: throw to monkey 0
+    If false: throw to monkey 1
 """
     }
 }
